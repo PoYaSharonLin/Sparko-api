@@ -1,0 +1,1945 @@
+---
+meta:
+  query: all:Reinforcement Learning AND submittedDate:[201010020000 TO 202510020000]
+  max_results: 50
+  sort_by: submittedDate
+  sort_order: ascending
+  fetched_at: '2025-10-06T10:52:06Z'
+total_results: 410811
+entries:
+- id: http://arxiv.org/abs/1010.0287v1
+  title: |-
+    Queue-Aware Distributive Resource Control for Delay-Sensitive Two-Hop
+      MIMO Cooperative Systems
+  summary: |-
+    In this paper, we consider a queue-aware distributive resource control
+    algorithm for two-hop MIMO cooperative systems. We shall illustrate that relay
+    buffering is an effective way to reduce the intrinsic half-duplex penalty in
+    cooperative systems. The complex interactions of the queues at the source node
+    and the relays are modeled as an average-cost infinite horizon Markov Decision
+    Process (MDP). The traditional approach solving this MDP problem involves
+    centralized control with huge complexity. To obtain a distributive and low
+    complexity solution, we introduce a linear structure which approximates the
+    value function of the associated Bellman equation by the sum of per-node value
+    functions. We derive a distributive two-stage two-winner auction-based control
+    policy which is a function of the local CSI and local QSI only. Furthermore, to
+    estimate the best fit approximation parameter, we propose a distributive online
+    stochastic learning algorithm using stochastic approximation theory. Finally,
+    we establish technical conditions for almost-sure convergence and show that
+    under heavy traffic, the proposed low complexity distributive control is global
+    optimal.
+  published: '2010-10-02T03:57:46Z'
+  updated: '2010-10-02T03:57:46Z'
+  authors: &1
+  - Rui Wang
+  - Vincent K. N. Lau
+  - Ying Cui
+  categories:
+  - cs.LG
+  - MIMO, relay, queue-aware, distributive resource control
+  primary_category: cs.LG
+  links:
+  - rel: related
+    href: http://dx.doi.org/10.1109/TSP.2010.2086449
+    title: doi
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.0287v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.0287v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.0520v2
+  title: Successive normalization of rectangular arrays
+  summary: |-
+    Standard statistical techniques often require transforming data to have mean
+    $0$ and standard deviation $1$. Typically, this process of "standardization" or
+    "normalization" is applied across subjects when each subject produces a single
+    number. High throughput genomic and financial data often come as rectangular
+    arrays where each coordinate in one direction concerns subjects who might have
+    different status (case or control, say), and each coordinate in the other
+    designates "outcome" for a specific feature, for example, "gene," "polymorphic
+    site" or some aspect of financial profile. It may happen, when analyzing data
+    that arrive as a rectangular array, that one requires BOTH the subjects and the
+    features to be "on the same footing." Thus there may be a need to standardize
+    across rows and columns of the rectangular matrix. There arises the question as
+    to how to achieve this double normalization. We propose and investigate the
+    convergence of what seems to us a natural approach to successive normalization
+    which we learned from our colleague Bradley Efron. We also study the
+    implementation of the method on simulated data and also on data that arose from
+    scientific experimentation.
+  published: '2010-10-04T09:48:16Z'
+  updated: '2013-12-11T12:51:40Z'
+  authors:
+  - Richard A. Olshen
+  - Bala Rajaratnam
+  categories:
+  - math.ST
+  - stat.TH
+  primary_category: math.ST
+  links:
+  - rel: related
+    href: http://dx.doi.org/10.1214/09-AOS743
+    title: doi
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.0520v2
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.0520v2
+    title: pdf
+- id: http://arxiv.org/abs/1010.0535v3
+  title: |-
+    Asymptotic Normality of Support Vector Machine Variants and Other
+      Regularized Kernel Methods
+  summary: |-
+    In nonparametric classification and regression problems, regularized kernel
+    methods, in particular support vector machines, attract much attention in
+    theoretical and in applied statistics. In an abstract sense, regularized kernel
+    methods (simply called SVMs here) can be seen as regularized M-estimators for a
+    parameter in a (typically infinite dimensional) reproducing kernel Hilbert
+    space. For smooth loss functions, it is shown that the difference between the
+    estimator, i.e.\ the empirical SVM, and the theoretical SVM is asymptotically
+    normal with rate $\sqrt{n}$. That is, the standardized difference converges
+    weakly to a Gaussian process in the reproducing kernel Hilbert space. As common
+    in real applications, the choice of the regularization parameter may depend on
+    the data. The proof is done by an application of the functional delta-method
+    and by showing that the SVM-functional is suitably Hadamard-differentiable.
+  published: '2010-10-04T10:46:32Z'
+  updated: '2011-04-12T07:08:05Z'
+  authors:
+  - Robert Hable
+  categories:
+  - stat.ML
+  - 62G08, 62G20, 62M10
+  primary_category: stat.ML
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.0535v3
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.0535v3
+    title: pdf
+- id: http://arxiv.org/abs/1010.0556v2
+  title: Regularizers for Structured Sparsity
+  summary: |-
+    We study the problem of learning a sparse linear regression vector under
+    additional conditions on the structure of its sparsity pattern. This problem is
+    relevant in machine learning, statistics and signal processing. It is well
+    known that a linear regression can benefit from knowledge that the underlying
+    regression vector is sparse. The combinatorial problem of selecting the nonzero
+    components of this vector can be "relaxed" by regularizing the squared error
+    with a convex penalty function like the $\ell_1$ norm. However, in many
+    applications, additional conditions on the structure of the regression vector
+    and its sparsity pattern are available. Incorporating this information into the
+    learning method may lead to a significant decrease of the estimation error. In
+    this paper, we present a family of convex penalty functions, which encode prior
+    knowledge on the structure of the vector formed by the absolute values of the
+    regression coefficients. This family subsumes the $\ell_1$ norm and is flexible
+    enough to include different models of sparsity patterns, which are of practical
+    and theoretical importance. We establish the basic properties of these penalty
+    functions and discuss some examples where they can be computed explicitly.
+    Moreover, we present a convergent optimization algorithm for solving
+    regularized least squares with these penalty functions. Numerical simulations
+    highlight the benefit of structured sparsity and the advantage offered by our
+    approach over the Lasso method and other related methods.
+  published: '2010-10-04T12:04:44Z'
+  updated: '2011-03-30T11:24:17Z'
+  authors:
+  - Charles A. Micchelli
+  - Jean M. Morales
+  - Massimiliano Pontil
+  categories:
+  - stat.ML
+  primary_category: stat.ML
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.0556v2
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.0556v2
+    title: pdf
+- id: http://arxiv.org/abs/1010.0609v1
+  title: Selfish Response to Epidemic Propagation
+  summary: |-
+    An epidemic spreading in a network calls for a decision on the part of the
+    network members: They should decide whether to protect themselves or not. Their
+    decision depends on the trade-off between their perceived risk of being
+    infected and the cost of being protected. The network members can make
+    decisions repeatedly, based on information that they receive about the changing
+    infection level in the network.
+      We study the equilibrium states reached by a network whose members increase
+    (resp. decrease) their security deployment when learning that the network
+    infection is widespread (resp. limited). Our main finding is that the
+    equilibrium level of infection increases as the learning rate of the members
+    increases. We confirm this result in three scenarios for the behavior of the
+    members: strictly rational cost minimizers, not strictly rational, and strictly
+    rational but split into two response classes. In the first two cases, we
+    completely characterize the stability and the domains of attraction of the
+    equilibrium points, even though the first case leads to a differential
+    inclusion. We validate our conclusions with simulations on human mobility
+    traces.
+  published: '2010-10-04T14:51:58Z'
+  updated: '2010-10-04T14:51:58Z'
+  authors:
+  - George Theodorakopoulos
+  - Jean-Yves Le Boudec
+  - John S. Baras
+  categories:
+  - cs.SY
+  - cs.MA
+  - nlin.AO
+  primary_category: cs.SY
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.0609v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.0609v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.0621v2
+  title: Local Optimality of User Choices and Collaborative Competitive Filtering
+  summary: |-
+    While a user's preference is directly reflected in the interactive choice
+    process between her and the recommender, this wealth of information was not
+    fully exploited for learning recommender models. In particular, existing
+    collaborative filtering (CF) approaches take into account only the binary
+    events of user actions but totally disregard the contexts in which users'
+    decisions are made. In this paper, we propose Collaborative Competitive
+    Filtering (CCF), a framework for learning user preferences by modeling the
+    choice process in recommender systems. CCF employs a multiplicative latent
+    factor model to characterize the dyadic utility function. But unlike CF, CCF
+    models the user behavior of choices by encoding a local competition effect. In
+    this way, CCF allows us to leverage dyadic data that was previously lumped
+    together with missing data in existing CF models. We present two formulations
+    and an efficient large scale optimization algorithm. Experiments on three
+    real-world recommendation data sets demonstrate that CCF significantly
+    outperforms standard CF approaches in both offline and online evaluations.
+  published: '2010-10-04T15:29:33Z'
+  updated: '2011-02-25T21:37:16Z'
+  authors:
+  - Shuang Hong Yang
+  categories:
+  - stat.ML
+  - cs.IR
+  - cs.SI
+  - stat.AP
+  - I.2.6; H.1.1; H.3.3
+  primary_category: stat.ML
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.0621v2
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.0621v2
+    title: pdf
+- id: http://arxiv.org/abs/1010.0703v2
+  title: |-
+    Implementing regularization implicitly via approximate eigenvector
+      computation
+  summary: |-
+    Regularization is a powerful technique for extracting useful information from
+    noisy data. Typically, it is implemented by adding some sort of norm constraint
+    to an objective function and then exactly optimizing the modified objective
+    function. This procedure often leads to optimization problems that are
+    computationally more expensive than the original problem, a fact that is
+    clearly problematic if one is interested in large-scale applications. On the
+    other hand, a large body of empirical work has demonstrated that heuristics,
+    and in some cases approximation algorithms, developed to speed up computations
+    sometimes have the side-effect of performing regularization implicitly. Thus,
+    we consider the question: What is the regularized optimization objective that
+    an approximation algorithm is exactly optimizing?
+      We address this question in the context of computing approximations to the
+    smallest nontrivial eigenvector of a graph Laplacian; and we consider three
+    random-walk-based procedures: one based on the heat kernel of the graph, one
+    based on computing the the PageRank vector associated with the graph, and one
+    based on a truncated lazy random walk. In each case, we provide a precise
+    characterization of the manner in which the approximation method can be viewed
+    as implicitly computing the exact solution to a regularized problem.
+    Interestingly, the regularization is not on the usual vector form of the
+    optimization problem, but instead it is on a related semidefinite program.
+  published: '2010-10-04T20:49:15Z'
+  updated: '2011-04-27T03:52:25Z'
+  authors:
+  - Michael W. Mahoney
+  - Lorenzo Orecchia
+  categories:
+  - cs.DS
+  - stat.CO
+  - stat.ML
+  primary_category: cs.DS
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.0703v2
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.0703v2
+    title: pdf
+- id: http://arxiv.org/abs/1010.0772v1
+  title: A bagging SVM to learn from positive and unlabeled examples
+  summary: |-
+    We consider the problem of learning a binary classifier from a training set
+    of positive and unlabeled examples, both in the inductive and in the
+    transductive setting. This problem, often referred to as \emph{PU learning},
+    differs from the standard supervised classification problem by the lack of
+    negative examples in the training set. It corresponds to an ubiquitous
+    situation in many applications such as information retrieval or gene ranking,
+    when we have identified a set of data of interest sharing a particular
+    property, and we wish to automatically retrieve additional data sharing the
+    same property among a large and easily available pool of unlabeled data. We
+    propose a conceptually simple method, akin to bagging, to approach both
+    inductive and transductive PU learning problems, by converting them into series
+    of supervised binary classification problems discriminating the known positive
+    examples from random subsamples of the unlabeled set. We empirically
+    demonstrate the relevance of the method on simulated and real data, where it
+    performs at least as well as existing methods while being faster.
+  published: '2010-10-05T06:03:09Z'
+  updated: '2010-10-05T06:03:09Z'
+  authors:
+  - Fantine Mordelet
+  - Jean-Philippe Vert
+  categories:
+  - stat.ML
+  primary_category: stat.ML
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.0772v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.0772v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.0789v2
+  title: Estimation of low-rank tensors via convex optimization
+  summary: |-
+    In this paper, we propose three approaches for the estimation of the Tucker
+    decomposition of multi-way arrays (tensors) from partial observations. All
+    approaches are formulated as convex minimization problems. Therefore, the
+    minimum is guaranteed to be unique. The proposed approaches can automatically
+    estimate the number of factors (rank) through the optimization. Thus, there is
+    no need to specify the rank beforehand. The key technique we employ is the
+    trace norm regularization, which is a popular approach for the estimation of
+    low-rank matrices. In addition, we propose a simple heuristic to improve the
+    interpretability of the obtained factorization. The advantages and
+    disadvantages of three proposed approaches are demonstrated through numerical
+    experiments on both synthetic and real world datasets. We show that the
+    proposed convex optimization based approaches are more accurate in predictive
+    performance, faster, and more reliable in recovering a known multilinear
+    structure than conventional approaches.
+  published: '2010-10-05T08:00:33Z'
+  updated: '2011-03-02T08:12:24Z'
+  authors:
+  - Ryota Tomioka
+  - Kohei Hayashi
+  - Hisashi Kashima
+  categories:
+  - stat.ML
+  - math.NA
+  primary_category: stat.ML
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.0789v2
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.0789v2
+    title: pdf
+- id: http://arxiv.org/abs/1010.1042v3
+  title: Hidden Markov Models with Multiple Observation Processes
+  summary: |-
+    We consider a hidden Markov model with multiple observation processes, one of
+    which is chosen at each point in time by a policy---a deterministic function of
+    the information state---and attempt to determine which policy minimises the
+    limiting expected entropy of the information state. Focusing on a special case,
+    we prove analytically that the information state always converges in
+    distribution, and derive a formula for the limiting entropy which can be used
+    for calculations with high precision. Using this fomula, we find
+    computationally that the optimal policy is always a threshold policy, allowing
+    it to be easily found. We also find that the greedy policy is almost optimal.
+  published: '2010-10-06T00:36:04Z'
+  updated: '2011-05-05T08:34:07Z'
+  authors:
+  - James Y. Zhao
+  categories:
+  - math.PR
+  - cs.IT
+  - cs.LG
+  - math.IT
+  - 90C40
+  primary_category: math.PR
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.1042v3
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.1042v3
+    title: pdf
+- id: http://arxiv.org/abs/1010.1409v1
+  title: |-
+    A sparse regulatory network of copy-number driven expression reveals
+      putative breast cancer oncogenes
+  summary: |-
+    The influence of DNA cis-regulatory elements on a gene's expression has been
+    intensively studied. However, little is known about expressions driven by
+    trans-acting DNA hotspots. DNA hotspots harboring copy number aberrations are
+    recognized to be important in cancer as they influence multiple genes on a
+    global scale. The challenge in detecting trans-effects is mainly due to the
+    computational difficulty in detecting weak and sparse trans-acting signals
+    amidst co-occuring passenger events. We propose an integrative approach to
+    learn a sparse interaction network of DNA copy-number regions with their
+    downstream targets in a breast cancer dataset. Information from this network
+    helps distinguish copy-number driven from copy-number independent expression
+    changes on a global scale. Our result further delineates cis- and trans-effects
+    in a breast cancer dataset, for which important oncogenes such as ESR1 and
+    ERBB2 appear to be highly copy-number dependent. Further, our model is shown to
+    be efficient and in terms of goodness of fit no worse than other state-of the
+    art predictors and network reconstruction models using both simulated and real
+    data.
+  published: '2010-10-07T12:12:13Z'
+  updated: '2010-10-07T12:12:13Z'
+  authors:
+  - Yinyin Yuan
+  - Christina Curtis
+  - Carlos Caldas
+  - Florian Markowetz
+  categories:
+  - q-bio.MN
+  - stat.AP
+  primary_category: q-bio.MN
+  links:
+  - rel: related
+    href: http://dx.doi.org/10.1109/BIBM.2010.5706612
+    title: doi
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.1409v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.1409v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.1437v1
+  title: Mixed-Membership Stochastic Block-Models for Transactional Networks
+  summary: |-
+    Transactional network data can be thought of as a list of one-to-many
+    communications(e.g., email) between nodes in a social network. Most social
+    network models convert this type of data into binary relations between pairs of
+    nodes. We develop a latent mixed membership model capable of modeling richer
+    forms of transactional network data, including relations between more than two
+    nodes. The model can cluster nodes and predict transactions. The block-model
+    nature of the model implies that groups can be characterized in very general
+    ways. This flexible notion of group structure enables discovery of rich
+    structure in transactional networks. Estimation and inference are accomplished
+    via a variational EM algorithm. Simulations indicate that the learning
+    algorithm can recover the correct generative model. Interesting structure is
+    discovered in the Enron email dataset and another dataset extracted from the
+    Reddit website. Analysis of the Reddit data is facilitated by a novel
+    performance measure for comparing two soft clusterings. The new model is
+    superior at discovering mixed membership in groups and in predicting
+    transactions.
+  published: '2010-10-07T14:16:38Z'
+  updated: '2010-10-07T14:16:38Z'
+  authors:
+  - Mahdi Shafiei
+  - Hugh Chipman
+  categories:
+  - stat.ML
+  - cs.AI
+  - cs.SI
+  - stat.AP
+  - stat.ME
+  primary_category: stat.ML
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.1437v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.1437v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.1499v3
+  title: |-
+    Completely Stale Transmitter Channel State Information is Still Very
+      Useful
+  summary: |-
+    Transmitter channel state information (CSIT) is crucial for the multiplexing
+    gains offered by advanced interference management techniques such as multiuser
+    MIMO and interference alignment. Such CSIT is usually obtained by feedback from
+    the receivers, but the feedback is subject to delays. The usual approach is to
+    use the fed back information to predict the current channel state and then
+    apply a scheme designed assuming perfect CSIT. When the feedback delay is large
+    compared to the channel coherence time, such a prediction approach completely
+    fails to achieve any multiplexing gain. In this paper, we show that even in
+    this case, the completely stale CSI is still very useful. More concretely, we
+    show that in a MIMO broadcast channel with $K$ transmit antennas and $K$
+    receivers each with 1 receive antenna, $\frac{K}{1+1/2+ ...+ \frac{1}{K}} (> 1)
+    $ degrees of freedom is achievable even when the fed back channel state is
+    completely independent of the current channel state. Moreover, we establish
+    that if all receivers have independent and identically distributed channels,
+    then this is the optimal number of degrees of freedom achievable. In the
+    optimal scheme, the transmitter uses the fed back CSI to learn the side
+    information that the receivers receive from previous transmissions rather than
+    to predict the current channel state. Our result can be viewed as the first
+    example of feedback providing a degree-of-freedom gain in memoryless channels.
+  published: '2010-10-07T18:00:46Z'
+  updated: '2012-06-29T16:38:17Z'
+  authors:
+  - Mohammad Ali Maddah-Ali
+  - David Tse
+  categories:
+  - cs.IT
+  - math.IT
+  primary_category: cs.IT
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.1499v3
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.1499v3
+    title: pdf
+- id: http://arxiv.org/abs/1010.1526v6
+  title: |-
+    Time Series Classification by Class-Specific Mahalanobis Distance
+      Measures
+  summary: |-
+    To classify time series by nearest neighbors, we need to specify or learn one
+    or several distance measures. We consider variations of the Mahalanobis
+    distance measures which rely on the inverse covariance matrix of the data.
+    Unfortunately --- for time series data --- the covariance matrix has often low
+    rank. To alleviate this problem we can either use a pseudoinverse, covariance
+    shrinking or limit the matrix to its diagonal. We review these alternatives and
+    benchmark them against competitive methods such as the related Large Margin
+    Nearest Neighbor Classification (LMNN) and the Dynamic Time Warping (DTW)
+    distance. As we expected, we find that the DTW is superior, but the Mahalanobis
+    distance measures are one to two orders of magnitude faster. To get best
+    results with Mahalanobis distance measures, we recommend learning one distance
+    measure per class using either covariance shrinking or the diagonal approach.
+  published: '2010-10-07T19:48:23Z'
+  updated: '2012-07-02T20:57:01Z'
+  authors:
+  - Zoltán Prekopcsák
+  - Daniel Lemire
+  categories:
+  - cs.LG
+  primary_category: cs.LG
+  links:
+  - rel: related
+    href: http://dx.doi.org/10.1007/s11634-012-0110-6
+    title: doi
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.1526v6
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.1526v6
+    title: pdf
+- id: http://arxiv.org/abs/1010.1609v1
+  title: Algorithmic and Statistical Perspectives on Large-Scale Data Analysis
+  summary: |-
+    In recent years, ideas from statistics and scientific computing have begun to
+    interact in increasingly sophisticated and fruitful ways with ideas from
+    computer science and the theory of algorithms to aid in the development of
+    improved worst-case algorithms that are useful for large-scale scientific and
+    Internet data analysis problems. In this chapter, I will describe two recent
+    examples---one having to do with selecting good columns or features from a (DNA
+    Single Nucleotide Polymorphism) data matrix, and the other having to do with
+    selecting good clusters or communities from a data graph (representing a social
+    or information network)---that drew on ideas from both areas and that may serve
+    as a model for exploiting complementary algorithmic and statistical
+    perspectives in order to solve applied large-scale data analysis problems.
+  published: '2010-10-08T07:02:11Z'
+  updated: '2010-10-08T07:02:11Z'
+  authors:
+  - Michael W. Mahoney
+  categories:
+  - cs.DS
+  - stat.CO
+  - stat.ML
+  primary_category: cs.DS
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.1609v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.1609v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.1763v3
+  title: Algorithms for nonnegative matrix factorization with the beta-divergence
+  summary: |-
+    This paper describes algorithms for nonnegative matrix factorization (NMF)
+    with the beta-divergence (beta-NMF). The beta-divergence is a family of cost
+    functions parametrized by a single shape parameter beta that takes the
+    Euclidean distance, the Kullback-Leibler divergence and the Itakura-Saito
+    divergence as special cases (beta = 2,1,0, respectively). The proposed
+    algorithms are based on a surrogate auxiliary function (a local majorization of
+    the criterion function). We first describe a majorization-minimization (MM)
+    algorithm that leads to multiplicative updates, which differ from standard
+    heuristic multiplicative updates by a beta-dependent power exponent. The
+    monotonicity of the heuristic algorithm can however be proven for beta in (0,1)
+    using the proposed auxiliary function. Then we introduce the concept of
+    majorization-equalization (ME) algorithm which produces updates that move along
+    constant level sets of the auxiliary function and lead to larger steps than MM.
+    Simulations on synthetic and real data illustrate the faster convergence of the
+    ME approach. The paper also describes how the proposed algorithms can be
+    adapted to two common variants of NMF : penalized NMF (i.e., when a penalty
+    function of the factors is added to the criterion function) and convex-NMF
+    (when the dictionary is assumed to belong to a known subspace).
+  published: '2010-10-08T18:53:27Z'
+  updated: '2011-03-08T12:56:39Z'
+  authors:
+  - Cédric Févotte
+  - Jérôme Idier
+  categories:
+  - cs.LG
+  primary_category: cs.LG
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.1763v3
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.1763v3
+    title: pdf
+- id: http://arxiv.org/abs/1010.1868v1
+  title: |-
+    Infinite Hierarchical MMSB Model for Nested Communities/Groups in Social
+      Networks
+  summary: |-
+    Actors in realistic social networks play not one but a number of diverse
+    roles depending on whom they interact with, and a large number of such
+    role-specific interactions collectively determine social communities and their
+    organizations. Methods for analyzing social networks should capture these
+    multi-faceted role-specific interactions, and, more interestingly, discover the
+    latent organization or hierarchy of social communities. We propose a
+    hierarchical Mixed Membership Stochastic Blockmodel to model the generation of
+    hierarchies in social communities, selective membership of actors to subsets of
+    these communities, and the resultant networks due to within- and
+    cross-community interactions. Furthermore, to automatically discover these
+    latent structures from social networks, we develop a Gibbs sampling algorithm
+    for our model. We conduct extensive validation of our model using synthetic
+    networks, and demonstrate the utility of our model in real-world datasets such
+    as predator-prey networks and citation networks.
+  published: '2010-10-09T19:43:56Z'
+  updated: '2010-10-09T19:43:56Z'
+  authors:
+  - Qirong Ho
+  - Ankur P. Parikh
+  - Le Song
+  - Eric P. Xing
+  categories:
+  - stat.ML
+  - stat.ME
+  primary_category: stat.ML
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.1868v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.1868v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.1888v1
+  title: |-
+    Multi-Objective Genetic Programming Projection Pursuit for Exploratory
+      Data Modeling
+  summary: |-
+    For classification problems, feature extraction is a crucial process which
+    aims to find a suitable data representation that increases the performance of
+    the machine learning algorithm. According to the curse of dimensionality
+    theorem, the number of samples needed for a classification task increases
+    exponentially as the number of dimensions (variables, features) increases. On
+    the other hand, it is costly to collect, store and process data. Moreover,
+    irrelevant and redundant features might hinder classifier performance. In
+    exploratory analysis settings, high dimensionality prevents the users from
+    exploring the data visually. Feature extraction is a two-step process: feature
+    construction and feature selection. Feature construction creates new features
+    based on the original features and feature selection is the process of
+    selecting the best features as in filter, wrapper and embedded methods.
+      In this work, we focus on feature construction methods that aim to decrease
+    data dimensionality for visualization tasks. Various linear (such as principal
+    components analysis (PCA), multiple discriminants analysis (MDA), exploratory
+    projection pursuit) and non-linear (such as multidimensional scaling (MDS),
+    manifold learning, kernel PCA/LDA, evolutionary constructive induction)
+    techniques have been proposed for dimensionality reduction. Our algorithm is an
+    adaptive feature extraction method which consists of evolutionary constructive
+    induction for feature construction and a hybrid filter/wrapper method for
+    feature selection.
+  published: '2010-10-10T02:34:22Z'
+  updated: '2010-10-10T02:34:22Z'
+  authors:
+  - Ilknur Icke
+  - Andrew Rosenberg
+  categories:
+  - cs.LG
+  - cs.NE
+  primary_category: cs.LG
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.1888v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.1888v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.2102v1
+  title: |-
+    Hierarchical Multiclass Decompositions with Application to Authorship
+      Determination
+  summary: |-
+    This paper is mainly concerned with the question of how to decompose
+    multiclass classification problems into binary subproblems. We extend known
+    Jensen-Shannon bounds on the Bayes risk of binary problems to hierarchical
+    multiclass problems and use these bounds to develop a heuristic procedure for
+    constructing hierarchical multiclass decomposition for multinomials. We test
+    our method and compare it to the well known "all-pairs" decomposition. Our
+    tests are performed using a new authorship determination benchmark test of
+    machine learning authors. The new method consistently outperforms the all-pairs
+    decomposition when the number of classes is small and breaks even on larger
+    multiclass problems. Using both methods, the classification accuracy we
+    achieve, using an SVM over a feature set consisting of both high frequency
+    single tokens and high frequency token-pairs, appears to be exceptionally high
+    compared to known results in authorship determination.
+  published: '2010-10-11T13:41:21Z'
+  updated: '2010-10-11T13:41:21Z'
+  authors:
+  - Ran El-Yaniv
+  - Noam Etzion-Rosenberg
+  categories:
+  - cs.AI
+  primary_category: cs.AI
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.2102v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.2102v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.2138v1
+  title: |-
+    Combiner suivi de l'activite? et partage d'expériences en
+      apprentissage par projet pour les acteurs tuteurs et apprenants
+  summary: |-
+    Our work aims to study tools offered to students and tutors involved in
+    face-to-face or blended project- based learning activities. Project-based
+    learning is often applied in the case of complex learning (i.e. which aims at
+    making learners acquire various linked skills or develop their behaviours). In
+    comparison to traditional learning, this type of learning relies on
+    co-development, collective responsibility and co-operation. Learners are the
+    principal actors of their learning. These trainings rest on rich and complex
+    organizations, particularly for tutors, and it is difficult to apply innovative
+    educational strategies. Our aim, in a bottom-up approach, is (1) to observe,
+    according to Knowledge Management methods, a course characterized by these
+    three criteria. The observed course concerns project management learning. Its
+    observation allows us (2) to highlight and to analyze the problems encountered
+    by the actors (students, tutors, designers) and (3) to propose tools to solve
+    or improve them. We particularly study the relevance and the limits of the
+    existing monitoring and experience sharing tools. We finally propose a result
+    in the form of the tool MEShaT (Monitoring and Experience Sharing Tool) and end
+    on the perspectives offered by these researches.
+  published: '2010-10-11T15:34:46Z'
+  updated: '2010-10-11T15:34:46Z'
+  authors:
+  - Christine Michel
+  - Elise Lavoué
+  categories:
+  - cs.CY
+  primary_category: cs.CY
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.2138v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.2138v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.2285v3
+  title: |-
+    Information-based complexity, feedback and dynamics in convex
+      programming
+  summary: |-
+    We study the intrinsic limitations of sequential convex optimization through
+    the lens of feedback information theory. In the oracle model of optimization,
+    an algorithm queries an {\em oracle} for noisy information about the unknown
+    objective function, and the goal is to (approximately) minimize every function
+    in a given class using as few queries as possible. We show that, in order for a
+    function to be optimized, the algorithm must be able to accumulate enough
+    information about the objective. This, in turn, puts limits on the speed of
+    optimization under specific assumptions on the oracle and the type of feedback.
+    Our techniques are akin to the ones used in statistical literature to obtain
+    minimax lower bounds on the risks of estimation procedures; the notable
+    difference is that, unlike in the case of i.i.d. data, a sequential
+    optimization algorithm can gather observations in a {\em controlled} manner, so
+    that the amount of information at each step is allowed to change in time. In
+    particular, we show that optimization algorithms often obey the law of
+    diminishing returns: the signal-to-noise ratio drops as the optimization
+    algorithm approaches the optimum. To underscore the generality of the tools, we
+    use our approach to derive fundamental lower bounds for a certain active
+    learning problem. Overall, the present work connects the intuitive notions of
+    information in optimization, experimental design, estimation, and active
+    learning to the quantitative notion of Shannon information.
+  published: '2010-10-12T02:19:43Z'
+  updated: '2011-09-09T15:57:54Z'
+  authors:
+  - Maxim Raginsky
+  - Alexander Rakhlin
+  categories:
+  - cs.IT
+  - cs.SY
+  - math.IT
+  - math.OC
+  primary_category: cs.IT
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.2285v3
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.2285v3
+    title: pdf
+- id: http://arxiv.org/abs/1010.2286v1
+  title: |-
+    Divergence-based characterization of fundamental limitations of adaptive
+      dynamical systems
+  summary: |-
+    Adaptive dynamical systems arise in a multitude of contexts, e.g.,
+    optimization, control, communications, signal processing, and machine learning.
+    A precise characterization of their fundamental limitations is therefore of
+    paramount importance. In this paper, we consider the general problem of
+    adaptively controlling and/or identifying a stochastic dynamical system, where
+    our {\em a priori} knowledge allows us to place the system in a subset of a
+    metric space (the uncertainty set). We present an information-theoretic
+    meta-theorem that captures the trade-off between the metric complexity (or
+    richness) of the uncertainty set, the amount of information acquired online in
+    the process of controlling and observing the system, and the residual
+    uncertainty remaining after the observations have been collected. Following the
+    approach of Zames, we quantify {\em a priori} information by the Kolmogorov
+    (metric) entropy of the uncertainty set, while the information acquired online
+    is expressed as a sum of information divergences. The general theory is used to
+    derive new minimax lower bounds on the metric identification error, as well as
+    to give a simple derivation of the minimum time needed to stabilize an
+    uncertain stochastic linear system.
+  published: '2010-10-12T02:27:59Z'
+  updated: '2010-10-12T02:27:59Z'
+  authors:
+  - Maxim Raginsky
+  categories:
+  - cs.IT
+  - math.IT
+  - math.OC
+  primary_category: cs.IT
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.2286v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.2286v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.2354v1
+  title: Predicting Coding Effort in Projects Containing XML Code
+  summary: |-
+    This paper studies the problem of predicting the coding effort for a
+    subsequent year of development by analysing metrics extracted from project
+    repositories, with an emphasis on projects containing XML code. The study
+    considers thirteen open source projects and applies machine learning algorithms
+    to generate models to predict one-year coding effort, measured in terms of
+    lines of code added, modified and deleted. Both organisational and code metrics
+    associated to revisions are taken into account. The results show that coding
+    effort is highly determined by the expertise of developers while source code
+    metrics have little effect on improving the accuracy of estimations of coding
+    effort. The study also shows that models trained on one project are unreliable
+    at estimating effort in other projects.
+  published: '2010-10-12T11:30:47Z'
+  updated: '2010-10-12T11:30:47Z'
+  authors:
+  - Siim Karus
+  - Marlon Dumas
+  categories:
+  - cs.SE
+  - D.2.7; D.2.8; D.2.9
+  primary_category: cs.SE
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.2354v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.2354v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.2384v1
+  title: Learning Taxonomy for Text Segmentation by Formal Concept Analysis
+  summary: |-
+    In this paper the problems of deriving a taxonomy from a text and
+    concept-oriented text segmentation are approached. Formal Concept Analysis
+    (FCA) method is applied to solve both of these linguistic problems. The
+    proposed segmentation method offers a conceptual view for text segmentation,
+    using a context-driven clustering of sentences. The Concept-oriented Clustering
+    Segmentation algorithm (COCS) is based on k-means linear clustering of the
+    sentences. Experimental results obtained using COCS algorithm are presented.
+  published: '2010-10-12T13:20:30Z'
+  updated: '2010-10-12T13:20:30Z'
+  authors:
+  - Mihaiela Lupea
+  - Doina Tatar
+  - Zsuzsana Marian
+  categories:
+  - cs.CL
+  - 68T50, 03H65
+  primary_category: cs.CL
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.2384v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.2384v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.2443v1
+  title: Leading twist shadowing, black disk regime and forward hadron production
+  summary: |-
+    We review theory of the leading twist nuclear shadowing, and describe
+    phenomenon of post-selection suppression of leading parton spectrum (effective
+    fractional energy losses) in the proximity of the black disk regime. We argue
+    that $2 \to 2$ mechanism dominates in the inclusive leading pion production in
+    d-Au collisions and explain that the post-selection naturally explains both the
+    magnitude of the suppression of the forward pion production in d-Au collisions
+    and the pattern of the forward - central correlations. At the same time this
+    pattern of correlations rules out $2\to 1$ mechanism as the main source of the
+    inclusive leading pion yield. It is demonstrated that the mechanism of the
+    double parton interactions gives an important contribution to the production of
+    two leading pions in $pp$ scattering opening a new way to study correlations of
+    leading quarks in the nucleon. The same mechanism is enhanced in $dAu \to
+    \pi^0\pi^0 +X$ collisions and explains the dominance of $\Delta\phi$
+    independent component and suppression of the away side peak.
+  published: '2010-10-12T17:02:03Z'
+  updated: '2010-10-12T17:02:03Z'
+  authors:
+  - Mark Strikman
+  categories:
+  - nucl-th
+  primary_category: nucl-th
+  links:
+  - rel: related
+    href: http://dx.doi.org/10.1016/j.nuclphysa.2010.10.003
+    title: doi
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.2443v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.2443v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.2457v6
+  title: Optimal designs for Lasso and Dantzig selector using Expander Codes
+  summary: |-
+    We investigate the high-dimensional regression problem using adjacency
+    matrices of unbalanced expander graphs. In this frame, we prove that the
+    $\ell_{2}$-prediction error and the $\ell_{1}$-risk of the lasso and the
+    Dantzig selector are optimal up to an explicit multiplicative constant. Thus we
+    can estimate a high-dimensional target vector with an error term similar to the
+    one obtained in a situation where one knows the support of the largest
+    coordinates in advance.
+      Moreover, we show that these design matrices have an explicit restricted
+    eigenvalue. Precisely, they satisfy the restricted eigenvalue assumption and
+    the compatibility condition with an explicit constant.
+      Eventually, we capitalize on the recent construction of unbalanced expander
+    graphs due to Guruswami, Umans, and Vadhan, to provide a deterministic
+    polynomial time construction of these design matrices.
+  published: '2010-10-12T18:03:23Z'
+  updated: '2014-07-22T08:56:44Z'
+  authors:
+  - Yohann de Castro
+  categories:
+  - math.ST
+  - cs.IT
+  - math.IT
+  - math.PR
+  - stat.ME
+  - stat.ML
+  - stat.TH
+  - 62G05, 62J05, 62J12
+  primary_category: math.ST
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.2457v6
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.2457v6
+    title: pdf
+- id: http://arxiv.org/abs/1010.2511v6
+  title: |-
+    The use of machine learning with signal- and NLP processing of source
+      code to fingerprint, detect, and classify vulnerabilities and weaknesses with
+      MARFCAT
+  summary: |-
+    We present a machine learning approach to static code analysis and
+    fingerprinting for weaknesses related to security, software engineering, and
+    others using the open-source MARF framework and the MARFCAT application based
+    on it for the NIST's SATE2010 static analysis tool exposition workshop found at
+    http://samate.nist.gov/SATE2010Workshop.html
+  published: '2010-10-12T20:37:06Z'
+  updated: '2011-11-06T18:49:49Z'
+  authors:
+  - Serguei A. Mokhov
+  categories:
+  - cs.CR
+  - cs.PL
+  - K.6.5; D.3
+  primary_category: cs.CR
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.2511v6
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.2511v6
+    title: pdf
+- id: http://arxiv.org/abs/1010.2770v1
+  title: Online Multiple Kernel Learning for Structured Prediction
+  summary: |-
+    Despite the recent progress towards efficient multiple kernel learning (MKL),
+    the structured output case remains an open research front. Current approaches
+    involve repeatedly solving a batch learning problem, which makes them
+    inadequate for large scale scenarios. We propose a new family of online
+    proximal algorithms for MKL (as well as for group-lasso and variants thereof),
+    which overcomes that drawback. We show regret, convergence, and generalization
+    bounds for the proposed method. Experiments on handwriting recognition and
+    dependency parsing testify for the successfulness of the approach.
+  published: '2010-10-13T20:48:30Z'
+  updated: '2010-10-13T20:48:30Z'
+  authors:
+  - Andre F. T. Martins
+  - Mario A. T. Figueiredo
+  - Pedro M. Q. Aguiar
+  - Noah A. Smith
+  - Eric P. Xing
+  categories:
+  - stat.ML
+  primary_category: stat.ML
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.2770v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.2770v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.2955v6
+  title: Robust Recovery of Subspace Structures by Low-Rank Representation
+  summary: |-
+    In this work we address the subspace recovery problem. Given a set of data
+    samples (vectors) approximately drawn from a union of multiple subspaces, our
+    goal is to segment the samples into their respective subspaces and correct the
+    possible errors as well. To this end, we propose a novel method termed Low-Rank
+    Representation (LRR), which seeks the lowest-rank representation among all the
+    candidates that can represent the data samples as linear combinations of the
+    bases in a given dictionary. It is shown that LRR well solves the subspace
+    recovery problem: when the data is clean, we prove that LRR exactly captures
+    the true subspace structures; for the data contaminated by outliers, we prove
+    that under certain conditions LRR can exactly recover the row space of the
+    original data and detect the outlier as well; for the data corrupted by
+    arbitrary errors, LRR can also approximately recover the row space with
+    theoretical guarantees. Since the subspace membership is provably determined by
+    the row space, these further imply that LRR can perform robust subspace
+    segmentation and error correction, in an efficient way.
+  published: '2010-10-14T15:38:48Z'
+  updated: '2012-05-06T08:23:16Z'
+  authors:
+  - Guangcan Liu
+  - Zhouchen Lin
+  - Shuicheng Yan
+  - Ju Sun
+  - Yong Yu
+  - Yi Ma
+  categories:
+  - cs.IT
+  - cs.CV
+  - cs.LG
+  - math.IT
+  primary_category: cs.IT
+  links:
+  - rel: related
+    href: http://dx.doi.org/10.1109/TPAMI.2012.88
+    title: doi
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.2955v6
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.2955v6
+    title: pdf
+- id: http://arxiv.org/abs/1010.3009v1
+  title: Curiosity and Pleasure
+  summary: |-
+    Heuristic decision making received wide attention due to the work of Tversky
+    and Kahneman (1981) and inspired multiple studies of irrationality of the human
+    mind and a fundamental disregard for knowledge. But what is the source of all
+    human knowledge, including heuristics? We discuss the hypothesis that
+    acquisition of knowledge is a deeply rooted psychological need, a motivational
+    mechanism for perception as well as higher cognition. We report experimental
+    results showing that acquisition of knowledge is emotionally pleasing. The
+    satisfaction of curiosity through acquiring knowledge brings pleasure. This
+    confirms the hypothesis that curiosity or need for knowledge is a fundamental
+    and ancient motivation on a par with other basic needs, such as sex or food.
+    This paper connects curiosity, knowledge, cognition, emotions, including
+    aesthetic emotions of the beautiful, mechanisms of drives, high cognitive
+    functions, minimization of cognitive effort through heuristics, and knowledge
+    maximization. We anticipate our finding to be an important aspect for several
+    classical fields including cognitive dissonance, personality, self, learning,
+    and new directions in cognitive science studying emotions related to acquiring
+    knowledge, personality types in relation to types of knowledge, relating higher
+    cognitive abilities to knowledge-related emotions, and new directions in
+    aesthetics revealing the cognitive nature of the beautiful and music.
+  published: '2010-10-14T19:30:08Z'
+  updated: '2010-10-14T19:30:08Z'
+  authors:
+  - Leonid Perlovsky
+  - Marie-Claude Bonniot-Cabanac
+  - Michel Cabanac
+  categories:
+  - q-bio.NC
+  primary_category: q-bio.NC
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.3009v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.3009v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.3043v1
+  title: Making Tensor Factorizations Robust to Non-Gaussian Noise
+  summary: |-
+    Tensors are multi-way arrays, and the Candecomp/Parafac (CP) tensor
+    factorization has found application in many different domains. The CP model is
+    typically fit using a least squares objective function, which is a maximum
+    likelihood estimate under the assumption of i.i.d. Gaussian noise. We
+    demonstrate that this loss function can actually be highly sensitive to
+    non-Gaussian noise. Therefore, we propose a loss function based on the 1-norm
+    because it can accommodate both Gaussian and grossly non-Gaussian
+    perturbations. We also present an alternating majorization-minimization
+    algorithm for fitting a CP model using our proposed loss function.
+  published: '2010-10-14T23:21:30Z'
+  updated: '2010-10-14T23:21:30Z'
+  authors:
+  - Eric C. Chi
+  - Tamara G. Kolda
+  categories:
+  - math.NA
+  - stat.CO
+  - stat.ME
+  primary_category: math.NA
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.3043v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.3043v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.3045v1
+  title: The Emerging Web of Social Machines
+  summary: |-
+    We define a notion of social machine and envisage an algebra that can
+    describe networks of such. To start with, social machines are defined as tuples
+    of input, output, processes, constraints, state, requests and responses; apart
+    from defining the machines themselves, the algebra defines a set of connectors
+    and conditionals that can be used to describe the interactions between any
+    number of machines in a multitude of ways, as a means to represent real
+    machines interacting in the real web, such as Twitter, Twitter running on top
+    of Amazon AWS, mashups built using Twitter and, obviously, other social
+    machines. This work is not a theoretical paper as yet; but, in more than one
+    sense, we think we have found a way to describe web based information systems
+    and are starting to work on what could be a practical way of dealing with the
+    complexity of this emerging web of social machines that is all around us. This
+    version should be read as work in progress and comments, observations, bugs...
+    are most welcome and should be sent to the email of the first, corresponding
+    author.
+  published: '2010-10-14T23:53:07Z'
+  updated: '2010-10-14T23:53:07Z'
+  authors:
+  - Silvio R. L. Meira
+  - Vanilson A. A. Buregio
+  - Leandro M. Nascimento
+  - Elaine G. M. de Figueiredo
+  - Misael Neto
+  - Bruno P. Encarnação
+  - Vinícius Garcia
+  categories:
+  - cs.SE
+  primary_category: cs.SE
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.3045v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.3045v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.3063v3
+  title: |-
+    Phase-Oscillator Computations as Neural Models of Stimulus-Response
+      Conditioning and Response Selection
+  summary: |-
+    The activity of collections of synchronizing neurons can be represented by
+    weakly coupled nonlinear phase oscillators satisfying Kuramoto's equations. In
+    this article, we build such neural-oscillator models, partly based on
+    neurophysiological evidence, to represent approximately the learning behavior
+    predicted and confirmed in three experiments by well-known stochastic learning
+    models of behavioral stimulus-response theory. We use three Kuramoto
+    oscillators to model a continuum of responses, and we provide detailed
+    numerical simulations and analysis of the three-oscillator Kuramoto problem,
+    including an analysis of the stability points for different coupling
+    conditions. We show that the oscillator simulation data are well-matched to the
+    behavioral data of the three experiments.
+  published: '2010-10-15T02:03:59Z'
+  updated: '2012-04-26T17:33:37Z'
+  authors:
+  - Patrick Suppes
+  - Jose Acacio de Barros
+  - Gary Oas
+  categories:
+  - q-bio.NC
+  - physics.bio-ph
+  primary_category: q-bio.NC
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.3063v3
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.3063v3
+    title: pdf
+- id: http://arxiv.org/abs/1010.3091v2
+  title: Near-Optimal Bayesian Active Learning with Noisy Observations
+  summary: |-
+    We tackle the fundamental problem of Bayesian active learning with noise,
+    where we need to adaptively select from a number of expensive tests in order to
+    identify an unknown hypothesis sampled from a known prior distribution. In the
+    case of noise-free observations, a greedy algorithm called generalized binary
+    search (GBS) is known to perform near-optimally. We show that if the
+    observations are noisy, perhaps surprisingly, GBS can perform very poorly. We
+    develop EC2, a novel, greedy active learning algorithm and prove that it is
+    competitive with the optimal policy, thus obtaining the first competitiveness
+    guarantees for Bayesian active learning with noisy observations. Our bounds
+    rely on a recently discovered diminishing returns property called adaptive
+    submodularity, generalizing the classical notion of submodular set functions to
+    adaptive policies. Our results hold even if the tests have non-uniform cost and
+    their noise is correlated. We also propose EffECXtive, a particularly fast
+    approximation of EC2, and evaluate it on a Bayesian experimental design problem
+    involving human subjects, intended to tease apart competing economic theories
+    of how people make decisions under uncertainty.
+  published: '2010-10-15T08:20:46Z'
+  updated: '2013-12-16T06:42:05Z'
+  authors:
+  - Daniel Golovin
+  - Andreas Krause
+  - Debajyoti Ray
+  categories:
+  - cs.LG
+  - cs.AI
+  - cs.DS
+  - I.2.6; G.3; F.2.2
+  primary_category: cs.LG
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.3091v2
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.3091v2
+    title: pdf
+- id: http://arxiv.org/abs/1010.3266v1
+  title: |-
+    Lens Inquiry: An Astronomy Lab for Non-science Majors at Hartnell
+      Community College
+  summary: |-
+    We describe a three hour inquiry activity involving converging lenses and
+    telescopes as part of a semester-long astronomy lab course for non-science
+    majors at Hartnell Community College in Salinas, CA. Students were shown
+    several short demonstrations and given the chance to experiment with the
+    materials, after which there was a class discussion about the phenomena they
+    observed. Students worked in groups of 2-4 to design their own experiments to
+    address a particular question of interest to them and then presented their
+    findings to the class. An instructor-led presentation highlighted the students'
+    discoveries and the lab's content goals, followed by a short worksheet-based
+    activity that guided them in applying their new knowledge to build a simple
+    telescope using two converging lenses. The activity was successful in
+    emphasizing communication skills and giving students opportunities to engage in
+    the process of science in different ways. One of the biggest challenges in
+    designing this activity was covering all of the content given the short amount
+    of time available. Future implementations may have more success by splitting
+    the lab into two sessions, one focusing on converging lenses and the other
+    focusing on telescopes.
+  published: '2010-10-15T20:18:17Z'
+  updated: '2010-10-15T20:18:17Z'
+  authors:
+  - Nicole M. Putnam
+  - Judy Y. Cheng
+  - Elizabeth J. McGrath
+  - David K. Lai
+  - Pimol Moth
+  categories:
+  - physics.ed-ph
+  - astro-ph.IM
+  primary_category: physics.ed-ph
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.3266v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.3266v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.3320v2
+  title: |-
+    Exact block-wise optimization in group lasso and sparse group lasso for
+      linear regression
+  summary: |-
+    The group lasso is a penalized regression method, used in regression problems
+    where the covariates are partitioned into groups to promote sparsity at the
+    group level. Existing methods for finding the group lasso estimator either use
+    gradient projection methods to update the entire coefficient vector
+    simultaneously at each step, or update one group of coefficients at a time
+    using an inexact line search to approximate the optimal value for the group of
+    coefficients when all other groups' coefficients are fixed. We present a new
+    method of computation for the group lasso in the linear regression case, the
+    Single Line Search (SLS) algorithm, which operates by computing the exact
+    optimal value for each group (when all other coefficients are fixed) with one
+    univariate line search. We perform simulations demonstrating that the SLS
+    algorithm is often more efficient than existing computational methods. We also
+    extend the SLS algorithm to the sparse group lasso problem via the Signed
+    Single Line Search (SSLS) algorithm, and give theoretical results to support
+    both algorithms.
+  published: '2010-10-16T05:15:50Z'
+  updated: '2010-11-11T20:05:04Z'
+  authors:
+  - Rina Foygel
+  - Mathias Drton
+  categories:
+  - stat.ML
+  primary_category: stat.ML
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.3320v2
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.3320v2
+    title: pdf
+- id: http://arxiv.org/abs/1010.3425v1
+  title: |-
+    Identifying the consequences of dynamic treatment strategies: A
+      decision-theoretic overview
+  summary: |-
+    We consider the problem of learning about and comparing the consequences of
+    dynamic treatment strategies on the basis of observational data. We formulate
+    this within a probabilistic decision-theoretic framework. Our approach is
+    compared with related work by Robins and others: in particular, we show how
+    Robins's 'G-computation' algorithm arises naturally from this
+    decision-theoretic perspective. Careful attention is paid to the mathematical
+    and substantive conditions required to justify the use of this formula. These
+    conditions revolve around a property we term stability, which relates the
+    probabilistic behaviours of observational and interventional regimes. We show
+    how an assumption of 'sequential randomization' (or 'no unmeasured
+    confounders'), or an alternative assumption of 'sequential irrelevance', can be
+    used to infer stability. Probabilistic influence diagrams are used to simplify
+    manipulations, and their power and limitations are discussed. We compare our
+    approach with alternative formulations based on causal DAGs or potential
+    response models. We aim to show that formulating the problem of assessing
+    dynamic treatment strategies as a problem of decision analysis brings clarity,
+    simplicity and generality.
+  published: '2010-10-17T16:02:58Z'
+  updated: '2010-10-17T16:02:58Z'
+  authors:
+  - A. Philip Dawid
+  - Vanessa Didelez
+  categories:
+  - math.ST
+  - cs.AI
+  - stat.TH
+  - 62C05, 62A01
+  primary_category: math.ST
+  links:
+  - rel: related
+    href: http://dx.doi.org/10.1214/10-SS081
+    title: doi
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.3425v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.3425v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.3460v2
+  title: Hybrid Linear Modeling via Local Best-fit Flats
+  summary: |-
+    We present a simple and fast geometric method for modeling data by a union of
+    affine subspaces. The method begins by forming a collection of local best-fit
+    affine subspaces, i.e., subspaces approximating the data in local
+    neighborhoods. The correct sizes of the local neighborhoods are determined
+    automatically by the Jones' $\beta_2$ numbers (we prove under certain geometric
+    conditions that our method finds the optimal local neighborhoods). The
+    collection of subspaces is further processed by a greedy selection procedure or
+    a spectral method to generate the final model. We discuss applications to
+    tracking-based motion segmentation and clustering of faces under different
+    illuminating conditions. We give extensive experimental evidence demonstrating
+    the state of the art accuracy and speed of the suggested algorithms on these
+    problems and also on synthetic hybrid linear data as well as the MNIST
+    handwritten digits data; and we demonstrate how to use our algorithms for fast
+    determination of the number of affine subspaces.
+  published: '2010-10-17T23:27:35Z'
+  updated: '2012-05-01T21:26:48Z'
+  authors:
+  - Teng Zhang
+  - Arthur Szlam
+  - Yi Wang
+  - Gilad Lerman
+  categories:
+  - cs.CV
+  - stat.ML
+  primary_category: cs.CV
+  links:
+  - rel: related
+    href: http://dx.doi.org/10.1007/s11263-012-0535-6
+    title: doi
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.3460v2
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.3460v2
+    title: pdf
+- id: http://arxiv.org/abs/1010.3467v1
+  title: |-
+    Fast Inference in Sparse Coding Algorithms with Applications to Object
+      Recognition
+  summary: |-
+    Adaptive sparse coding methods learn a possibly overcomplete set of basis
+    functions, such that natural image patches can be reconstructed by linearly
+    combining a small subset of these bases. The applicability of these methods to
+    visual object recognition tasks has been limited because of the prohibitive
+    cost of the optimization algorithms required to compute the sparse
+    representation. In this work we propose a simple and efficient algorithm to
+    learn basis functions. After training, this model also provides a fast and
+    smooth approximator to the optimal representation, achieving even better
+    accuracy than exact sparse coding algorithms on visual object recognition
+    tasks.
+  published: '2010-10-18T02:31:21Z'
+  updated: '2010-10-18T02:31:21Z'
+  authors:
+  - Koray Kavukcuoglu
+  - Marc'Aurelio Ranzato
+  - Yann LeCun
+  categories:
+  - cs.CV
+  - cs.LG
+  primary_category: cs.CV
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.3467v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.3467v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.3482v1
+  title: |-
+    Lecture Notes: Non-Standard Approach to J.F. Colombeau's Theory of
+      Generalized Function: University of Vienna, Austria, May 2006
+  summary: |-
+    In these lecture notes we present an introduction to non-standard analysis
+    especially written for the community of mathematicians, physicists and
+    engineers who do research on J. F. Colombeau' theory of new generalized
+    functions and its applications. The main purpose of our non-standard approach
+    to Colombeau' theory is the improvement of the properties of the scalars of the
+    varieties of spaces of generalized functions: in our non-standard approach the
+    sets of scalars of the functional spaces always form algebraically closed
+    non-archimedean Cantor complete fields. In contrast, the scalars of the
+    functional spaces in Colombeau's theory are rings with zero divisors. The
+    improvement of the scalars leads to other improvements and simplifications of
+    Colombeau's theory such as reducing the number of quantifiers and possibilities
+    for an axiomatization of the theory. Some of the algebras we construct in these
+    notes have already counterparts in Colombeau's theory, other seems to be
+    without counterpart. We present applications of the theory to PDE and
+    mathematical physics. Although our approach is directed mostly to Colombeau's
+    community, the readers who are already familiar with non-standard methods might
+    also find a short and comfortable way to learn about Colombeau's theory: a new
+    branch of functional analysis which naturally generalizes the Schwartz theory
+    of distributions with numerous applications to partial differential equations,
+    differential geometry, relativity theory and other areas of mathematics and
+    physics.
+  published: '2010-10-18T05:01:16Z'
+  updated: '2010-10-18T05:01:16Z'
+  authors:
+  - Todor D. Todorov
+  categories:
+  - math.FA
+  - 'Primary: 46F30, Secondary: 46S20, 46S10, 46F10, 03H05, 03C50'
+  primary_category: math.FA
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.3482v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.3482v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.3484v1
+  title: |-
+    Hardness Results for Agnostically Learning Low-Degree Polynomial
+      Threshold Functions
+  summary: |-
+    Hardness results for maximum agreement problems have close connections to
+    hardness results for proper learning in computational learning theory. In this
+    paper we prove two hardness results for the problem of finding a low degree
+    polynomial threshold function (PTF) which has the maximum possible agreement
+    with a given set of labeled examples in $\R^n \times \{-1,1\}.$ We prove that
+    for any constants $d\geq 1, \eps > 0$,
+      {itemize}
+      Assuming the Unique Games Conjecture, no polynomial-time algorithm can find a
+    degree-$d$ PTF that is consistent with a $(\half + \eps)$ fraction of a given
+    set of labeled examples in $\R^n \times \{-1,1\}$, even if there exists a
+    degree-$d$ PTF that is consistent with a $1-\eps$ fraction of the examples.
+      It is $\NP$-hard to find a degree-2 PTF that is consistent with a $(\half +
+    \eps)$ fraction of a given set of labeled examples in $\R^n \times \{-1,1\}$,
+    even if there exists a halfspace (degree-1 PTF) that is consistent with a $1 -
+    \eps$ fraction of the examples.
+      {itemize}
+      These results immediately imply the following hardness of learning results:
+    (i) Assuming the Unique Games Conjecture, there is no better-than-trivial
+    proper learning algorithm that agnostically learns degree-$d$ PTFs under
+    arbitrary distributions; (ii) There is no better-than-trivial learning
+    algorithm that outputs degree-2 PTFs and agnostically learns halfspaces (i.e.
+    degree-1 PTFs) under arbitrary distributions.
+  published: '2010-10-18T05:46:46Z'
+  updated: '2010-10-18T05:46:46Z'
+  authors:
+  - Ilias Diakonikolas
+  - Ryan O'Donnell
+  - Rocco A. Servedio
+  - Yi Wu
+  categories:
+  - cs.LG
+  primary_category: cs.LG
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.3484v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.3484v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.3775v2
+  title: Dynamic reconfiguration of human brain networks during learning
+  summary: |-
+    Human learning is a complex phenomenon requiring flexibility to adapt
+    existing brain function and precision in selecting new neurophysiological
+    activities to drive desired behavior. These two attributes -- flexibility and
+    selection -- must operate over multiple temporal scales as performance of a
+    skill changes from being slow and challenging to being fast and automatic. Such
+    selective adaptability is naturally provided by modular structure, which plays
+    a critical role in evolution, development, and optimal network function. Using
+    functional connectivity measurements of brain activity acquired from initial
+    training through mastery of a simple motor skill, we explore the role of
+    modularity in human learning by identifying dynamic changes of modular
+    organization spanning multiple temporal scales. Our results indicate that
+    flexibility, which we measure by the allegiance of nodes to modules, in one
+    experimental session predicts the relative amount of learning in a future
+    session. We also develop a general statistical framework for the identification
+    of modular architectures in evolving systems, which is broadly applicable to
+    disciplines where network adaptability is crucial to the understanding of
+    system performance.
+  published: '2010-10-19T01:30:23Z'
+  updated: '2011-10-24T03:51:53Z'
+  authors:
+  - Danielle S. Bassett
+  - Nicholas F. Wymbs
+  - Mason A. Porter
+  - Peter J. Mucha
+  - Jean M. Carlson
+  - Scott T. Grafton
+  categories:
+  - q-bio.NC
+  - cond-mat.dis-nn
+  - math-ph
+  - math.MP
+  - nlin.AO
+  - physics.bio-ph
+  primary_category: q-bio.NC
+  links:
+  - rel: related
+    href: http://dx.doi.org/10.1073/pnas.1018985108
+    title: doi
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.3775v2
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.3775v2
+    title: pdf
+- id: http://arxiv.org/abs/1010.3812v2
+  title: Random Projection Trees Revisited
+  summary: |-
+    The Random Projection Tree structures proposed in [Freund-Dasgupta STOC08]
+    are space partitioning data structures that automatically adapt to various
+    notions of intrinsic dimensionality of data. We prove new results for both the
+    RPTreeMax and the RPTreeMean data structures. Our result for RPTreeMax gives a
+    near-optimal bound on the number of levels required by this data structure to
+    reduce the size of its cells by a factor $s \geq 2$. We also prove a packing
+    lemma for this data structure. Our final result shows that low-dimensional
+    manifolds have bounded Local Covariance Dimension. As a consequence we show
+    that RPTreeMean adapts to manifold dimension as well.
+  published: '2010-10-19T06:53:46Z'
+  updated: '2010-10-20T08:44:58Z'
+  authors:
+  - Aman Dhesi
+  - Purushottam Kar
+  categories:
+  - cs.DS
+  - cs.CG
+  - math.DG
+  - stat.ML
+  primary_category: cs.DS
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.3812v2
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.3812v2
+    title: pdf
+- id: http://arxiv.org/abs/1010.3898v2
+  title: Advancements in scientific data searching, sharing and retrieval
+  summary: |-
+    The Open Archive Initiative Protocol for Metadata Handling (OAI-PMHiii) is a
+    standard that is seeing increased use as a means for exchanging structured
+    metadata. OAI-PMH implementations must support Dublin Core as a metadata
+    standard, with other metadata formats as optional. We have developed tools
+    which enable Mercury to consume metadata from OAI-PMH services in any of the
+    metadata formats we support (Dublin Core, Darwin Core, FCDC CSDGM, GCMD DIF,
+    EML, and ISO 19115/19137). We are also making ORNL DAAC metadata available
+    through OAI-PMH for other metadata tools to utilize. This paper describes
+    Mercury capabilities with multiple metadata formats, in general, and, more
+    specifically, the results of our OAI-PMH implementations and the lessons
+    learned.
+  published: '2010-10-19T13:17:39Z'
+  updated: '2010-12-30T02:56:19Z'
+  authors:
+  - Ranjeet Devarakonda
+  - Giri Palanisamy
+  - Bruce Wilson
+  categories:
+  - cs.IR
+  primary_category: cs.IR
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.3898v2
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.3898v2
+    title: pdf
+- id: http://arxiv.org/abs/1010.4001v1
+  title: Low-Mass X-ray Binary Populations
+  summary: |-
+    Low-mass X-ray binaries (LMXBs) have been studied in the Galaxy since the
+    beginning of X-ray astronomy. A lot has been learned about these bright X-ray
+    sources, but significant questions are still open. These questions are related
+    to the origin and evolution of LMXBs, dynamical evolution in globular clusters
+    (GC) or evolution of native field binaries, and on how their properties may
+    depend on those of the parent stellar population. The discovery of several
+    populations LMXB populations in elliptical galaxies with Chandra gives us tools
+    to look at these sources in a new way.
+  published: '2010-10-19T18:31:36Z'
+  updated: '2010-10-19T18:31:36Z'
+  authors:
+  - G. Fabbiano
+  categories:
+  - astro-ph.HE
+  primary_category: astro-ph.HE
+  links:
+  - rel: related
+    href: http://dx.doi.org/10.1063/1.3536394
+    title: doi
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.4001v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.4001v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.4050v1
+  title: Efficient Matrix Completion with Gaussian Models
+  summary: |-
+    A general framework based on Gaussian models and a MAP-EM algorithm is
+    introduced in this paper for solving matrix/table completion problems. The
+    numerical experiments with the standard and challenging movie ratings data show
+    that the proposed approach, based on probably one of the simplest probabilistic
+    models, leads to the results in the same ballpark as the state-of-the-art, at a
+    lower computational cost.
+  published: '2010-10-19T21:01:45Z'
+  updated: '2010-10-19T21:01:45Z'
+  authors:
+  - Flavien Léger
+  - Guoshen Yu
+  - Guillermo Sapiro
+  categories:
+  - cs.LG
+  primary_category: cs.LG
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.4050v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.4050v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.4207v2
+  title: 'Convex Analysis and Optimization with Submodular Functions: a Tutorial'
+  summary: |-
+    Set-functions appear in many areas of computer science and applied
+    mathematics, such as machine learning, computer vision, operations research or
+    electrical networks. Among these set-functions, submodular functions play an
+    important role, similar to convex functions on vector spaces. In this tutorial,
+    the theory of submodular functions is presented, in a self-contained way, with
+    all results shown from first principles. A good knowledge of convex analysis is
+    assumed.
+  published: '2010-10-20T14:02:21Z'
+  updated: '2010-11-14T17:19:42Z'
+  authors:
+  - Francis Bach
+  categories:
+  - cs.LG
+  - math.OC
+  - stat.ML
+  primary_category: cs.LG
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.4207v2
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.4207v2
+    title: pdf
+- id: http://arxiv.org/abs/1010.4222v1
+  title: |-
+    Grounded Symbols in the Brain Computational Foundations for Perceptual
+      Symbol System
+  summary: |-
+    We describe a mathematical models of grounded symbols in the brain. It also
+    serves as a computational foundations for Perceptual Symbol System (PSS). This
+    development requires new mathematical methods of dynamic logic (DL), which have
+    overcome limitations of classical artificial intelligence and connectionist
+    approaches. The paper discusses these past limitations, relates them to
+    combinatorial complexity (exponential explosion) of algorithms in the past, and
+    further to the static nature of classical logic. The new mathematical theory,
+    DL, is a process-logic. A salient property of this process is evolution of
+    vague representations into crisp. The paper first applies it to one aspect of
+    PSS: situation learning from object perceptions. Then we relate DL to the
+    essential PSS mechanisms of concepts, simulators, grounding, productivity,
+    binding, recursion, and to the mechanisms relating grounded and amodal symbols.
+    We discuss DL as a general theory describing the process of cognition on
+    multiple levels of abstraction. We also discuss the implications of this theory
+    for interactions between cognition and language, mechanisms of language
+    grounding, and possible role of language in grounding abstract cognition. The
+    developed theory makes experimental predictions, and will impact future
+    theoretical developments in cognitive science, including knowledge
+    representation, and perception-cognition interaction. Experimental neuroimaging
+    evidence for DL and PSS in brain imaging is discussed as well as future
+    research directions.
+  published: '2010-10-20T15:09:25Z'
+  updated: '2010-10-20T15:09:25Z'
+  authors:
+  - Leonid Perlovsky
+  - Roman Ilin
+  categories:
+  - q-bio.NC
+  primary_category: q-bio.NC
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.4222v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.4222v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.4236v1
+  title: |-
+    Maximum Likelihood Joint Tracking and Association in a Strong Clutter
+      without Combinatorial Complexity
+  summary: |-
+    We have developed an efficient algorithm for the maximum likelihood joint
+    tracking and association problem in a strong clutter for GMTI data. By using an
+    iterative procedure of the dynamic logic process "from vague-to-crisp," the new
+    tracker overcomes combinatorial complexity of tracking in highly-cluttered
+    scenarios and results in a significant improvement in signal-to-clutter ratio.
+  published: '2010-10-20T16:03:40Z'
+  updated: '2010-10-20T16:03:40Z'
+  authors:
+  - Leonid I. Perlovsky
+  - Ross W. Deming
+  categories:
+  - stat.ML
+  primary_category: stat.ML
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.4236v1
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.4236v1
+    title: pdf
+- id: http://arxiv.org/abs/1010.4237v2
+  title: Robust PCA via Outlier Pursuit
+  summary: |-
+    Singular Value Decomposition (and Principal Component Analysis) is one of the
+    most widely used techniques for dimensionality reduction: successful and
+    efficiently computable, it is nevertheless plagued by a well-known,
+    well-documented sensitivity to outliers. Recent work has considered the setting
+    where each point has a few arbitrarily corrupted components. Yet, in
+    applications of SVD or PCA such as robust collaborative filtering or
+    bioinformatics, malicious agents, defective genes, or simply corrupted or
+    contaminated experiments may effectively yield entire points that are
+    completely corrupted.
+      We present an efficient convex optimization-based algorithm we call Outlier
+    Pursuit, that under some mild assumptions on the uncorrupted points (satisfied,
+    e.g., by the standard generative assumption in PCA problems) recovers the exact
+    optimal low-dimensional subspace, and identifies the corrupted points. Such
+    identification of corrupted points that do not conform to the low-dimensional
+    approximation, is of paramount interest in bioinformatics and financial
+    applications, and beyond. Our techniques involve matrix decomposition using
+    nuclear norm minimization, however, our results, setup, and approach,
+    necessarily differ considerably from the existing line of work in matrix
+    completion and matrix decomposition, since we develop an approach to recover
+    the correct column space of the uncorrupted matrix, rather than the exact
+    matrix itself. In any problem where one seeks to recover a structure rather
+    than the exact initial matrices, techniques developed thus far relying on
+    certificates of optimality, will fail. We present an important extension of
+    these methods, that allows the treatment of such problems.
+  published: '2010-10-20T16:05:28Z'
+  updated: '2010-12-31T18:36:49Z'
+  authors:
+  - Huan Xu
+  - Constantine Caramanis
+  - Sujay Sanghavi
+  categories:
+  - cs.LG
+  - cs.IT
+  - math.IT
+  - stat.ML
+  primary_category: cs.LG
+  links:
+  - rel: alternate
+    type: text/html
+    href: http://arxiv.org/abs/1010.4237v2
+  - rel: related
+    type: application/pdf
+    href: http://arxiv.org/pdf/1010.4237v2
+    title: pdf
+titles:
+- |-
+  Queue-Aware Distributive Resource Control for Delay-Sensitive Two-Hop
+    MIMO Cooperative Systems
+- Successive normalization of rectangular arrays
+- |-
+  Asymptotic Normality of Support Vector Machine Variants and Other
+    Regularized Kernel Methods
+- Regularizers for Structured Sparsity
+- Selfish Response to Epidemic Propagation
+- Local Optimality of User Choices and Collaborative Competitive Filtering
+- |-
+  Implementing regularization implicitly via approximate eigenvector
+    computation
+- A bagging SVM to learn from positive and unlabeled examples
+- Estimation of low-rank tensors via convex optimization
+- Hidden Markov Models with Multiple Observation Processes
+- |-
+  A sparse regulatory network of copy-number driven expression reveals
+    putative breast cancer oncogenes
+- Mixed-Membership Stochastic Block-Models for Transactional Networks
+- |-
+  Completely Stale Transmitter Channel State Information is Still Very
+    Useful
+- |-
+  Time Series Classification by Class-Specific Mahalanobis Distance
+    Measures
+- Algorithmic and Statistical Perspectives on Large-Scale Data Analysis
+- Algorithms for nonnegative matrix factorization with the beta-divergence
+- |-
+  Infinite Hierarchical MMSB Model for Nested Communities/Groups in Social
+    Networks
+- |-
+  Multi-Objective Genetic Programming Projection Pursuit for Exploratory
+    Data Modeling
+- |-
+  Hierarchical Multiclass Decompositions with Application to Authorship
+    Determination
+- |-
+  Combiner suivi de l'activite? et partage d'expériences en
+    apprentissage par projet pour les acteurs tuteurs et apprenants
+- |-
+  Information-based complexity, feedback and dynamics in convex
+    programming
+- |-
+  Divergence-based characterization of fundamental limitations of adaptive
+    dynamical systems
+- Predicting Coding Effort in Projects Containing XML Code
+- Learning Taxonomy for Text Segmentation by Formal Concept Analysis
+- Leading twist shadowing, black disk regime and forward hadron production
+- Optimal designs for Lasso and Dantzig selector using Expander Codes
+- |-
+  The use of machine learning with signal- and NLP processing of source
+    code to fingerprint, detect, and classify vulnerabilities and weaknesses with
+    MARFCAT
+- Online Multiple Kernel Learning for Structured Prediction
+- Robust Recovery of Subspace Structures by Low-Rank Representation
+- Curiosity and Pleasure
+- Making Tensor Factorizations Robust to Non-Gaussian Noise
+- The Emerging Web of Social Machines
+- |-
+  Phase-Oscillator Computations as Neural Models of Stimulus-Response
+    Conditioning and Response Selection
+- Near-Optimal Bayesian Active Learning with Noisy Observations
+- |-
+  Lens Inquiry: An Astronomy Lab for Non-science Majors at Hartnell
+    Community College
+- |-
+  Exact block-wise optimization in group lasso and sparse group lasso for
+    linear regression
+- |-
+  Identifying the consequences of dynamic treatment strategies: A
+    decision-theoretic overview
+- Hybrid Linear Modeling via Local Best-fit Flats
+- |-
+  Fast Inference in Sparse Coding Algorithms with Applications to Object
+    Recognition
+- |-
+  Lecture Notes: Non-Standard Approach to J.F. Colombeau's Theory of
+    Generalized Function: University of Vienna, Austria, May 2006
+- |-
+  Hardness Results for Agnostically Learning Low-Degree Polynomial
+    Threshold Functions
+- Dynamic reconfiguration of human brain networks during learning
+- Random Projection Trees Revisited
+- Advancements in scientific data searching, sharing and retrieval
+- Low-Mass X-ray Binary Populations
+- Efficient Matrix Completion with Gaussian Models
+- 'Convex Analysis and Optimization with Submodular Functions: a Tutorial'
+- |-
+  Grounded Symbols in the Brain Computational Foundations for Perceptual
+    Symbol System
+- |-
+  Maximum Likelihood Joint Tracking and Association in a Strong Clutter
+    without Combinatorial Complexity
+- Robust PCA via Outlier Pursuit
+first_entry_authors: *1
