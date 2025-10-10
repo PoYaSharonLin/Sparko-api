@@ -4,19 +4,35 @@ require 'rexml/document'
 
 module AcaRadar
   class ArXivApiParser
-    def self.arxiv_api_path(path)
+    module Errors 
+      class NotFound < StandardError; end 
+      class Unauthorized < StandardError; end 
+    end
+
+    HTTP_ERROR = {
+      401 => Errors::Unauthorized, 
+      404 => Errors::NotFound
+    }.freeze
+
+    def arxiv_api_path(path)
       "https://export.arxiv.org/api/#{path}"
     end
 
-    def self.call_arxiv_url(config, url)
+    def call_arxiv_url(config, url)
       ua = config['ARXIV_USER_AGENT'].to_s
+      result = 
       HTTP.headers(
         'Accept' => 'application/atom+xml',
         'User-Agent' => ua
       ).get(url)
+      successful?(result) ? result : raise(HTTP_ERROR[result.code])
     end
 
-    def self.parse_arxiv_atom(xml_str)
+    def successful?(result)
+      !HTTP_ERROR.keys.include?(result.code)
+    end
+
+    def parse_arxiv_atom(xml_str)
       doc = REXML::Document.new(xml_str)
 
       total_results = REXML::XPath.first(doc, '//opensearch:totalResults')&.text&.to_i

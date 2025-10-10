@@ -45,14 +45,15 @@ params = URI.encode_www_form(
   'sortOrder'    => sort_order
 )
 
-good_url = AcaRadar::ArXivApiParser.arxiv_api_path("query?#{params}")
+parser = AcaRadar::ArXivApiParser.new
+good_url = parser.arxiv_api_path("query?#{params}")
 puts "GOOD URL: #{good_url}"
 
-resp = AcaRadar::ArXivApiParser.call_arxiv_url(config, good_url)
+resp = parser.call_arxiv_url(config, good_url)
 puts "HTTP STATUS: #{resp.status}"
 
 good_atom = resp.to_s
-good_parsed = AcaRadar::ArXivApiParser.parse_arxiv_atom(good_atom)
+good_parsed = parser.parse_arxiv_atom(good_atom)
 
 arxiv_results['meta'] = {
   'query' => query,
@@ -75,8 +76,8 @@ arxiv_results['first_entry_authors'] = (good_parsed['entries']&.first || {})['au
 # should be an array of author names for the first entry (if any)
 
 ## BAD arXiv request (intentionally wrong path to simulate a failure)
-bad_url = AcaRadar::ArXivApiParser.arxiv_api_path('querty?search_query=all:foo') # typo: "querty"
-arxiv_response[bad_url] = AcaRadar::ArXivApiParser.call_arxiv_url(config, bad_url)
+bad_url = parser.arxiv_api_path('querty?search_query=all:foo') # typo: "querty"
+arxiv_response[bad_url] = parser.call_arxiv_url(config, bad_url)
 arxiv_response[bad_url].to_s # ensure body is fully read
 
 # -------------------------------------------------------------------
