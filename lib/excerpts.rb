@@ -1,13 +1,16 @@
-module AcaRadar 
+# frozen_string_literal: true
+
+module AcaRadar
+  # Library for Excerpt object
   class Excerpt
     def initialize(excerpt_data)
-      # hot fix: only return the first hash 
+      # hot fix: only return the first hash
       @excerpt = excerpt_data.is_a?(Array) ? excerpt_data.first : excerpt_data
-    end 
-    
+    end
+
     def id
       @id ||= @excerpt['id']
-    end 
+    end
 
     def title
       @title ||= @excerpt['title']
@@ -15,7 +18,6 @@ module AcaRadar
 
     def summary
       @summary ||= @excerpt['summary']
-    end 
-  end 
+    end
+  end
 end
-

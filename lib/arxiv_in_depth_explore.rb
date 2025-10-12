@@ -39,10 +39,10 @@ sort_order  = 'ascending'
 
 params = URI.encode_www_form(
   'search_query' => query,
-  'start'        => 0,
-  'max_results'  => max_results,
-  'sortBy'       => sort_by,
-  'sortOrder'    => sort_order
+  'start' => 0,
+  'max_results' => max_results,
+  'sortBy' => sort_by,
+  'sortOrder' => sort_order
 )
 
 parser = AcaRadar::ArXivApiParser.new

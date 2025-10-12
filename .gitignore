@@ -1,2 +1,4 @@
 config/secrets.yml
 Gemfile.lock
+coverage/*
+!coverage/.resultset.json

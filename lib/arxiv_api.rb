@@ -10,17 +10,18 @@ require_relative 'authors'
 
 module AcaRadar
   module ArXivConfig
-    BASE_QUERY = 'all:Reinforcement Learning'.freeze
-    MIN_DATE_ARXIV = '201010020000'.freeze
-    MAX_DATE_ARXIV = '202510020000'.freeze
+    BASE_QUERY = 'all:Reinforcement Learning'
+    MIN_DATE_ARXIV = '201010020000'
+    MAX_DATE_ARXIV = '202510020000'
     MAX_RESULTS = 50
-    SORT_BY = 'submittedDate'.freeze
-    SORT_ORDER = 'ascending'.freeze
+    SORT_BY = 'submittedDate'
+    SORT_ORDER = 'ascending'
   end
+
   # Library for arXiv Web API
   class ArXivApi
     include ArXivConfig
-    def initialize(config_path = '../config/secrets.yml')
+    def initialize(config_path = 'config/secrets.yml')
       @config = YAML.safe_load_file(config_path)
       @parser = AcaRadar::ArXivApiParser.new
       @params = build_query_params

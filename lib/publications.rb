@@ -1,24 +1,27 @@
+# frozen_string_literal: true
+
 module AcaRadar
+  # Library for Publication object
   class Publication
     def initialize(publication_data)
-      # hot fix: only return the first hash 
+      # hot fix: only return the first hash
       @publication = publication_data.is_a?(Array) ? publication_data.first : publication_data
-    end 
+    end
 
-    def id 
+    def id
       @id ||= @publication['id']
-    end 
+    end
 
     def published
       @published ||= @publication['published']
-    end 
+    end
 
     def updated
       @updated ||= @publication['updated']
-    end 
+    end
 
     def links
       @links ||= @publication['links']
     end
-  end 
-end 
+  end
+end
