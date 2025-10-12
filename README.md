@@ -1,29 +1,42 @@
-# arXiv API Client
-Project to gather useful information from arXiv API
-https://info.arxiv.org/help/api/user-manual.html#arxiv-api-users-manual
+# AcaRadar 
+Application that allows researchers to find innovative research topics from other domains. 
 
-## Resources
-These are objects that could be used in the projects 
-- ArXiv Query Title 
-- ID (contains the url to the paper)
-- Updated 
-- Total Results 
-- Entry
 
-## Elements
-These are objects included in Resources
-Entry
-- Published 
-- Updated 
-- Paper Title
-- Summary (abstract)
-- Author (list of authors)
-- arXiv comment 
-- arXiv journal reference 
-- Categories (arXiv, ACM, or MSC classification)
+## Overview
+AcaRadar will pull data from arXiv's API to fetch title, summary, authors, publication date, and categories of research papers. 
 
-## Entities
-These are objects that could become the database tables 
-- Title 
-- Summary 
-- Total Results 
+It will then preprocess the text data and transform them into embeddings using pre-trained scientific language models. 
+
+Finally, it will cluster the embeddings to identify research topics and visualize them in a word cloud showing 
+1. The most frequent terms in selected domains
+2. Intersections between different domains 
+
+We hope this tool will give researchers a quick overview of research trends in their own and other domains, and inspire them to explore innovative research topics.
+
+## Objectives
+### Short-term usability goals
+1. Preprocess text data and generate embeddings
+2. Define n-gram frequency algo for word cloud 
+3. Define clustering algo to define the distance between each n-gram 
+4. Define intersection between different domains
+
+### Long-term goals
+1. Speed up the embedding generation process
+
+
+### Setup
+
+- Copy `config/secrets_example.yml` to `config/secrets.yml` 
+- Ensure correct version of Ruby install (see .`ruby-version` for `rbenv`)
+- Run `bundle install`
+
+## Running tests
+### To run tests:
+```bash
+rake spec
+```
+
+### To test code quality:
+```bash
+rake quality:all
+```
