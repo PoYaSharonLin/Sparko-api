@@ -7,12 +7,12 @@ module AcaRadar
 
     attr_reader :url
 
-    def initialize(base_query: BASE_QUERY,
-                   min_date: MIN_DATE_ARXIV,
-                   max_date: MAX_DATE_ARXIV,
+    def initialize(base_query: ArXivConfig::BASE_QUERY,
+                   min_date: ArXivConfig::MIN_DATE_ARXIV,
+                   max_date: ArXivConfig::MAX_DATE_ARXIV,
                    max_results: 50,
-                   sort_by: SORT_BY,
-                   sort_order: SORT_ORDER)
+                   sort_by: ArXivConfig::SORT_BY,
+                   sort_order: ArXivConfig::SORT_ORDER)
       @query = "#{base_query} AND submittedDate:[#{min_date} TO #{max_date}]"
       @url = "https://export.arxiv.org/api/#{build_query(max_results, sort_by, sort_order)}"
     end

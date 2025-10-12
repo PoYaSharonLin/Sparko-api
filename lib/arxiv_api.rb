@@ -20,10 +20,9 @@ module AcaRadar
 
   # Library for arXiv Web API
   class ArXivApi
-    def initialize(config_path = '../config/secrets.yml', cooldown_time = 3)
+    def initialize(config_path = 'config/secrets.yml', cooldown_time = 3)
       @config = YAML.safe_load_file(config_path)
       @parser = AcaRadar::ArXivApiParser.new
-      @params = build_query_params
       @next_call_time = 0
       @cooldown_time = cooldown_time
     end
