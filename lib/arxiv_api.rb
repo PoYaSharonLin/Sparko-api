@@ -3,10 +3,10 @@
 require 'http'
 require 'yaml'
 require_relative '../helper/arxiv_api_parser'
-require_relative 'excerpts'
 require_relative 'categories'
-require_relative 'publications'
 require_relative 'authors'
+require_relative 'papers'
+require_relative 'query'
 
 module AcaRadar
   module ArXivConfig
@@ -20,51 +20,56 @@ module AcaRadar
 
   # Library for arXiv Web API
   class ArXivApi
-    include ArXivConfig
-
-    def initialize(config_path = 'config/secrets.yml')
+    def initialize(config_path = '../config/secrets.yml', cooldown_time = 3)
       @config = YAML.safe_load_file(config_path)
       @parser = AcaRadar::ArXivApiParser.new
       @params = build_query_params
+      @next_call_time = 0
+      @cooldown_time = cooldown_time
     end
 
-    def excerpts
-      fetch_and_parse(Excerpt)
-    end
+    def call(query_obj)
+      wait_cooldown
+      url = query_obj.url
+      response = @parser.call_arxiv_url(@config, url)
+      data_hash = @parser.parse_arxiv_atom(response.body.to_s)
 
-    def categories
-      fetch_and_parse(Category)
-    end
-
-    def publications
-      fetch_and_parse(Publication)
-    end
-
-    def authors
-      fetch_and_parse(Author)
+      @next_call_time = Time.now.to_f + @cooldown_time + 0.1
+      ArXivApiResponse.new(response.code, data_hash)
+    rescue StandardError => error # rubocop:disable Naming/RescuedExceptionsVariableName
+      raise "Failed to fetch or parse arXiv data: #{error.message}"
     end
 
     private
 
-    def build_query_params
-      query = "#{BASE_QUERY} AND submittedDate:[#{MIN_DATE_ARXIV} TO #{MAX_DATE_ARXIV}]"
-      URI.encode_www_form(
-        'search_query' => query,
-        'start' => 0,
-        'max_results' => MAX_RESULTS,
-        'sortBy' => SORT_BY,
-        'sortOrder' => SORT_ORDER
-      )
+    def wait_cooldown
+      delay = @next_call_time - Time.now.to_f
+      sleep(delay) if delay.positive?
+    end
+  end
+
+  # Represents the response given by the API with some metadata
+  class ArXivApiResponse
+    attr_reader :status, :total_results, :start_index, :items_per_page, :papers
+
+    def initialize(status_code, content_hash)
+      @status = status_code.to_i
+      @total_results = content_hash['total_results']&.to_i
+      @start_index = content_hash['start_index']&.to_i
+      @items_per_page = content_hash['items_per_page']&.to_i
+
+      entries = content_hash['entries'] || []
+      @papers = entries.map { |entry_hash| AcaRadar::Paper.new(entry_hash) }
     end
 
-    def fetch_and_parse(klass)
-      url = @parser.arxiv_api_path("query?#{@params}")
-      response = @parser.call_arxiv_url(@config, url)
-      atom = response.to_s
-      parsed = @parser.parse_arxiv_atom(atom)
-      klass.new(parsed['entries'] || parsed)
-    rescue StandardError => e
-      raise "Failed to fetch or parse arXiv data: #{e.message}"
+    def ok?
+      (200..299).include?(@status)
+    end
+
+    def pagination
+      { 'total_results' => @total_results,
+        'start_index' => @start_index,
+        'items_per_page' => @items_per_page }.compact
     end
   end
 end

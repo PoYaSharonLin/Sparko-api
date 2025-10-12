@@ -1,23 +1,20 @@
 # frozen_string_literal: true
 
 module AcaRadar
-  # Library for Category object
-  class Category
-    def initialize(category_data)
-      # hot fix: only return the first hash
-      @category = category_data.is_a?(Array) ? category_data.first : category_data
+  # Holds the primary and weird secondary categories of the paper
+  class Categories
+    attr_reader :all, :primary
+
+    def initialize(categories, primary_category)
+      @all     = Array(categories).compact.uniq
+      @primary = primary_category
     end
 
-    def id
-      @id ||= @category['id']
-    end
-
-    def primary_category
-      @primary_category ||= @category['primary_category']
-    end
-
-    def all_categories
-      @all_categories ||= @category['categories']
+    def to_h
+      {
+        primary_category: primary,
+        categories: all
+      }.compact
     end
   end
 end

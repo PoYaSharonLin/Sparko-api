@@ -11,3 +11,6 @@ Metrics/BlockLength:
   Enabled: true
   Exclude:
     - 'spec/**/*'
+
+Metrics/ParameterLists:
+  Max: 6
