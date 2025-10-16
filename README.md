@@ -3,7 +3,7 @@ Application that allows researchers to find innovative research topics from othe
 
 
 ## Overview
-AcaRadar will pull data from arXiv's API to fetch title, summary, authors, publication date, and categories of research papers. 
+AcaRadar will pull data from arXiv's API using **query** entity, to fetch **paper** entity, which include **authors**, **categories** and **links**.
 
 It will then preprocess the text data and transform them into embeddings using pre-trained scientific language models. 
 
