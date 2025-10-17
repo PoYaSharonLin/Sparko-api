@@ -7,15 +7,19 @@ module AcaRadar
 
     attr_reader :url
 
+    # rubocop:disable Metrics/ParameterLists
     def initialize(base_query: ArXivConfig::BASE_QUERY,
                    min_date: ArXivConfig::MIN_DATE_ARXIV,
                    max_date: ArXivConfig::MAX_DATE_ARXIV,
-                   max_results: 50,
+                   journal: ArXivConfig::JOURNAL,
+                   max_results: ArXivConfig::MAX_RESULTS,
                    sort_by: ArXivConfig::SORT_BY,
                    sort_order: ArXivConfig::SORT_ORDER)
       @query = "#{base_query} AND submittedDate:[#{min_date} TO #{max_date}]"
+      @query += " AND jr:\"#{journal}\"" if journal && !journal.strip.empty?
       @url = "https://export.arxiv.org/api/#{build_query(max_results, sort_by, sort_order)}"
     end
+    # rubocop:enable Metrics/ParameterLists
 
     def build_query(max_results, sort_by, sort_order)
       URI.encode_www_form(

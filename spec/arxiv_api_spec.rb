@@ -28,15 +28,14 @@ describe 'Test arXiv API library' do
   end
 
   describe 'Query class' do
-    it 'HAPPY: should build correct query url' do
-      query = AcaRadar::Query.new(base_query: 'all:Reinforcement Learning', max_results: 5)
+    it 'HAPPY: should correctly include the journal parameter in the query' do
+      query = AcaRadar::Query.new(journal: 'Nature')
       url = query.url
 
       encoded = url.match(/search_query=([^&]+)/)[1]
       decoded = CGI.unescape(encoded)
 
-      _(decoded).must_include 'all:Reinforcement Learning'
-      _(url).must_include 'max_results=5'
+      _(decoded).must_include 'AND jr:"Nature"'
     end
   end
 

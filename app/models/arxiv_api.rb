@@ -10,9 +10,10 @@ require_relative 'query'
 
 module AcaRadar
   module ArXivConfig
-    BASE_QUERY = 'all:Reinforcement Learning'
-    MIN_DATE_ARXIV = '201010020000'
+    BASE_QUERY = [nil,
+                  MIN_DATE_ARXIV = '201010020000'].freeze
     MAX_DATE_ARXIV = '202510020000'
+    JOURNAL = 'MIS%20Quarterly'
     MAX_RESULTS = 50
     SORT_BY = 'submittedDate'
     SORT_ORDER = 'ascending'
