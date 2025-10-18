@@ -22,12 +22,15 @@ module AcaRadar
     end
 
     def call_arxiv_url(config, url)
+      # warn "[arXiv][REQUEST] ts=#{Time.now.utc.iso8601} url=#{url} caller=#{caller_locations(1,5).map(&:to_s).join(' | ')}"
       ua = config['ARXIV_USER_AGENT'].to_s
       result =
         HTTP.headers(
           'Accept' => 'application/atom+xml',
           'User-Agent' => ua
         ).get(url)
+      # warn "[arXiv] code=#{result.code} content_type=#{result.headers['Content-Type']}"
+      # warn "[arXiv] head=#{result.body.to_s[0, 200].gsub(/\s+/, ' ')}"
       successful?(result) ? result : raise(HTTP_ERROR[result.code])
     end
 

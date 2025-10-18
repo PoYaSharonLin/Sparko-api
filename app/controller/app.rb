@@ -35,7 +35,7 @@ module AcaRadar
       routing.on 'selected_journals' do
         journal1 = routing.params['journal1']&.strip
         journal2 = routing.params['journal2']&.strip
-        @journals = [journal1, journal2].reject(&:empty?)
+        @journals = [journal1, journal2].compact.reject(&:empty?)
         routing.halt 400, 'Please select at least 1 journal' if @journals.empty?
 
         begin
@@ -46,14 +46,7 @@ module AcaRadar
           raise "arXiv API returned status #{api_response.status}" unless api_response.ok?
 
           @papers = api_response.papers
-          @total_papers = api_response.total_results || papers.size
-
-          @journal1_papers = papers.select do |paper|
-            paper.journal_ref&.downcase&.include?(journal1.downcase)
-          end
-          @journal2_papers = papers.select do |paper|
-            paper.journal_ref&.downcase&.include?(journal2.downcase)
-          end
+          @total_papers = api_response.total_results || @papers.size
 
           @pagination = api_response.pagination
 

@@ -15,12 +15,24 @@ module AcaRadar
                    max_results: ArXivConfig::MAX_RESULTS,
                    sort_by: ArXivConfig::SORT_BY,
                    sort_order: ArXivConfig::SORT_ORDER)
-      @query = "#{base_query} AND submittedDate:[#{min_date} TO #{max_date}]"
+      normalized_base = if base_query.is_a?(Array)
+                          base_query.compact.join(' ')
+                        else
+                          base_query.to_s
+                        end
+      normalized_base = normalized_base.to_s.strip
+      @query =
+        if normalized_base.empty?
+          "submittedDate:[#{min_date} TO #{max_date}]"
+        else
+          "#{normalized_base} AND submittedDate:[#{min_date} TO #{max_date}]"
+        end
       if journals.any?
         journal_conditions = journals.map { |j| "jr:\"#{j.strip.gsub('"', '\"')}\"" }.join(' OR ')
         @query += " AND (#{journal_conditions})"
       end
       @url = "https://export.arxiv.org/api/query?#{build_query(max_results, sort_by, sort_order)}"
+      warn "[Query] search_query=#{@query.inspect} url=#{@url}"
     end
     # rubocop:enable Metrics/ParameterLists
 

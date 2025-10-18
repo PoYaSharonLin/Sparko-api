@@ -6,11 +6,8 @@ html lang='en'
     title Selected Journals - AcaRadar
   body
     .container.mt-4
-      if @error
-        .alert.alert-danger
-          = @error
-      else
-        p You have selected the following journals:
-        li #{@journals}
-        p #{@journal1_papers}
-        p #{@journal2_papers}
+        p You have selected the following journals: #{@journals}
+        p We found: 
+        p #{@total_papers} papers in total 
+        p #{@papers}
+

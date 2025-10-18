@@ -31,8 +31,12 @@ module AcaRadar
     def call(query_obj)
       wait_cooldown
       url = query_obj.url
+      warn "[ArXivApi] requesting url=#{url}"
       response = @parser.call_arxiv_url(@config, url)
+      warn "[ArXivApi] response_code=#{response.code} content_type=#{response.headers['Content-Type']} body_head=#{response.body.to_s[0,1000].gsub(/\s+/, ' ')}"
       data_hash = @parser.parse_arxiv_atom(response.body.to_s)
+      entries = data_hash['entries'] || []
+      warn "[ArXivApi] parsed entries_count=#{entries.size} sample_entry=#{entries.first&.slice('id','title','journal_ref')}"
 
       @next_call_time = Time.now.to_f + @cooldown_time + 0.1
       ArXivApiResponse.new(response.code, data_hash)
