@@ -9,11 +9,35 @@ html lang='en'
       - if @error
         .alert.alert-danger = @error
       p You have selected the following journals: #{@journals.inspect}
-      p We found: 
-      p #{@total_papers} papers in total
+      p We found: #{@total_papers} papers in total
       - if @papers.any?
-        ul.papers
-          - @papers.each do |paper|
-            li.paper
-              h4 = paper.title
+        .table-responsive
+          table.table.table-hover
+            thead
+              tr
+                th Title
+                th Published
+                th Updated
+                th Authors
+                th Categories
+                th Summary
+                th PDF
+            tbody
+              - @papers.each do |paper|
+                - pdf_link = paper.links.find { |l| l['title'] == 'pdf' } || paper.links.find { |l| l['type'] == 'application/pdf' }
+                - summary_text = paper.summary.to_s.strip
+                - short_summary = summary_text.length > 300 ? "#{summary_text[0,300]}..." : summary_text
+                tr.table-light
+                  td = paper.title
+                  td = paper.published
+                  td = paper.updated
+                  td = paper.authors.map(&:name).join(', ')
+                  td = paper.categories.all.join(', ')
+                  td = short_summary
+                  td
+                    - if pdf_link
+                      a.btn.btn-sm.btn-outline-primary href=pdf_link['href'] target='_blank' PDF
+      - else
+        p No papers found.
+        
 
