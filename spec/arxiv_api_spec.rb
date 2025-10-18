@@ -29,13 +29,14 @@ describe 'Test arXiv API library' do
 
   describe 'Query class' do
     it 'HAPPY: should correctly include the journal parameter in the query' do
-      query = AcaRadar::Query.new(journal: 'Nature')
+      query = AcaRadar::Query.new(journals: ['Nature', 'MIS Quarterly'])
       url = query.url
 
       encoded = url.match(/search_query=([^&]+)/)[1]
       decoded = CGI.unescape(encoded)
 
-      _(decoded).must_include 'AND jr:"Nature"'
+      _(decoded).must_include 'jr:"Nature"'
+      _(decoded).must_include 'jr:"MIS Quarterly"'
     end
   end
 

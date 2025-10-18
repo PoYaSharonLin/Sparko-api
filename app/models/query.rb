@@ -11,13 +11,16 @@ module AcaRadar
     def initialize(base_query: ArXivConfig::BASE_QUERY,
                    min_date: ArXivConfig::MIN_DATE_ARXIV,
                    max_date: ArXivConfig::MAX_DATE_ARXIV,
-                   journal: ArXivConfig::JOURNAL,
+                   journals: ArXivConfig::JOURNALS,
                    max_results: ArXivConfig::MAX_RESULTS,
                    sort_by: ArXivConfig::SORT_BY,
                    sort_order: ArXivConfig::SORT_ORDER)
       @query = "#{base_query} AND submittedDate:[#{min_date} TO #{max_date}]"
-      @query += " AND jr:\"#{journal}\"" if journal && !journal.strip.empty?
-      @url = "https://export.arxiv.org/api/#{build_query(max_results, sort_by, sort_order)}"
+      if journals.any?
+        journal_conditions = journals.map { |j| "jr:\"#{j.strip.gsub('"', '\"')}\"" }.join(' OR ')
+        @query += " AND (#{journal_conditions})"
+      end
+      @url = "https://export.arxiv.org/api/query?#{build_query(max_results, sort_by, sort_order)}"
     end
     # rubocop:enable Metrics/ParameterLists
 

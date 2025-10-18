@@ -10,10 +10,10 @@ require_relative 'query'
 
 module AcaRadar
   module ArXivConfig
-    BASE_QUERY = [nil,
-                  MIN_DATE_ARXIV = '201010020000'].freeze
+    BASE_QUERY = nil
+    MIN_DATE_ARXIV = '201010020000'
     MAX_DATE_ARXIV = '202510020000'
-    JOURNAL = 'MIS%20Quarterly'
+    JOURNALS = [].freeze
     MAX_RESULTS = 50
     SORT_BY = 'submittedDate'
     SORT_ORDER = 'ascending'

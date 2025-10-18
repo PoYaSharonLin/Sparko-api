@@ -1,15 +1,16 @@
-.container
-  p You have selected the following journals:
-  .row
-    .col-md-6
-      .card.bg-secondary.mb-3 style="max-width: 20rem;"
-        .card-header Journal 1
-        .card-body
-          h4.card-title = @journal1
-          p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
-    .col-md-6
-      .card.bg-secondary.mb-3 style="max-width: 20rem;"
-        .card-header Journal 2
-        .card-body
-          h4.card-title = @journal2
-          p.card-text Some quick example text to build on the card title and make up the bulk of the card's content.
+doctype html
+html lang='en'
+  head
+    meta charset='utf-8'
+    meta name='viewport' content='width=device-width, initial-scale=1'
+    title Selected Journals - AcaRadar
+  body
+    .container.mt-4
+      if @error
+        .alert.alert-danger
+          = @error
+      else
+        p You have selected the following journals:
+        li #{@journals}
+        p #{@journal1_papers}
+        p #{@journal2_papers}
