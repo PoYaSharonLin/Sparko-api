@@ -1,4 +1,4 @@
-#frozen_string_literal: true
+# frozen_string_literal: true
 
 module AcaRadar
   # Holds the primary and weird secondary categories of the paper
