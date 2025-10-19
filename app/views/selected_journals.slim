@@ -5,15 +5,15 @@ html lang='en'
     meta name='viewport' content='width=device-width, initial-scale=1'
     title Selected Journals - AcaRadar
   body
-    .container.mt-4
+    .container-fluid.mt-4
       - if error
-        .alert.alert-danger = error
+        .alert.alert-danger.show = error
       p You have selected the following journals: #{journals.inspect}
       p We found: #{total_papers} papers in total
       - if papers.any?
         .table-responsive
           table.table.table-hover
-            thead
+            thead.table-active
               tr
                 th Title
                 th Published
@@ -27,7 +27,7 @@ html lang='en'
                 - pdf_link = paper.links.find { |l| l['title'] == 'pdf' } || paper.links.find { |l| l['type'] == 'application/pdf' }
                 - summary_text = paper.summary.to_s.strip
                 - short_summary = summary_text.length > 300 ? "#{summary_text[0,300]}..." : summary_text
-                tr.table-light
+                tr.table-secondary
                   td = paper.title
                   td = paper.published
                   td = paper.updated

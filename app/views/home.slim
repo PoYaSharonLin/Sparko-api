@@ -1,4 +1,4 @@
-.container
+.container-fluid
   form role="form" action="/selected_journals" method='GET' id='find-journals-form'
     / 'align-items-top' vertically aligns the items to their top edge.
     .row.align-items-top
@@ -15,4 +15,16 @@
           option value="Management Science" Management Science
           option value="Journal of the ACM"  Journal of the ACM
       .col-md-2
-        button type='submit' id='find-button' class="btn btn-primary w-100" Find
+        button type='submit' id='find-button' class="btn btn-primary w-100" 
+          span.spinner-grow.spinner-grow-sm.d-none role="status" aria-hidden="true"
+          span.button-text Find
+  javascript:
+    document.getElementById('find-journals-form').addEventListener('submit', function() {
+      const button = document.getElementById('find-button');
+      const spinner = button.querySelector('.spinner-grow');
+      const buttonText = button.querySelector('.button-text');
+      
+      button.disabled = true;
+      spinner.classList.remove('d-none');
+      buttonText.textContent = '   Loading...';
+    });
