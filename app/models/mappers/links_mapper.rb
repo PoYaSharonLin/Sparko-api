@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 module AcaRadar
-  # Categories Mapper Object
-  class CategoriesMapper
+  # Links Mapper Object
+  class LinksMapper
     def initialize(hash)
       @hash = hash
     end
 
     def build_entity
-      Categories.new(@hash['categories'], @hash['primary_category'])
+      Array(@hash['links'])
     end
   end
 end

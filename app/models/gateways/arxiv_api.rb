@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+#frozen_string_literal: true
 
 require 'http'
 require 'yaml'
@@ -36,8 +36,13 @@ module AcaRadar
       data_hash['entries'] || []
       @next_call_time = Time.now.to_f + @cooldown_time + 0.1
       ArXivApiResponse.new(response.code, data_hash)
+<<<<<<< HEAD
     rescue StandardError => e
       raise "Failed to fetch or parse arXiv data: #{e.message}"
+=======
+    rescue StandardError => error
+      raise "Failed to fetch or parse arXiv data: #{error.message}"
+>>>>>>> b57bdd0153fed0feeeb37a65429240b2687bb6c9
     end
 
     private
