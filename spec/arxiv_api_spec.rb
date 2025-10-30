@@ -95,7 +95,7 @@ describe 'Test arXiv API library' do
       _(paper.categories.all).must_equal Array(entry['categories'])
       _(paper.categories.primary).must_equal entry['primary_category']
 
-      _(paper.links).must_equal Array(entry['links'])
+      _(paper.links.links).must_equal entry['links']
     end
   end
 end

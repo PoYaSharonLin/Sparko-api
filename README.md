@@ -3,13 +3,12 @@ Application that allows researchers to find innovative research topics from othe
 
 
 ## Overview
-AcaRadar will pull data from arXiv's API using **query** entity, to fetch **paper** entity, which include **authors**, **categories** and **links**.
+AcaRadar will pull data from arXiv's API using **query** entity, to fetch **paper** entity, which include **summary**, **authors**, **categories** and **links**.
 
-It will then preprocess the text data and transform them into embeddings using pre-trained scientific language models. 
-
-Finally, it will cluster the embeddings to identify research topics and visualize them in a word cloud showing 
-1. The most frequent terms in selected domains
-2. Intersections between different domains 
+It will then preprocess the text data and 
+1. Extract keywords from **summary** of the the paper as **concepts** 
+2. Use word embedding to tranform keywords to **embeddings**
+3. Use **algorithm** to show the concepts in 2D space 
 
 We hope this tool will give researchers a quick overview of research trends in their own and other domains, and inspire them to explore innovative research topics.
 

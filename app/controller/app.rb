@@ -4,7 +4,7 @@ require 'roda'
 require 'slim'
 require 'uri'
 require_relative '../infrastructure/arxiv/gateways/arxiv_api'
-require_relative '../models/entities/query'
+require_relative '../domain/clustering/entities/query'
 
 # rubocop:disable Metrics/BlockLength
 module AcaRadar

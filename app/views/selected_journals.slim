@@ -17,26 +17,25 @@ html lang='en'
               tr
                 th Title
                 th Published
-                th Updated
                 th Authors
                 th Categories
-                th Summary
+                th Short Summary
+                th Concept
                 th PDF
             tbody
               - papers.each do |paper|
-                - pdf_link = paper.links.find { |l| l['title'] == 'pdf' } || paper.links.find { |l| l['type'] == 'application/pdf' }
-                - summary_text = paper.summary.to_s.strip
-                - short_summary = summary_text.length > 300 ? "#{summary_text[0,300]}..." : summary_text
+                - summary = AcaRadar::Entity::Summary.new(paper.summary)
+                - concept = AcaRadar::Entity::Concept.extract(summary.full_summary).map(&:to_s).join(', ')
                 tr.table-secondary
                   td = paper.title
                   td = paper.published
-                  td = paper.updated
                   td = paper.authors.map(&:name).join(', ')
                   td = paper.categories.all.join(', ')
-                  td = short_summary
+                  td = summary.short_summary
+                  td = concept
                   td
-                    - if pdf_link
-                      a.btn.btn-sm.btn-outline-primary href=pdf_link['href'] target='_blank' PDF
+                    - if paper.links&.pdf_href
+                      a.btn.btn-sm.btn-outline-primary href=paper.links.pdf_href target='_blank' PDF
       - else
         p No papers found.
         

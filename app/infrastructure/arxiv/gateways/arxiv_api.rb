@@ -5,8 +5,10 @@ require 'yaml'
 require_relative '../../../../helper/arxiv_api_parser'
 require_relative '../../../models/entities/categories'
 require_relative '../../../models/entities/authors'
-require_relative '../../../models/entities/papers'
-require_relative '../../../models/entities/query'
+require_relative '../../../domain/clustering/entities/papers'
+require_relative '../../../domain/clustering/entities/query'
+require_relative '../../../../app/models/entities/summary'
+require_relative '../../../../app/models/entities/links'
 
 module AcaRadar
   # :reek:TooManyConstants
