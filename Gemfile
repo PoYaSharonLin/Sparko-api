@@ -59,3 +59,4 @@ end
 gem 'engtagger'
 gem 'nokogiri'
 gem 'tactful_tokenizer'
+gem 'rexml'
