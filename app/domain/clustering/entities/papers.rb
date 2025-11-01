@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
-require_relative '../../infrastructure/arxiv/mappers/author_mapper'
-require_relative '../../infrastructure/arxiv/mappers/categories_mapper'
-require_relative '../../infrastructure/arxiv/mappers/links_mapper'
+require_relative '../../../infrastructure/arxiv/mappers/author_mapper'
+require_relative '../../../infrastructure/arxiv/mappers/categories_mapper'
+require_relative '../../../infrastructure/arxiv/mappers/links_mapper'
+require_relative '../../../infrastructure/arxiv/mappers/summary_mapper'
 
 module AcaRadar
+  # Domain entity module
   module Entity
     # Represents a single paper entry from the arXiv API, including title, authors, categories, and links
     class Paper
@@ -12,7 +14,7 @@ module AcaRadar
 
       def initialize(paper_hash)
         assign_basic_fields(paper_hash)
-        # @summary = Summary.new(paper_hash['summary'])
+        @summary = SummaryMapper.new(paper_hash).build_entity
         @authors = AuthorMapper.new(paper_hash).build_entity
         @categories = CategoriesMapper.new(paper_hash).build_entity
         @links = LinksMapper.new(paper_hash).build_entity

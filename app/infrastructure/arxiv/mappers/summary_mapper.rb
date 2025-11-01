@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 module AcaRadar
-  # Links Mapper Object
-  class LinksMapper
+  # Summary Mapper Object
+  class SummaryMapper
     def initialize(hash)
       @hash = hash
     end
 
     def build_entity
-      AcaRadar::Entity::Links.new(@hash['links'])
+      AcaRadar::Entity::Summary.new(@hash['summary'])
     end
   end
 end

@@ -114,6 +114,13 @@ GEM
       ast (~> 2.4.1)
       racc
     path_expander (1.1.3)
+    pg (1.6.2)
+    pg (1.6.2-aarch64-linux)
+    pg (1.6.2-aarch64-linux-musl)
+    pg (1.6.2-arm64-darwin)
+    pg (1.6.2-x86_64-darwin)
+    pg (1.6.2-x86_64-linux)
+    pg (1.6.2-x86_64-linux-musl)
     prism (1.5.2)
     pry (0.15.2)
       coderay (~> 1.1)
@@ -220,6 +227,7 @@ DEPENDENCIES
   minitest (~> 5.20)
   minitest-rg (~> 5.2)
   nokogiri
+  pg
   pry
   puma (~> 6.0)
   rake

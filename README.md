@@ -3,13 +3,12 @@ Application that allows researchers to find innovative research topics from othe
 
 
 ## Overview
-AcaRadar will pull data from arXiv's API using **query** entity, to fetch **paper** entity, which include **authors**, **categories** and **links**.
+AcaRadar will pull data from arXiv's API using **query** entity, to fetch **paper** entity, which include **summary**, **authors**, **categories** and **links**.
 
-It will then preprocess the text data and transform them into embeddings using pre-trained scientific language models. 
-
-Finally, it will cluster the embeddings to identify research topics and visualize them in a word cloud showing 
-1. The most frequent terms in selected domains
-2. Intersections between different domains 
+It will then preprocess the text data and 
+1. Extract keywords from **summary** of the the paper as **concepts** 
+2. Use word embedding to tranform keywords to **embeddings**
+3. Use **algorithm** to show the concepts in 2D space 
 
 We hope this tool will give researchers a quick overview of research trends in their own and other domains, and inspire them to explore innovative research topics.
 
@@ -62,4 +61,42 @@ rake console
 ```bash
 RACK_ENV=development rake db:drop
 RACK_ENV=test rake db:drop
+```
+
+## Entity Relationship Diagram 
+[Editable version](https://mermaid.live/edit#pako:eNqlVF1vmzAU_SuW90oiAoEE-hRl7SZVXaOm07QJKXKxAWtgI2PUpAn_fddAvpRkmjS_WD7n3E9fe4tjSRkOMVOfOUkVKSKBYM2-v359fkHb7mQWFxpxihaPR6jSiosUCVKwC5AkCc850VyKC44VhOcd2nTbfPZ6_-X55ed_BKSsihUvjwF714vZ4v4fC9Fc5yeONVtrRN6AJLE-wpRohsr6LedxW97KABe-SpqsapVfprK63tqSlEytIK-Hx3OC1DqTf2OkokxdiXOrpzcjQTkslWpzyp01cbcbDHbb8zJCFOGMVH0yVYTP5ueWxbvimh3EV7wfkt_775PjR6uD5Lbh3ujDWGELF0zB6FEY97YnEdYZg1HCRitYDRedR9jqqIILWpDSkH0DI1wSSuFyDebY1h6tK_ZE1j841ZlhtKrbcWh6R4kU-oEUPN90geayhjIU-sbeD8GMZglpGsXIt06Smy-XndlQwENFMVdxztAWwevKQ_QpSTxYd6hBHa9YrI-s5xn-zsyk_M1auVmtnNGULYjOQH1Bd8Dg3ZQEpZZrsDBtb6CHcNFyuRExDk2hFlayTjMcJiSv4FSX5jX0X8leUhLxS8rDkVGupXrq_p32-7Fwqsy19B6ZgImGNgmNw5HT2uNwi9dwmoyHvj0NJr4zDeyJ64wtvAHYngwnrmuPR4E_Daa24zcW_mhD2kPfc1zPm7i257peEATNHww3feg)
+
+```mermaid 
+erDiagram
+    AUTHOR {
+        int id PK
+        string name
+        string affiliation
+        string email
+    }
+    CATEGORY {
+        int id PK
+        string name
+        string description
+    }
+    PAPER {
+        int id PK
+        string title
+        text abstract
+        date publication_date
+        string pdf_url
+    }
+    PAPER_AUTHOR {
+        int paper_id FK
+        int author_id FK
+        int author_order
+    }
+    PAPER_CATEGORY {
+        int paper_id FK
+        int category_id FK
+    }
+    PAPER ||--|{ PAPER_AUTHOR : "has authors"
+    AUTHOR ||--|{ PAPER_AUTHOR : "writes"
+    PAPER ||--|{ PAPER_CATEGORY : "has categories"
+    CATEGORY ||--|{ PAPER_CATEGORY : "categorizes"
 ```

@@ -50,6 +50,11 @@ group :development do
   gem 'rubocop-sequel'
 end
 
+# Production
+group :production do
+  gem 'pg'
+end
+
 # Utiliy tools
 gem 'engtagger'
 gem 'nokogiri'
