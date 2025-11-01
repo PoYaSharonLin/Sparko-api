@@ -10,15 +10,14 @@ module AcaRadar
   class App < Roda
     plugin :environments
 
-    Figaro.application = Figaro::Application.new(
+    configure :development, :test do
+      Figaro.application = Figaro::Application.new(
       environment:,
       path: File.expand_path('config/secrets.yml')
-    )
-    Figaro.load
-    def self.config = Figaro.env
-    CONFIG = YAML.safe_load_file('config/secrets.yml')
-
-    configure :development, :test do
+      )
+      Figaro.load
+      def self.config = Figaro.env
+      CONFIG = YAML.safe_load_file('config/secrets.yml')
       ENV['DATABASE_URL'] = "sqlite://#{config.DB_FILENAME}"
     end
     @db = Sequel.connect(ENV.fetch('DATABASE_URL'))

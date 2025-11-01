@@ -4,3 +4,4 @@ coverage/*
 !coverage/.resultset.json
 *.db
 .venv
+.bundle/

@@ -1,6 +1,7 @@
 # AcaRadar 
 Application that allows researchers to find innovative research topics from other domains. 
 
+**Please note that this project uses both Ruby & Python**
 
 ## Overview
 AcaRadar will pull data from arXiv's API using **query** entity, to fetch **paper** entity, which include **summary**, **authors**, **categories** and **links**.
@@ -27,7 +28,10 @@ We hope this tool will give researchers a quick overview of research trends in t
 
 - Copy `config/secrets_example.yml` to `config/secrets.yml` 
 - Ensure correct version of Ruby install (see .`ruby-version` for `rbenv`)
-- Run `bundle install`
+- Run `python3 -m venv .venv` to create a virtual environment
+- Run `source .venv/bin/activate` to activate the virtual environment
+- Run `pip install -r requirements.txt` to install python dependencies
+- Run `bundle install` to install ruby dependencies
 
 ## Running tests
 ### To run tests:
