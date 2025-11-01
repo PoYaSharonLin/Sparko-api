@@ -24,6 +24,7 @@ module AcaRadar
     end
 
     configure :production do
+      CONFIG = YAML.safe_load_file('config/secrets_example.yml')
       def self.config = ENV
     end
 
