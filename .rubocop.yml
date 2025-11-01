@@ -5,6 +5,7 @@ AllCops:
   NewCops: enable
   Exclude:
     - '_snippets/*'
+    - '.venv/**/*' # ignore python virtual environments
 
 # ignore block length in test code only
 Metrics/BlockLength:

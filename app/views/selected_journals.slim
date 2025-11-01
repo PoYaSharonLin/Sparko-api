@@ -21,11 +21,13 @@ html lang='en'
                 th Categories
                 th Short Summary
                 th Concept
+                th Concept Embedding
                 th PDF
             tbody
               - papers.each do |paper|
                 - summary = AcaRadar::Entity::Summary.new(paper.summary)
-                - concept = AcaRadar::Entity::Concept.extract(summary.full_summary).map(&:to_s).join(', ')
+                - concept = AcaRadar::Entity::Concept.extract_from(summary.full_summary).map(&:to_s).join(', ')
+                - embedding = AcaRadar::Value::Embedding.embed_from(concept)
                 tr.table-secondary
                   td = paper.title
                   td = paper.published
@@ -33,6 +35,7 @@ html lang='en'
                   td = paper.categories.all.join(', ')
                   td = summary.short_summary
                   td = concept
+                  td = embedding.short_embedding
                   td
                     - if paper.links&.pdf_href
                       a.btn.btn-sm.btn-outline-primary href=paper.links.pdf_href target='_blank' PDF

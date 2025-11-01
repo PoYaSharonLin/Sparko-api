@@ -17,7 +17,7 @@ module AcaRadar
       end
 
       # rubocop:disable Metrics/MethodLength
-      def self.extract(summary)
+      def self.extract_from(summary)
         input = summary.to_s
         extractor_path = ENV['EXTRACTOR_PATH'] || 'app/domain/clustering/services/extractor.py'
 
@@ -28,10 +28,10 @@ module AcaRadar
         begin
           parsed_json = JSON.parse(stdout)
           parsed_json.map do |concept_data|
-            new(concept_data) # Create a Concept for each extracted string
+            new(concept_data)
           end
         rescue JSON::ParserError => e
-          raise "Failed to parse JSON from Python script: #{e.message}"
+          raise "Failed to parse JSON from extractor.py: #{e.message}"
         end
       end
       # rubocop:enable Metrics/MethodLength
