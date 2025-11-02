@@ -14,11 +14,15 @@ module AcaRadar
         @two_dim_embedding = two_dim_embedding
       end
 
-      def self.reduce_dimension_from(embedding)
-        input = embedding
-        embedder_path = ENV['EMBEDDER_PATH'] || 'app/domain/clustering/services/embedder.py'
+      def to_s
+        @two_dim_embedding.to_s
+      end
 
-        stdout, stderr, status = Open3.capture3('python3', embedder_path, stdin_data: input)
+      def self.reduce_dimension_from(embedding)
+        input = embedding.to_json
+        dim_reducer_path = ENV['DIM_REDUCER_PATH'] || 'app/domain/clustering/services/dimension_reducer.py'
+
+        stdout, stderr, status = Open3.capture3('python3', dim_reducer_path, stdin_data: input)
 
         raise "Python script failed: #{stderr}" unless status.success?
 

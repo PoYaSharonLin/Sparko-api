@@ -46,15 +46,15 @@ rake spec
 rake quality:all
 ```
 
-### To run the app:
-```bash
-rake run
-```
-
 ### To run migration:
 ```bash
 RACK_ENV=development rake db:migrate
 RACK_ENV=test rake db:migrate
+```
+
+### To run the app:
+```bash
+rake run
 ```
 
 ### To test orm:

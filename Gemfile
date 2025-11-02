@@ -58,5 +58,5 @@ end
 # Utiliy tools
 gem 'engtagger'
 gem 'nokogiri'
-gem 'tactful_tokenizer'
 gem 'rexml'
+gem 'tactful_tokenizer'

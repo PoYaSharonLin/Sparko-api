@@ -6,6 +6,7 @@ AllCops:
   Exclude:
     - '_snippets/*'
     - '.venv/**/*' # ignore python virtual environments
+    - 'config/environment.rb' # ignore CONFIG for now 
 
 # ignore block length in test code only
 Metrics/BlockLength:
