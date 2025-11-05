@@ -1,9 +1,15 @@
 .container-fluid
+  hr.my-4
+  - if flash[:notice]
+    .alert.alert-dismissible.alert-secondary.fade.show[role="alert"]
+      = flash[:notice]
+      button.btn-close[type="button" data-bs-dismiss="alert" aria-label="Close"]
+  hr.my-4
   form role="form" action="/selected_journals" method='GET' id='find-journals-form'
     / 'align-items-top' vertically aligns the items to their top edge.
     .row.align-items-top
       .col-md-2
-        .text-right Select Journals:
+        .h4.mb-3.fw-bold Select Journals
       .col-md-4
         select name='journal1' id='journal_select1' class="form-control"
           option value="MIS Quarterly" MIS Quarterly
@@ -19,10 +25,10 @@
           span.spinner-grow.spinner-grow-sm.d-none role="status" aria-hidden="true"
           span.button-text Find
   hr.my-4
-  h2.mb-3 Previously Viewed Papers
+  h4.mb-3.fw-bold Previously Viewed Papers
   - if watched_papers.any?
     - watched_papers.each do |paper|
-      .card.mb-3
+      .card.bg-light.mb-3
         .card-body
           h5.card-title
             a href=paper.origin_id target="_blank" rel="noopener noreferrer" = paper.title

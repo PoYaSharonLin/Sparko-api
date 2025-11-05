@@ -9,6 +9,7 @@ html
       rel="stylesheet"
       crossorigin="anonymous"
     }
+    link rel="icon" href="/assets/acaradar_logo-removebg.png" type="image/png" sizes="32x32"
 
   body
     / Popper.js
@@ -23,13 +24,12 @@ html
       crossorigin="anonymous"
     }
 
+    nav.navbar.navbar-expand-lg.bg-light 
+      .container-fluid
+        a.navbar-brand href="/" style="font-size: 3rem; font-weight: bold;"
+          img.me-2 src="/assets/acaradar_logo-removebg.png" height="70"
+          | AcaRadar
     .container id='html_body'
-      section
-        .row style="vertical-align: middle;"
-          .col-12
-            h1
-              a.text href="/" AcaRadar
-
       section
         == yield
 

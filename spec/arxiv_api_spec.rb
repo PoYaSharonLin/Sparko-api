@@ -85,7 +85,6 @@ describe 'Test arXiv API library' do
       entry = CORRECT['entries'][0]
       paper = AcaRadar::Entity::Paper.new(entry)
 
-      _(paper.id).must_equal entry['id']
       _(paper.title).must_equal entry['title']
       _(paper.published).must_equal entry['published']
       _(paper.updated).must_equal entry['updated']

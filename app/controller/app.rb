@@ -3,6 +3,7 @@
 require 'roda'
 require 'slim'
 require 'uri'
+require 'rack'
 require_relative '../infrastructure/arxiv/gateways/arxiv_api'
 require_relative '../domain/clustering/entities/query'
 
@@ -12,9 +13,17 @@ module AcaRadar
   class App < Roda
     plugin :render, engine: 'slim', views: 'app/views'
     plugin :assets, css: 'style.css', path: 'app/views/assets'
+    plugin :static, ['/assets']
     plugin :common_logger, $stderr
     plugin :halt
     plugin :all_verbs
+    plugin :flash
+
+    MESSAGE = {
+      refuse_same_journal: 'Please select 2 different journals',
+      api_error: 'arxiv API is not responsing, please visit the website later'
+
+    }.freeze
 
     route do |routing|
       routing.assets
@@ -32,15 +41,18 @@ module AcaRadar
       routing.on 'selected_journals' do
         first_journal = routing.params['journal1']&.strip
         second_journal = routing.params['journal2']&.strip
+        if first_journal == second_journal
+          flash[:notice] = MESSAGE[:refuse_same_journal]
+          routing.redirect '/'
+        end
         journals = [first_journal, second_journal].compact.reject(&:empty?)
-        routing.halt 400, 'Please select at least 1 journal' if journals.empty?
 
         begin
           query = AcaRadar::Query.new(journals: journals)
           api = AcaRadar::ArXivApi.new
           api_response = api.call(query)
 
-          raise "arXiv API returned status #{api_response.status}" unless api_response.ok?
+          flash.now[:notice] = MESSAGE[:api_error] unless api_response.ok?
 
           papers = api_response.papers
           total_papers = api_response.total_results || papers.size
