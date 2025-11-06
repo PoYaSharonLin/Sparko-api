@@ -28,7 +28,7 @@ module AcaRadar
     configure :production do
       CONFIG = YAML.safe_load_file('config/secrets_example.yml')
       def self.config = ENV
-      use Rack::Session::Cookie, secret: config.SESSION_SECRET
+      use Rack::Session::Cookie, secret: ENV.fetch('SESSION_SECRET')
     end
 
     @db = Sequel.connect(ENV.fetch('DATABASE_URL'))
