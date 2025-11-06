@@ -1,0 +1,8 @@
+- if flash[:error]
+  .alert.alert-danger.alert-dismissible.fade.show role="alert" style="width: 1520px; margin: 0 auto;"
+    = flash[:error]
+    button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+- if flash[:notice]
+  .alert.alert-primary.alert-dismissible.fade.show.w-100.mx-auto role="alert"
+    = flash[:notice]
+    button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"

@@ -30,7 +30,9 @@ html
           img.me-2 src="/assets/acaradar_logo-removebg.png" height="70"
           | AcaRadar
     .container id='html_body'
+    hr.my-4
       section
+        == render('flash_bar')
         == yield
 
       footer.mt-auto.py-5

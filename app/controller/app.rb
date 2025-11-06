@@ -11,18 +11,18 @@ require_relative '../domain/clustering/entities/query'
 module AcaRadar
   # Web App
   class App < Roda
-    plugin :render, engine: 'slim', views: 'app/views'
-    plugin :assets, css: 'style.css', path: 'app/views/assets'
+    plugin :render, engine: 'slim', views: 'app/presentation/views_slim'
+    plugin :assets, css: 'style.css', path: '/assets'
     plugin :static, ['/assets']
     plugin :common_logger, $stderr
     plugin :halt
     plugin :all_verbs
+    plugin :sessions, secret: ENV.fetch('SESSION_SECRET', nil)
     plugin :flash
 
     MESSAGE = {
       refuse_same_journal: 'Please select 2 different journals',
       api_error: 'arxiv API is not responsing, please visit the website later'
-
     }.freeze
 
     route do |routing|
@@ -34,7 +34,8 @@ module AcaRadar
         # display papers in previous session
         session[:watching] ||= []
         watched_papers = Repository::Paper.find_many_by_ids(session[:watching])
-        view 'home', locals: { watched_papers: watched_papers }
+        journal_options = AcaRadar::View::JournalOption.new
+        view 'home', locals: { watched_papers: watched_papers, options: journal_options }
       end
 
       # GET /selected_journals

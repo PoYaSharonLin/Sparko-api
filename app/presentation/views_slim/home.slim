@@ -1,9 +1,5 @@
 .container-fluid
   hr.my-4
-  - if flash[:notice]
-    .alert.alert-dismissible.alert-secondary.fade.show[role="alert"]
-      = flash[:notice]
-      button.btn-close[type="button" data-bs-dismiss="alert" aria-label="Close"]
   hr.my-4
   form role="form" action="/selected_journals" method='GET' id='find-journals-form'
     / 'align-items-top' vertically aligns the items to their top edge.
@@ -12,14 +8,12 @@
         .h4.mb-3.fw-bold Select Journals
       .col-md-4
         select name='journal1' id='journal_select1' class="form-control"
-          option value="MIS Quarterly" MIS Quarterly
-          option value="Management Science" Management Science
-          option value="Journal of the ACM"  Journal of the ACM
+          - options.all.each do |text, value|
+            option value=value = text
       .col-md-4
         select name='journal2' id='journal_select2' class="form-control"
-          option value="MIS Quarterly" MIS Quarterly
-          option value="Management Science" Management Science
-          option value="Journal of the ACM"  Journal of the ACM
+          - options.all.each do |text, value|
+            option value=value = text
       .col-md-2
         button type='submit' id='find-button' class="btn btn-primary w-100" 
           span.spinner-grow.spinner-grow-sm.d-none role="status" aria-hidden="true"
@@ -38,9 +32,9 @@
             = paper.summary
 
   - else
-    .alert.alert-info role="alert"
+    .alert.alert-light role="alert"
       h4.alert-heading Welcome!
-      p You haven't viewed any papers yet. Use the form above to find some interesting research. Your viewed papers will appear here for easy access later.
+      p You haven't viewed any papers yet. Use the form above to find some interesting research.
   javascript:
     document.getElementById('find-journals-form').addEventListener('submit', function() {
       const button = document.getElementById('find-button');
