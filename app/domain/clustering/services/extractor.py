@@ -2,8 +2,9 @@ import sys
 import json
 from string import punctuation
 from collections import Counter
+from itertools import chain
 
-# NLTK Stopwords lists
+# NLTK Stopwords lists (kept the same)
 stop_words = [
     'i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', "you're", "you've", "you'll", "you'd",
     'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', "she's", 'her', 'hers',
@@ -25,18 +26,34 @@ stop_words = [
 
 
 def extract_concepts(text, top_n=10):
-    # extract concept using 1 word instead of n-gram
     text = ''.join(c for c in text if c not in punctuation)
     text = text.lower()
     words = text.split()
-    words = [word for word in words if word not in stop_words and len(word) > 1]  # Ignore single-letter words
-    word_counts = Counter(words)
-    return [word for word, count in word_counts.most_common(top_n)]
+
+    # generate unigram, bigram, and trigram
+    unigrams = [word for word in words if word not in stop_words and len(word) > 1]
+    bigrams = [' '.join(gram) for gram in zip(words, words[1:]) if not any(word in stop_words for word in gram)]
+    trigrams = [' '.join(gram) for gram in zip(words, words[1:], words[2:]) if not any(word in stop_words for word in gram)]
+
+    all_ngrams = list(chain(unigrams, bigrams, trigrams))
+    ngram_counts = Counter(all_ngrams)
+    most_common_ngrams = [gram for gram, count in ngram_counts.most_common(top_n * 3)]
+
+    # exclude subgrams
+    final_concepts = []
+    for ngram in most_common_ngrams:
+        is_subgram = False
+        for other_ngram in most_common_ngrams:
+            if ngram != other_ngram and ngram in other_ngram:
+                is_subgram = True
+                break
+        if not is_subgram:
+            final_concepts.append(ngram)
+
+    return final_concepts[:top_n]
 
 
 if __name__ == "__main__":
-    # reading summary object from Ruby
     summary = sys.stdin.read().strip()
     concepts = extract_concepts(summary)
-    # output json
     print(json.dumps(concepts))

@@ -1,6 +1,83 @@
 {
   "RSpec": {
     "coverage": {
+      "/home/poyasharonlin/SOA/Project/sangria/spec/domain/entities/concepts_spec.rb": {
+        "lines": [
+          null
+        ]
+      },
+      "/home/poyasharonlin/SOA/Project/sangria/spec/domain/entities/papers_spec.rb": {
+        "lines": [
+          null
+        ]
+      },
+      "/home/poyasharonlin/SOA/Project/sangria/spec/domain/entities/query_spec.rb": {
+        "lines": [
+          null
+        ]
+      },
+      "/home/poyasharonlin/SOA/Project/sangria/spec/domain/services/embedder_spec.rb": {
+        "lines": [
+          null
+        ]
+      },
+      "/home/poyasharonlin/SOA/Project/sangria/spec/domain/services/extractor_spec.rb": {
+        "lines": [
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null
+        ]
+      },
       "/home/poyasharonlin/SOA/Project/sangria/spec/infrastructure_database_spec.rb": {
         "lines": [
           null,
@@ -97,6 +174,6 @@
         ]
       }
     },
-    "timestamp": 1762416185
+    "timestamp": 1762499540
   }
 }
