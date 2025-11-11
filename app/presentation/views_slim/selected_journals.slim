@@ -23,12 +23,15 @@ html lang='en'
                 th Short Summary
                 th Concept
                 th Concept Embedding
+                th Concept 2D Embedding
                 th PDF
             tbody
               - papers.each do |paper|
                 - summary = AcaRadar::Entity::Summary.new(paper.summary)
                 - concept = AcaRadar::Entity::Concept.extract_from(summary.full_summary).map(&:to_s).join(', ')
                 - embedding = AcaRadar::Value::Embedding.embed_from(concept)
+                - two_dim_embedding = AcaRadar::Value::TwoDimEmbedding.reduce_dimension_from(embedding.full_embedding)
+                - plot_data << { x: two_dim_embedding.two_dim_embedding[0], y: two_dim_embedding.two_dim_embedding[1], label: paper.title }
                 tr.table-secondary
                   td = paper.title
                   td = paper.published
@@ -36,9 +39,128 @@ html lang='en'
                   td = summary.short_summary
                   td = concept
                   td = embedding.short_embedding
+                  td = two_dim_embedding
                   td
                     - if paper.links&.pdf_href
                       a.btn.btn-sm.btn-outline-primary href=paper.links.pdf_href target='_blank' PDF
-      
+        h2.mt-4 Concept Visualization
+        canvas#concept-chart data-points=plot_data.to_json
+
       - else
         p No papers found.
+
+    javascript:
+      document.addEventListener('DOMContentLoaded', () => {
+        const canvas = document.getElementById('concept-chart');
+        if (canvas) {
+          // 1. Get the data from our data-points attribute
+          const dataPointsJSON = canvas.dataset.points;
+          const dataPoints = JSON.parse(dataPointsJSON);
+
+          // 2. Define our custom plugin to draw the circle on hover
+          const hoverCirclePlugin = {
+            id: 'hoverCircle',
+            // We use afterEvent to track the mouse position and see what it's hovering over
+            afterEvent: (chart, args, options) => {
+              const event = args.event;
+              
+              if (event.type === 'mousemove') {
+                const activeElements = chart.getActiveElements();
+                if (activeElements.length > 0) {
+                  // Store the hovered element's info for the drawing phase
+                  chart.hoveredElement = activeElements[0];
+                } else {
+                  chart.hoveredElement = null;
+                }
+                // Redraw the chart to show/hide the circle
+                chart.draw();
+              } else if (event.type === 'mouseout') {
+                chart.hoveredElement = null;
+                chart.draw();
+              }
+            },
+            // afterDatasetsDraw allows us to draw on top of the chart datasets
+            afterDatasetsDraw: (chart, args, options) => {
+              const { ctx } = chart;
+              const hoveredElement = chart.hoveredElement;
+
+              if (hoveredElement) {
+                ctx.save();
+                
+                // Get the pixel coordinates of the hovered point
+                const x = hoveredElement.element.x;
+                const y = hoveredElement.element.y;
+                
+                // --- Calculate the radius in pixels from data units ---
+                // This is the desired diameter in terms of the chart's x-axis scale
+                const dataDiameter = 0.04; 
+                const dataRadius = dataDiameter / 2;
+
+                // Get the data value of the hovered point
+                const pointDataX = chart.data.datasets[hoveredElement.datasetIndex].data[hoveredElement.index].x;
+                
+                // Find out the pixel position for the center and the edge of our circle
+                const xCenterPixel = chart.scales.x.getPixelForValue(pointDataX);
+                const xEdgePixel = chart.scales.x.getPixelForValue(pointDataX + dataRadius);
+                
+                // The difference is the radius in pixels
+                const pixelRadius = Math.abs(xEdgePixel - xCenterPixel);
+                // --- End of radius calculation ---
+                
+                // Style the circle
+                ctx.beginPath();
+                ctx.strokeStyle = 'rgba(0, 0, 0, 0.6)'; // Circle color
+                ctx.lineWidth = 2; // Circle line width
+                ctx.setLineDash([4, 4]); // 4px dash, 4px space
+                
+                // Draw the circle
+                ctx.arc(x, y, pixelRadius, 0, 2 * Math.PI);
+                
+                ctx.stroke();
+                ctx.restore();
+              }
+            }
+          };
+
+          // 3. Register the plugin globally
+          Chart.register(hoverCirclePlugin);
+
+          // 4. Create the Chart.js scatter plot
+          new Chart(canvas, {
+            type: 'scatter',
+            data: {
+              datasets: [{
+                label: 'Paper Concepts',
+                data: dataPoints,
+                backgroundColor: 'rgb(54, 162, 235)'
+              }]
+            },
+            options: {
+              scales: {
+                x: {
+                  title: {
+                    display: true,
+                    text: 'Dimension 1'
+                  }
+                },
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Dimension 2'
+                  }
+                }
+              },
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    label: function(context) {
+                      // Show the paper's title in the tooltip on hover
+                      return context.raw.label;
+                    }
+                  }
+                }
+              }
+            }
+          });
+        }
+      });
