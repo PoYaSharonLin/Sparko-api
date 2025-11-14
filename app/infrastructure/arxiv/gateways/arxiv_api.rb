@@ -2,6 +2,7 @@
 
 require 'http'
 require 'yaml'
+require 'logger'
 require_relative '../../../../helper/arxiv_api_parser'
 require_relative '../../../models/entities/categories'
 require_relative '../../../models/entities/authors'
@@ -14,7 +15,7 @@ module AcaRadar
   # :reek:TooManyConstants
   module ArXivConfig
     MIN_DATE_ARXIV = '201010020000'
-    MAX_DATE_ARXIV = '202510020000'
+    MAX_DATE_ARXIV = Date.today.strftime('%Y%m%d0000')
     JOURNALS = [].freeze
     MAX_RESULTS = 5
     SORT_BY = 'submittedDate'
@@ -28,12 +29,17 @@ module AcaRadar
       @parser = AcaRadar::ArXivApiParser.new
       @next_call_time = 0
       @cooldown_time = cooldown_time
+      # @logger = Logger.new($stdout)
     end
 
     def call(query_obj)
       wait_cooldown
       url = query_obj.url
+      # @logger.debug("ArXivApi Request URL: #{url}")
       response = @parser.call_arxiv_url(@config, url)
+      # @logger.debug("ArXivApi Response Status: #{response.code}")
+      # @logger.debug("ArXivApi Response Headers: #{response.headers.inspect}")
+      # @logger.debug("ArXivApi Response Body: #{response.body.to_s[0..500]}...")
       data_hash = @parser.parse_arxiv_atom(response.body.to_s)
       data_hash['entries'] || []
       @next_call_time = Time.now.to_f + @cooldown_time + 0.1
@@ -56,7 +62,6 @@ module AcaRadar
 
     def initialize(status_code, content_hash)
       @status = status_code.to_i
-      # group pagination values into one ivar to reduce instance var count
       @pagination = build_pagination(content_hash)
       entries = content_hash['entries'] || []
       @papers = entries.map { |entry_hash| AcaRadar::Entity::Paper.new(entry_hash) }
