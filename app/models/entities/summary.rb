@@ -8,7 +8,11 @@ module AcaRadar
       attr_reader :full_summary, :short_summary
 
       def initialize(text)
-        # Handle text as string or array
+        unless text.is_a?(String) || text.is_a?(Array)
+          raise ArgumentError,
+                'Summary must be initialized with a String or Array'
+        end
+
         full_text = text.is_a?(Array) ? text.join("\n").strip : text.to_s.strip
         @full_summary = full_text
         @short_summary = truncate_to_100_words(full_text)

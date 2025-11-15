@@ -8,11 +8,11 @@
         .h4.mb-3.fw-bold Select Journals
       .col-md-4
         select name='journal1' id='journal_select1' class="form-control"
-          - options.all.each do |text, value|
+          - AcaRadar::View::JournalOption.all.each do |text, value|
             option value=value = text
       .col-md-4
         select name='journal2' id='journal_select2' class="form-control"
-          - options.all.each do |text, value|
+          - AcaRadar::View::JournalOption.all.each do |text, value|
             option value=value = text
       .col-md-2
         button type='submit' id='find-button' class="btn btn-primary w-100" 

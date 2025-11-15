@@ -4,7 +4,7 @@ module AcaRadar
   module View
     # class for presenting the journal options in frontend
     class JournalOption
-      def all
+      def self.all
         [
           ['MIS Quarterly', 'MIS Quarterly'],
           ['Management Science', 'Management Science'],

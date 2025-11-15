@@ -5,12 +5,19 @@ require_relative '../../../infrastructure/arxiv/mappers/categories_mapper'
 require_relative '../../../infrastructure/arxiv/mappers/links_mapper'
 require_relative '../../../infrastructure/arxiv/mappers/summary_mapper'
 
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
+# rubocop:disable Metrics/MethodLength
+
 module AcaRadar
   # Domain entity module
   module Entity
     # Represents a single paper entry from the arXiv API, including title, authors, categories, and links
     class Paper
-      attr_reader :origin_id, :title, :published, :updated, :summary, :authors, :categories, :links, :journal_ref
+      attr_reader :origin_id, :title, :published, :updated, :summary, :short_summary,
+                  :authors, :categories, :links, :journal_ref, :concepts, :embedding,
+                  :two_dim_embedding, :fetched_at
 
       def initialize(paper_hash)
         @origin_id = paper_hash['id'] || paper_hash[:origin_id]
@@ -19,6 +26,10 @@ module AcaRadar
         @authors = AuthorMapper.new(paper_hash).build_entity
         @categories = CategoriesMapper.new(paper_hash).build_entity
         @links = LinksMapper.new(paper_hash).build_entity
+        @concepts = paper_hash['concepts'] || paper_hash[:concepts] || []
+        @embedding = (paper_hash['embedding'] || paper_hash[:embedding] || []).map(&:to_f)
+        @two_dim_embedding = (paper_hash['two_dim_embedding'] || paper_hash[:two_dim_embedding] || []).map(&:to_f)
+        @fetched_at = paper_hash['fetched_at'] || paper_hash[:fetched_at]
       end
 
       def to_attr_hash
@@ -27,8 +38,12 @@ module AcaRadar
           title: @title,
           published: @published,
           updated: @updated,
-          summary: @summary, # Assuming @summary can be saved directly as a string
-          journal_ref: @journal_ref
+          summary: @summary,
+          journal_ref: @journal_ref,
+          concepts: @concepts,
+          embedding: @embedding,
+          two_dim_embedding: @two_dim_embedding,
+          fetched_at: @fetched_at
         }
       end
 
@@ -43,3 +58,7 @@ module AcaRadar
     end
   end
 end
+# rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
+# rubocop:enable Metrics/MethodLength

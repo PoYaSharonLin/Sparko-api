@@ -33,7 +33,8 @@ We hope this tool will give researchers a quick overview of research trends in t
 - Run `python3 -m venv .venv` to create a virtual environment
 - Run `source .venv/bin/activate` to activate the virtual environment
 - Run `pip install -r requirements.txt` to install python dependencies
-
+- Run `ruby bin/fetch_arxiv_papers.rb` to fetch papers from arXiv API and store them in the database
+- Run `rake run` to run the application
 
 ## Running tests
 ### To run tests:
@@ -70,7 +71,7 @@ RACK_ENV=test rake db:drop
 ```
 
 ## Entity Relationship Diagram 
-[Editable version](https://mermaid.live/edit#pako:eNqlVF1vmzAU_SuW90oiAoEE-hRl7SZVXaOm07QJKXKxAWtgI2PUpAn_fddAvpRkmjS_WD7n3E9fe4tjSRkOMVOfOUkVKSKBYM2-v359fkHb7mQWFxpxihaPR6jSiosUCVKwC5AkCc850VyKC44VhOcd2nTbfPZ6_-X55ed_BKSsihUvjwF714vZ4v4fC9Fc5yeONVtrRN6AJLE-wpRohsr6LedxW97KABe-SpqsapVfprK63tqSlEytIK-Hx3OC1DqTf2OkokxdiXOrpzcjQTkslWpzyp01cbcbDHbb8zJCFOGMVH0yVYTP5ueWxbvimh3EV7wfkt_775PjR6uD5Lbh3ujDWGELF0zB6FEY97YnEdYZg1HCRitYDRedR9jqqIILWpDSkH0DI1wSSuFyDebY1h6tK_ZE1j841ZlhtKrbcWh6R4kU-oEUPN90geayhjIU-sbeD8GMZglpGsXIt06Smy-XndlQwENFMVdxztAWwevKQ_QpSTxYd6hBHa9YrI-s5xn-zsyk_M1auVmtnNGULYjOQH1Bd8Dg3ZQEpZZrsDBtb6CHcNFyuRExDk2hFlayTjMcJiSv4FSX5jX0X8leUhLxS8rDkVGupXrq_p32-7Fwqsy19B6ZgImGNgmNw5HT2uNwi9dwmoyHvj0NJr4zDeyJ64wtvAHYngwnrmuPR4E_Daa24zcW_mhD2kPfc1zPm7i257peEATNHww3feg)
+[Editable version](https://mermaid.live/edit#pako:eNqlVF1vmzAU_SuW90oiAoEE-hRl7SZVXaOm07QJKXKxAWtgI2PUpAn_fddAvpRkmjS_WD7n3E9fe4tjSRkOMVOfOUkVKSKBYM2-v359fkHb7mQWFxpxihaPR6jSiosUCVKwC5AkCc850VyKC44VhOcd2nTbfPZ6_-X55ed_BKSsihUvjwF714vZ4v4fFc5yeONVtrRN6AJLE-wpRohsr6LedxW97KABe-SpqsapVfprK63tqSlEytIK-Hx3OC1DqTf2OkokxdiXOrpzcjQTkslWpzyp01cbcbDHbb8zJCFOGMVH0yVYTP5ueWxbvimh3EV7wfkt_775PjR6uD5Lbh3ujDWGELF0zB6FEY97YnEdYZg1HCRitYDRedR9jqqIILWpDSkH0DI1wSSuFyDebY1h6tK_ZE1j841ZlhtKrbcWh6R4kU-oEUPN90geayhjIU-sbeD8GMZglpGsXIt06Smy-XndlQwENFMVdxztAWwevKQ_QpSTxYd6hBHa9YrI-s5xn-zsyk_M1auVmtnNGULYjOQH1Bd8Dg3ZQEpZZrsDBtb6CHcNFyuRExDk2hFlayTjMcJiSv4FSX5jX0X8leUhLxS8rDkVGupXrq_p32-7Fwqsy19B6ZgImGNgmNw5HT2uNwi9dwmoyHvj0NJr4zDeyJ64wtvAHYngwnrmuPR4E_Daa24zcW_mhD2kPfc1zPm7i257peEATNHww3feg)
 
 ```mermaid 
 erDiagram
@@ -95,9 +96,9 @@ erDiagram
     PAPER_AUTHOR {
         int paper_id FK
         int author_id FK
-        int author_order
+        int author_order0
     }
-    PAPER_CATEGORY {
+    PAPER_CATEGORY {C9
         int paper_id FK
         int category_id FK
     }

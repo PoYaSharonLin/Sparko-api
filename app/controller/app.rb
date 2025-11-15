@@ -4,8 +4,6 @@ require 'roda'
 require 'slim'
 require 'uri'
 require 'rack'
-require_relative '../infrastructure/arxiv/gateways/arxiv_api'
-require_relative '../domain/clustering/entities/query'
 
 # rubocop:disable Metrics/BlockLength
 module AcaRadar
@@ -48,23 +46,27 @@ module AcaRadar
         journals = [first_journal, second_journal].compact.reject(&:empty?)
 
         begin
-          query = AcaRadar::Query.new(journals: journals)
-          api = AcaRadar::ArXivApi.new
-          api_response = api.call(query)
+          page = routing.params['page']&.to_i || 1
+          limit = 10
+          offset = (page - 1) * limit
 
-          flash.now[:notice] = MESSAGE[:api_error] unless api_response.ok?
+          papers = Repository::Paper.find_by_categories(journals, limit: limit, offset: offset)
+          total_papers = Repository::Paper.count_by_categories(journals)
 
-          papers = api_response.papers
-          total_papers = api_response.total_results || papers.size
-          pagination = api_response.pagination
-          # store papers' ids to display at home next time
-          papers.each do |paper|
-            Repository::Paper.db_find_or_create(paper)
-          end
+          total_pages = (total_papers.to_f / limit).ceil
+          pagination = {
+            current: page,
+            total_pages: total_pages,
+            prev_page: page > 1 ? page - 1 : nil,
+            next_page: page < total_pages ? page + 1 : nil
+          }
+
           session[:watching] |= papers.map(&:origin_id)
 
           view 'selected_journals',
-               locals: { journals: journals, papers: papers, total_papers: total_papers, pagination: pagination,
+               locals: { journals: journals, papers: papers.map do |p|
+                 AcaRadar::View::Paper.new(p)
+               end, total_papers: total_papers, pagination: pagination,
                          error: nil }
         rescue StandardError => e
           view 'selected_journals',
