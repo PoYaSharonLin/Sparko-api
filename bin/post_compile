@@ -3,8 +3,6 @@
 echo "Running post_compile script..."
 echo "Pre-downloading sentence-transformers model..."
 
-# This command runs a small python script to download and cache the model.
-# The buildpack will have already installed dependencies, so this will work.
 python3 -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('all-MiniLM-L6-v2')"
 
 echo "Model caching complete."
