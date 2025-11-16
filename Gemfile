@@ -21,8 +21,11 @@ gem 'roda', '~> 3.0'
 gem 'slim', '~> 5.0'
 
 # Validation
+gem 'dry-monads', '~> 1.0'
 gem 'dry-struct', '~> 1.0'
+gem 'dry-transaction', '~> 0'
 gem 'dry-types', '~> 1.0'
+gem 'dry-validation', '~> 1.0'
 
 # Networking
 gem 'http', '~> 5.3.1'

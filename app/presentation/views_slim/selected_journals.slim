@@ -13,6 +13,7 @@ html lang='en'
       p We found: #{total_papers} papers in total
       - if papers.any?
         - plot_data = []
+        - ri_plot_data = research_interest_2d ? [{ x: research_interest_2d[0], y: research_interest_2d[1], label: research_interest_term }] : []
         .table-responsive
           table.table.table-hover
             thead.table-active
@@ -38,7 +39,7 @@ html lang='en'
                   td = paper.two_dim_embedding
 
         h2.mt-4 Concept Visualization
-        canvas#concept-chart data-points=plot_data.to_json
+        canvas#concept-chart data-paper-points=plot_data.to_json data-ri-points=ri_plot_data.to_json
 
       - else
         p No papers found.
@@ -48,16 +49,17 @@ html lang='en'
         const canvas = document.getElementById('concept-chart');
         if (canvas) {
           // 1. Get the data from our data-points attribute
-          const dataPointsJSON = canvas.dataset.points;
-          const dataPoints = JSON.parse(dataPointsJSON);
-
+          const paperPointsJSON = canvas.dataset.paperPoints;
+          const riPointsJSON = canvas.dataset.riPoints;
+          const paperPoints = JSON.parse(paperPointsJSON);
+          const riPoints = JSON.parse(riPointsJSON);
           // 2. Define our custom plugin to draw the circle on hover
           const hoverCirclePlugin = {
             id: 'hoverCircle',
             // We use afterEvent to track the mouse position and see what it's hovering over
             afterEvent: (chart, args, options) => {
               const event = args.event;
-              
+            
               if (event.type === 'mousemove') {
                 const activeElements = chart.getActiveElements();
                 if (activeElements.length > 0) {
@@ -77,57 +79,48 @@ html lang='en'
             afterDatasetsDraw: (chart, args, options) => {
               const { ctx } = chart;
               const hoveredElement = chart.hoveredElement;
-
               if (hoveredElement) {
                 ctx.save();
-                
+              
                 // Get the pixel coordinates of the hovered point
                 const x = hoveredElement.element.x;
                 const y = hoveredElement.element.y;
-                
-                // --- Calculate the radius in pixels from data units ---
-                // This is the desired diameter in terms of the chart's x-axis scale
-                const dataDiameter = 0.04; 
-                const dataRadius = dataDiameter / 2;
-
-                // Get the data value of the hovered point
-                const pointDataX = chart.data.datasets[hoveredElement.datasetIndex].data[hoveredElement.index].x;
-                
-                // Find out the pixel position for the center and the edge of our circle
-                const xCenterPixel = chart.scales.x.getPixelForValue(pointDataX);
-                const xEdgePixel = chart.scales.x.getPixelForValue(pointDataX + dataRadius);
-                
-                // The difference is the radius in pixels
-                const pixelRadius = Math.abs(xEdgePixel - xCenterPixel);
-                // --- End of radius calculation ---
-                
+              
+                // Use a fixed pixel radius for visibility (adjust as needed)
+                const pixelRadius = 400;
+              
                 // Style the circle
                 ctx.beginPath();
                 ctx.strokeStyle = 'rgba(0, 0, 0, 0.6)'; // Circle color
                 ctx.lineWidth = 2; // Circle line width
                 ctx.setLineDash([4, 4]); // 4px dash, 4px space
-                
+              
                 // Draw the circle
                 ctx.arc(x, y, pixelRadius, 0, 2 * Math.PI);
-                
+              
                 ctx.stroke();
                 ctx.restore();
               }
             }
           };
-
           // 3. Register the plugin globally
           Chart.register(hoverCirclePlugin);
-
           // 4. Create the Chart.js scatter plot
           new Chart(canvas, {
             type: 'scatter',
             data: {
-              datasets: [{
-                label: 'Paper Concepts',
-                data: dataPoints,
-                backgroundColor: 'rgb(54, 162, 235)'
-              }]
+              datasets: [
+                {
+                  label: 'Paper Concepts',
+                  data: paperPoints,
+                  backgroundColor: 'rgb(54, 162, 235)'
+                },
+                {
+                  label: 'Research Interest',
+                  data: riPoints,
+                  backgroundColor: 'rgb(255, 99, 132)'
+                }
+              ]
             },
             options: {
               scales: {
@@ -148,7 +141,7 @@ html lang='en'
                 tooltip: {
                   callbacks: {
                     label: function(context) {
-                      // Show the paper's title in the tooltip on hover
+                      // Show the paper's title or research interest in the tooltip on hover
                       return context.raw.label;
                     }
                   }

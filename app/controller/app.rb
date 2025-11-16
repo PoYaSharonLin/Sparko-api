@@ -18,6 +18,7 @@ module AcaRadar
     plugin :flash
 
     MESSAGE = {
+      embed_research_interest_ok: 'Research interest is sucessfully embedded!',
       refuse_same_journal: 'Please select 2 different journals',
       api_error: 'arxiv API is not responsing, please visit the website later'
     }.freeze
@@ -32,6 +33,28 @@ module AcaRadar
         session[:watching] ||= []
         watched_papers = Repository::Paper.find_many_by_ids(session[:watching])
         journal_options = AcaRadar::View::JournalOption.new
+
+        # research interest from user should be a single term
+        research_interest = routing.params['research_interest']&.strip
+        if research_interest
+          research_interest_form = AcaRadar::Form::ResearchInterest.new.call(single_term: research_interest)
+          if research_interest_form.failure?
+            flash[:error] = research_interest_form.errors[:single_term].first
+            routing.redirect '/'
+          end
+
+          embedded_research_interest = AcaRadar::Service::EmbedResearchInterest.new.call(research_interest_form.to_h)
+          if embedded_research_interest.failure?
+            flash[:error] = embedded_research_interest.failure
+            routing.redirect '/'
+          end
+
+          session[:research_interest_term] = research_interest
+          session[:research_interest_2d] = embedded_research_interest.value!
+          flash[:notice] = MESSAGE[:embed_research_interest_ok]
+          routing.redirect '/'
+        end
+
         view 'home', locals: { watched_papers: watched_papers, options: journal_options }
       end
 
@@ -67,11 +90,15 @@ module AcaRadar
                locals: { journals: journals, papers: papers.map do |p|
                  AcaRadar::View::Paper.new(p)
                end, total_papers: total_papers, pagination: pagination,
-                         error: nil }
+                         error: nil,
+                         research_interest_term: session[:research_interest_term],
+                         research_interest_2d: session[:research_interest_2d] }
         rescue StandardError => e
           view 'selected_journals',
                locals: { journals: journals, papers: [], total_papers: 0, pagination: {},
-                         error: "Failed to fetch arXiv data: #{e.message}" }
+                         error: "Failed to fetch arXiv data: #{e.message}",
+                         research_interest_term: session[:research_interest_term],
+                         research_interest_2d: session[:research_interest_2d] }
         end
       end
     end

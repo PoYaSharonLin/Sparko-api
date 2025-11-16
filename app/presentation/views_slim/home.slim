@@ -1,5 +1,16 @@
 .container-fluid
   hr.my-4
+  form role="form" action="/" method="get" id="research-interest-form"
+    .row.align-items-top
+      .col-md-2
+        .h4.mb-3.fw-bold Research Interest
+      .col-md-8
+        input.form-control type="text" name="research_interest" id="research_interest_input" placeholder="Please enter your research interest"
+      .col-md-2
+        button type="submit" id="embed-button" class="btn btn-primary w-100"
+          span.spinner-grow.spinner-grow-sm.d-none role="status" aria-hidden="true"
+          span.button-text Embed
+
   hr.my-4
   form role="form" action="/selected_journals" method='GET' id='find-journals-form'
     / 'align-items-top' vertically aligns the items to their top edge.
