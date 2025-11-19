@@ -9,7 +9,7 @@ require 'rack'
 module AcaRadar
   # Web App
   class App < Roda
-    plugin :render, engine: 'slim', views: 'app/presentation/views_slim'
+    plugin :render, engine: 'slim', views: 'app/presentation/representers'
     plugin :assets, css: 'style.css', path: '/assets'
     plugin :static, ['/assets']
     plugin :common_logger, $stderr
