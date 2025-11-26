@@ -4,7 +4,7 @@ require 'json'
 
 module AcaRadar
   module Response
-    # Represents a successful API response for a newly created resource.
+    # class for created resource
     class Created
       def initialize(representer)
         @representer = representer

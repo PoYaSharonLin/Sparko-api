@@ -7,7 +7,7 @@ module AcaRadar
     # class that validate the form of research interest
     class EmbedResearchInterest
       def initialize(params)
-        @term = params['research_interest']&.strip
+        @term = params['term']&.strip
       end
 
       attr_reader :term

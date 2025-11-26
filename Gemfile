@@ -68,3 +68,6 @@ gem 'tactful_tokenizer'
 # Presentation
 gem 'multi_json'
 gem 'roar'
+
+# API testing
+gem 'rack-test'

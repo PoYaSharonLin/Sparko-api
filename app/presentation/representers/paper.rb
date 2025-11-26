@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../../services/calculate_similarity'
+require_relative '../../application/services/calculate_similarity'
 require 'roar/decorator'
 require 'roar/json'
 
