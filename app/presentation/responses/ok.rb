@@ -1,4 +1,6 @@
-module AcaRadar 
+# frozen_string_literal: true
+
+module AcaRadar
   module Response
     # class ok from response
     class Ok
