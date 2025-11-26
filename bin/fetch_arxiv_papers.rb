@@ -18,8 +18,7 @@ module AcaRadar
   class ArxivFetcher
     def initialize
       @api = ArXivApi.new
-      @journals = [['MIS Quarterly', 'MIS Quarterly']]
-      # View::JournalOption.all
+      @journals = View::JournalOption.all
     end
 
     def run

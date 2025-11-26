@@ -32,6 +32,11 @@ module AcaRadar
         @fetched_at = paper_hash['fetched_at'] || paper_hash[:fetched_at]
       end
 
+      def pdf_url
+        pdf_link = @links.find { |link| link['type'] == 'application/pdf' }
+        pdf_link ? pdf_link['href'] : nil
+      end
+
       def to_attr_hash
         {
           origin_id: @origin_id,
@@ -45,6 +50,18 @@ module AcaRadar
           two_dim_embedding: @two_dim_embedding,
           fetched_at: @fetched_at
         }
+      end
+
+      def published_at
+        @published
+      end
+
+      def primary_category
+        @categories&.first
+      end
+
+      def embedding_2d
+        @two_dim_embedding
       end
 
       private

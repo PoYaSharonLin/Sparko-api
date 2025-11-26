@@ -19,3 +19,7 @@ Metrics/ParameterLists:
   # change the parameter list as query needs a lot of parameters 
 
   Max: 8
+
+# Disable the OpenStructUse cop globally
+Style/OpenStructUse:
+  Enabled: false

@@ -66,5 +66,8 @@ gem 'rexml'
 gem 'tactful_tokenizer'
 
 # Presentation
-gem 'roar'
 gem 'multi_json'
+gem 'roar'
+
+# API testing
+gem 'rack-test'
