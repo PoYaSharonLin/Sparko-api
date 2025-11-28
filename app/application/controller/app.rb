@@ -26,40 +26,31 @@ module AcaRadar
         message = "AcaRadar API v1 at /api/v1/ in #{App.environment} mode"
         result = Response::ApiResult.new(status: :ok, message: message)
         response.status = result.http_status_code
-        Representer::HttpResponse.new(result).to_json
+        result.to_json
       end
 
       routing.on 'api', 'v1' do
         # POST /api/v1/research_interest
         routing.on 'research_interest' do
           routing.post do
-            APP_LOGGER.info('Received POST request to /api/v1/research_interest')
-            APP_LOGGER.info("Request parameters (routing.params): #{routing.params.inspect}")
             request_obj = Request::EmbedResearchInterest.new(routing.params)
-            APP_LOGGER.info("Initialized Request::EmbedResearchInterest with: #{request_obj.inspect}")
 
             unless request_obj.valid?
-              APP_LOGGER.warn("Request::EmbedResearchInterest validation failed for term: '#{request_obj.term}'")
               response.status = 400
               return Response::BadRequest.new(
                 Representer::Error.generic('Research interest must be a non-empty string')
               ).to_json
             end
-            APP_LOGGER.info("Request::EmbedResearchInterest is valid. Term: '#{request_obj.term}'")
 
             result = Service::EmbedResearchInterest.new.call(term: request_obj.term)
-            APP_LOGGER.info("Service::EmbedResearchInterest call result: #{result.inspect}")
 
             if result.failure?
-              APP_LOGGER.error("Service::EmbedResearchInterest failed. Result: #{result.inspect}")
               response.status = 422
               return Representer::Error.generic('Failed to embed research interest').to_json
             end
-            APP_LOGGER.info("Service::EmbedResearchInterest succeeded. Value: #{result.value!.inspect}")
 
             session[:research_interest_term] = request_obj.term
             session[:research_interest_2d]   = result.value!
-            APP_LOGGER.info("Session updated with term: '#{request_obj.term}' and 2D vector: #{result.value!.inspect}")
 
             research_interest = OpenStruct.new(
               term: request_obj.term,
@@ -90,27 +81,23 @@ module AcaRadar
               ).to_json
             end
 
-            papers = AcaRadar::Repository::Paper.find_by_categories(
-              request_obj.journals,
-              limit: 10,
-              offset: request_obj.offset(10)
+            result = Service::ListPapers.new.call(
+              journals: request_obj.journals,
+              page: request_obj.page
             )
-            total = AcaRadar::Repository::Paper.count_by_categories(request_obj.journals)
+
+            if result.failure?
+              response.status = 500
+              return Representer::Error.generic('Failed to list papers').to_json
+            end
+
+            list = result.value!
 
             response_obj = OpenStruct.new(
               research_interest_term: session[:research_interest_term],
               research_interest_2d: session[:research_interest_2d],
               journals: request_obj.journals,
-              papers: OpenStruct.new(
-                data: papers,
-                pagination: {
-                  current: request_obj.page,
-                  total_pages: (total / 10.0).ceil,
-                  total_count: total,
-                  prev_page: request_obj.page > 1 ? request_obj.page - 1 : nil,
-                  next_page: request_obj.page < (total / 10.0).ceil ? request_obj.page + 1 : nil
-                }
-              )
+              papers: list
             )
 
             Representer::PapersPageResponse.new(response_obj).to_json

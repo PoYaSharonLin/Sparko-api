@@ -3,7 +3,7 @@
 # spec/domain/services/extractor_spec.rb
 require 'open3'
 require 'json'
-require_relative '../../helpers/spec_helper'
+require_relative '../../../helpers/spec_helper'
 
 describe 'Concept Extractor Service' do
   let(:summary_text) do
@@ -17,7 +17,7 @@ describe 'Concept Extractor Service' do
   end
 
   let(:python_script_path) do
-    File.expand_path('../../../app/domain/clustering/services/extractor.py', __dir__)
+    File.expand_path('../../../../app/domain/clustering/services/extractor.py', __dir__)
   end
 
   it 'HAPPY: correctly extracts 1-3 gram concepts from text' do
