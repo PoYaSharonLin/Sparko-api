@@ -34,12 +34,8 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-
-      - name: Setup test database
-        env: # define secrets in Github project -> settings -> secrets
-            DB_FILENAME: ${{ secrets.DB_FILENAME }}
-        run: RACK_ENV=production bundle exec rake db:migrate
-
+      
+      # read env variable before setup test db
       - name: Run all specs
         env: # define secrets in Github project -> settings -> secrets
           ARXIV_USER_AGENT: ${{ secrets.GH_TOKEN }}
@@ -47,3 +43,10 @@ jobs:
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
           
         run: bundle exec rake spec
+
+      - name: Setup test database
+        env: # define secrets in Github project -> settings -> secrets
+            DB_FILENAME: ${{ secrets.DB_FILENAME }}
+        run: RACK_ENV=production bundle exec rake db:migrate
+
+      
