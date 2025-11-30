@@ -42,7 +42,7 @@ jobs:
           DB_FILENAME: ${{ secrets.DB_FILENAME }}
           SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
           
-        run: bundle exec rake spec
+        run: RACK_ENV=test bundle exec rake spec
 
       - name: Setup test database
         env: # define secrets in Github project -> settings -> secrets
