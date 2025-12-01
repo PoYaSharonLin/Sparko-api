@@ -25,10 +25,9 @@ jobs:
     runs-on: ${{ matrix.os }}-latest  # Runs on latest builds of matrix OSes
     env:
       BUNDLE_WITHOUT: production # skip installing production gem (pg)
-      ARXIV_USER_AGENT: ${{ secrets.GH_TOKEN }}
-      DB_FILENAME: ${{ secrets.DB_FILENAME }}
-      SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
       RACK_ENV: test
+      DATABASE_URL: sqlite://${{ github.workspace }}/${{ secrets.DB_FILENAME }}
+      
 
 
     # Steps represent a sequence of tasks that will be executed as part of the job
