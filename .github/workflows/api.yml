@@ -41,7 +41,7 @@ jobs:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - name: Debug Environment Variables
-        run:
+        run: | 
           echo "Workspace is: ${{ github.workspace }}"
           echo "DB Filename is: ${{ secrets.DB_FILENAME }}"
           echo "DATABASE_URL is: $DATABASE_URL"
