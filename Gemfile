@@ -62,9 +62,9 @@ end
 # Utiliy tools
 gem 'engtagger'
 gem 'nokogiri'
+gem 'ostruct'
 gem 'rexml'
 gem 'tactful_tokenizer'
-gem 'ostruct'
 
 # Presentation
 gem 'multi_json'
