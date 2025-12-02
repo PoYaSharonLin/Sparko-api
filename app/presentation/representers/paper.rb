@@ -14,8 +14,17 @@ module AcaRadar
       property :pdf_url
       property :published_at, exec_context: :decorator
       property :primary_category, as: :category
-
       property :authors, exec_context: :decorator
+
+      # list of keywords / concepts for this paper
+      property :concepts,
+               exec_context: :decorator,
+               render_nil: true
+
+      # 2D embedding of the paper in the same space as research interest
+      property :embedding_2d,
+               exec_context: :decorator,
+               render_nil: true
 
       property :similarity_score,
                exec_context: :decorator,
@@ -27,6 +36,20 @@ module AcaRadar
 
       def authors
         represented.authors.join(', ')
+      end
+
+      def concepts
+        represented.concepts
+      end
+
+      def embedding_2d
+        vec = represented.two_dim_embedding
+        return nil unless vec && vec.size == 2
+
+        {
+          x: vec[0].round(6),
+          y: vec[1].round(6)
+        }
       end
 
       def similarity_score(options = {})

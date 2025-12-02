@@ -1,15 +1,6 @@
-# frozen_string_literal: true
-
-require 'roar/decorator'
-require 'roar/json'
-
-require_relative 'base'
-require_relative 'research_interest'
-require_relative 'papers_collection'
-
+# app/presentation/representers/papers_page_response.rb
 module AcaRadar
   module Representer
-    # class for response in each page of papers
     class PapersPageResponse < Representer::Base
       include Roar::JSON
 
@@ -18,12 +9,21 @@ module AcaRadar
 
       property :journals, exec_context: :decorator
 
-      property :papers, decorator: Representer::PapersCollection, pass_options: true
+      property :papers,
+               exec_context: :decorator,
+               decorator: Representer::PapersCollection,
+               pass_options: true
 
       property :pagination, exec_context: :decorator
 
       def journals
         represented.journals
+      end
+
+      # `represented.papers` is the OpenStruct from Service::ListPapers
+      def papers(_options = {})
+        list = represented.papers
+        OpenStruct.new(data: list.papers)
       end
 
       def pagination
