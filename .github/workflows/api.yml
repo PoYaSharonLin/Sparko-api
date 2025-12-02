@@ -51,6 +51,21 @@ jobs:
       - name: Ensure database directory exists
         run: mkdir -p $(dirname ${{ secrets.DB_FILENAME }})
 
+      - name: Debug Ruby SSL info (before override)
+        run: ruby -ropenssl -e 'puts OpenSSL::X509::DEFAULT_CERT_FILE; puts OpenSSL::X509::DEFAULT_CERT_DIR'
+
+      - name: Force Ruby to use Homebrew OpenSSL CA bundle (macOS only)
+        if: runner.os == 'macOS'
+        run: |
+          echo "SSL_CERT_FILE=/opt/homebrew/etc/openssl@3/cert.pem" >> $GITHUB_ENV
+          echo "SSL_CERT_DIR=/opt/homebrew/etc/openssl@3/certs" >> $GITHUB_ENV
+
+      - name: Debug Ruby SSL info (after override)
+        run: |
+          echo "SSL_CERT_FILE=$SSL_CERT_FILE"
+          echo "SSL_CERT_DIR=$SSL_CERT_DIR"
+
+
       # Debug secret length
       - name: Verify Secret Length
         run: echo "The session secret length is ${{ secrets.SESSION_SECRET.length }}"
