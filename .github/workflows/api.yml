@@ -67,8 +67,17 @@ jobs:
       - name: Create Python virtualenv & install requirements
         run: |
           python -m venv venv
-          ./venv/bin/pip install --upgrade pip # Use direct path to pip in venv
-          ./venv/bin/pip install -r requirements.txt # Use direct path to pip in venv
+          ./venv/bin/pip install --upgrade pip
+          ./venv/bin/pip install -r requirements.txt
+      
+      # install pytorch indepently since it is platform-specific
+      - name: Install PyTorch
+        run: |
+          if [ "${{ matrix.os }}" == "ubuntu" ]; then
+            ./venv/bin/pip install torch==2.7.0+cpu --index-url https://download.pytorch.org/whl/cpu
+          elif [ "${{ matrix.os }}" == "macos" ]; then
+            ./venv/bin/pip install torch==2.7.0 --index-url https://download.pytorch.org/whl/cpu
+          fi
 
       # Add Python virtual environment to PATH for subsequent steps
       - name: Add Python venv to PATH
