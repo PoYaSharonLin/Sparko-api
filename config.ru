@@ -15,7 +15,7 @@ if env == 'production'
 
   use Rack::Cache,
       verbose: true,
-      metastore:  "#{redis_url}/metastore",
+      metastore: "#{redis_url}/metastore",
       entitystore: "#{redis_url}/entitystore"
 else
   # Development: file-based cache in tmp/cache
@@ -24,7 +24,7 @@ else
 
   use Rack::Cache,
       verbose: true,
-      metastore:  'file:tmp/cache/meta',
+      metastore: 'file:tmp/cache/meta',
       entitystore: 'file:tmp/cache/body'
 end
 

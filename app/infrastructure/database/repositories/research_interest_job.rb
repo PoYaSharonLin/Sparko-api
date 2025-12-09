@@ -2,6 +2,7 @@
 
 module AcaRadar
   module Repository
+    # Repository for ResearchInterestJob
     class ResearchInterestJob
       def self.create(job_id:, term:)
         Database::ResearchInterestJobOrm.create(
@@ -50,4 +51,3 @@ module AcaRadar
     end
   end
 end
-  

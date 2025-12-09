@@ -2,8 +2,11 @@
 
 require 'shoryuken'
 
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/MethodLength
 module AcaRadar
   module Workers
+    # class for embed research interest worker
     class EmbedResearchInterestWorker
       include Shoryuken::Worker
 
@@ -11,7 +14,7 @@ module AcaRadar
       shoryuken_options queue: ENV.fetch('SQS_QUEUE_NAME', 'acaradar-research-interest-dev'),
                         auto_delete: true
 
-      def perform(sqs_msg, body)
+      def perform(_sqs_msg, body)
         payload = parse_body(body)
 
         return unless payload['type'] == 'embed_research_interest'
@@ -44,3 +47,5 @@ module AcaRadar
     end
   end
 end
+# rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/MethodLength

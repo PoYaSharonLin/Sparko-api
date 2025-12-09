@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 # app/presentation/representers/papers_page_response.rb
 module AcaRadar
   module Representer
+    # class for paper page response
     class PapersPageResponse < Representer::Base
       include Roar::JSON
 

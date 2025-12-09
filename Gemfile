@@ -79,5 +79,5 @@ gem 'rack-cache'
 gem 'redis'
 
 # Parallelism
-gem 'shoryuken'
 gem 'aws-sdk-sqs'
+gem 'shoryuken'

@@ -20,12 +20,10 @@ task :run do
 
   # Make sure we clean up the worker when we exit Puma / Ctrl-C
   at_exit do
-    begin
-      Process.kill('TERM', worker_pid)
-      puts "\nShoryuken worker (PID #{worker_pid}) terminated"
-    rescue Errno::ESRCH
-      # already dead, ignore
-    end
+    Process.kill('TERM', worker_pid)
+    puts "\nShoryuken worker (PID #{worker_pid}) terminated"
+  rescue Errno::ESRCH
+    # already dead, ignore
   end
 
   sh "RACK_ENV=#{env} bundle exec puma"
@@ -111,14 +109,14 @@ namespace :vcr do
 end
 
 namespace :cache do
-  desc "Wipe all cached API responses"
+  desc 'Wipe all cached API responses'
   task :wipe do
     cache_dir = File.expand_path('tmp/cache', __dir__)
 
     if Dir.exist?(cache_dir)
       puts "Deleting cache directory: #{cache_dir}"
       FileUtils.rm_rf(cache_dir)
-      puts "✔ Cache wiped."
+      puts '✔ Cache wiped.'
     else
       puts "No cache directory found at #{cache_dir}."
     end
