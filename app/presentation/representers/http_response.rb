@@ -4,10 +4,12 @@ require_relative 'base'
 
 module AcaRadar
   module Representer
-    # class that represents the response of the API with status and messages
+    # Represents the standardized API envelope
     class HttpResponse < Representer::Base
       property :status
+      property :code
       property :message
+      property :data
     end
   end
 end
