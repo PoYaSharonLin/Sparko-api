@@ -75,11 +75,6 @@ module AcaRadar
                 term: request_obj.term,
                 status_url: "/api/v1/research_interest/#{job_id}"
               }
-              # puts "#{result.inspect}"
-              # session[:research_interest_embedding] = result.term
-              # session[:research_interest_term] = result.embedding
-              # session[:research_interest_2d] = resilt.vector_2d
-
               standard_response(:processing, 'Job queued', data)
             end
           end
@@ -91,6 +86,8 @@ module AcaRadar
 
             case job.status
             when 'completed'
+              session[:research_interest_term] = job.term
+              session[:research_interest_2d] = [job.vector_x, job.vector_y]
               data = {
                 status: 'completed',
                 job_id: job.job_id,
@@ -127,6 +124,7 @@ module AcaRadar
               page: request_obj.page,
               research_embedding: session[:research_interest_embedding]
             )
+            
             standard_response(:internal_error, 'Failed to list papers') if result.failure?
 
             list = result.value!
@@ -148,7 +146,7 @@ module AcaRadar
             # Prepare Data
             response_obj = OpenStruct.new(
               research_interest_term: session[:research_interest_term],
-              research_interest_2d: session[:research_interest_2d],
+              research_interest_2d: research_interest_2d,
               journals: request_obj.journals,
               papers: list
             )
