@@ -119,8 +119,7 @@ module AcaRadar
 
             result = Service::ListPapers.new.call(
               journals: request_obj.journals,
-              page: request_obj.page,
-              research_embedding: session[:research_interest_embedding]
+              page: request_obj.page
             )
 
             standard_response(:internal_error, 'Failed to list papers') if result.failure?
