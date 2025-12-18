@@ -13,7 +13,7 @@ module AcaRadar
 
       PER_PAGE = 10
 
-      def call(journals:, page:, research_embedding:)
+      def call(journals:, page:)
         page     = [page.to_i, 1].max
         per_page = PER_PAGE
         offset   = (page - 1) * per_page

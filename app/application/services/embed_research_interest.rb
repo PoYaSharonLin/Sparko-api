@@ -16,6 +16,7 @@ module AcaRadar
         sleep(3)
         concepts = Entity::Concept.extract_from(term)
         return Failure('No concepts extracted from research interest') if concepts.empty?
+
         publisher.publish(status: 'processing', message: 'Extracting concepts', percent: 40)
         sleep(2)
 
