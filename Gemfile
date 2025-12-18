@@ -81,3 +81,9 @@ gem 'redis'
 # Parallelism
 gem 'aws-sdk-sqs'
 gem 'shoryuken'
+
+# Worker
+gem 'faye'
+
+# Policy
+gem 'rack-cors'

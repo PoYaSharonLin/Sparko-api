@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/AbcSize
 module AcaRadar
   module Service
     # class to calculate cosine similarity
@@ -33,3 +35,5 @@ module AcaRadar
     end
   end
 end
+# rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/AbcSize

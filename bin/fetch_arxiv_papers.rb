@@ -16,7 +16,11 @@ require_relative '../app/infrastructure/database/repositories/papers'
 
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/MethodLength
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
+
 module AcaRadar
+  # class for arxiv fetcher to fetch paper
   class ArxivFetcher
     def initialize
       @api = ArXivApi.new
@@ -42,28 +46,26 @@ module AcaRadar
       return unless api_response.ok?
 
       api_response.papers.each do |paper|
-        begin
-          concepts = Entity::Concept.extract_from(paper.summary.full_summary)
-          embedding = Value::Embedding.embed_from(concepts.map(&:to_s).join(', '))
+        concepts = Entity::Concept.extract_from(paper.summary.full_summary)
+        embedding = Value::Embedding.embed_from(concepts.map(&:to_s).join(', '))
 
-          # IMPORTANT: do NOT compute 2D here anymore
-          Repository::Paper.create_or_update(
-            origin_id: paper.origin_id,
-            title: paper.title,
-            published: paper.published,
-            authors: paper.authors,
-            summary: paper.summary.full_summary,
-            short_summary: paper.summary.short_summary,
-            concepts: concepts.map(&:to_s),
-            embedding: embedding.full_embedding,
-            two_dim_embedding: [], # placeholder; will be backfilled after PCA fit
-            categories: paper.categories,
-            links: paper.links,
-            fetched_at: Time.now
-          )
-        rescue StandardError => e
-          puts "Error processing paper #{paper.origin_id}: #{e.message}. Skipping paper."
-        end
+        # IMPORTANT: do NOT compute 2D here anymore
+        Repository::Paper.create_or_update(
+          origin_id: paper.origin_id,
+          title: paper.title,
+          published: paper.published,
+          authors: paper.authors,
+          summary: paper.summary.full_summary,
+          short_summary: paper.summary.short_summary,
+          concepts: concepts.map(&:to_s),
+          embedding: embedding.full_embedding,
+          two_dim_embedding: [], # placeholder; will be backfilled after PCA fit
+          categories: paper.categories,
+          links: paper.links,
+          fetched_at: Time.now
+        )
+      rescue StandardError => e
+        puts "Error processing paper #{paper.origin_id}: #{e.message}. Skipping paper."
       end
     rescue StandardError => e
       puts "Error fetching for arXiv api: #{e.message}. Skipping."
@@ -96,9 +98,7 @@ module AcaRadar
         stdin_data: embeddings.to_json
       )
 
-      unless status.success?
-        raise "PCA fitting failed (dimension_reducer.py): #{stderr}"
-      end
+      raise "PCA fitting failed (dimension_reducer.py): #{stderr}" unless status.success?
 
       coords = JSON.parse(stdout)
       unless coords.is_a?(Array) && coords.length == pairs.length
@@ -121,3 +121,5 @@ end
 AcaRadar::ArxivFetcher.new.run
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/MethodLength
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity

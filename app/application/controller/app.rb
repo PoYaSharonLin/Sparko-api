@@ -38,43 +38,24 @@ module AcaRadar
             request_obj = Request::EmbedResearchInterest.new(routing.params)
             standard_response(:bad_request, 'Research interest must be a non-empty string') unless request_obj.valid?
 
-            result = Service::EmbedResearchInterest.new.call(term: request_obj.term)
-            standard_response(:cannot_process, 'Failed to embed research interest') if result.failure?
+            request_id = [request_obj, Time.now.to_f].hash.to_s
 
-            # Service now returns a payload hash:
-            # { term:, embedding:, vector_2d: } (but be robust to old shapes)
-            payload = result.value!
+            Thread.new do
+              Service::EmbedResearchInterest.new.call(
+                term: request_obj.term,
+                request_id: request_id
+              )
+            rescue StandardError => e
+              APP_LOGGER.error "BACKGROUND_JOB_ERROR: #{e.message}"
+              APP_LOGGER.error e.backtrace.join("\n")
+            end
 
-            vector_2d =
-              if payload.is_a?(Hash)
-                payload[:vector_2d] || payload['vector_2d']
-              else
-                payload
-              end
+            data = {
+              message: 'Processing started',
+              request_id: request_id
+            }
 
-            term =
-              if payload.is_a?(Hash)
-                payload[:term] || payload['term'] || request_obj.term
-              else
-                request_obj.term
-              end
-
-            embedding =
-              if payload.is_a?(Hash)
-                payload[:embedding] || payload['embedding']
-              end
-
-            # Store in session (only store embedding if present)
-            session[:research_interest_term] = term
-            session[:research_interest_embedding] = embedding if embedding
-            session[:research_interest_2d] = vector_2d
-
-            # Prepare data for response (Representer expects vector_2d, not the whole payload)
-            data = Representer::ResearchInterest.new(
-              OpenStruct.new(term: term, vector_2d: vector_2d)
-            )
-
-            standard_response(:created, 'Research interest created', data)
+            standard_response(:processing, 'Research interest processing started', data)
           end
 
           # POST /api/v1/research_interest/async
@@ -92,7 +73,6 @@ module AcaRadar
                 term: request_obj.term,
                 status_url: "/api/v1/research_interest/#{job_id}"
               }
-
               standard_response(:processing, 'Job queued', data)
             end
           end
@@ -104,6 +84,8 @@ module AcaRadar
 
             case job.status
             when 'completed'
+              session[:research_interest_term] = job.term
+              session[:research_interest_2d] = [job.vector_x, job.vector_y]
               data = {
                 status: 'completed',
                 job_id: job.job_id,
@@ -140,6 +122,7 @@ module AcaRadar
               page: request_obj.page,
               research_embedding: session[:research_interest_embedding]
             )
+
             standard_response(:internal_error, 'Failed to list papers') if result.failure?
 
             list = result.value!
@@ -161,7 +144,7 @@ module AcaRadar
             # Prepare Data
             response_obj = OpenStruct.new(
               research_interest_term: session[:research_interest_term],
-              research_interest_2d: session[:research_interest_2d],
+              research_interest_2d: research_interest_2d,
               journals: request_obj.journals,
               papers: list
             )

@@ -3,8 +3,10 @@
 require 'open3'
 require 'json'
 
+# rubocop:disable Metrics/MethodLength
 module AcaRadar
   module Value
+    # class for two dim embedding
     class TwoDimEmbedding
       attr_reader :two_dim_embedding
 
@@ -41,3 +43,4 @@ module AcaRadar
     end
   end
 end
+# rubocop:enable Metrics/MethodLength

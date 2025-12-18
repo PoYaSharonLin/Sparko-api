@@ -52,6 +52,7 @@ describe 'Test AcaRadar API v1 routes' do
 
   describe 'POST /api/v1/research_interest' do
     valid_term = 'information systems'
+    invalid_term = ''
     vector_2d = [0.75, -0.31]
 
     it 'HAPPY: should successfully embed a valid research interest' do
@@ -66,20 +67,10 @@ describe 'Test AcaRadar API v1 routes' do
              { term: valid_term }.to_json,
              { 'CONTENT_TYPE' => 'application/json' }
 
-        _(last_response.status).must_equal 201
+        _(last_response.status).must_equal 202
         body = parsed_response
 
-        _(body['status']).must_equal 'created'
-        _(body['message']).must_equal 'Research interest created'
-
-        data = body['data']
-        _(data['term']).must_equal valid_term
-        _(data['vector_2d']['x']).must_equal 0.75
-        _(data['vector_2d']['y']).must_equal(-0.31)
-
-        session = last_request.env['rack.session']
-        _(session[:research_interest_term]).must_equal valid_term
-        _(session[:research_interest_2d]).must_equal vector_2d
+        _(body['status']).must_equal 'processing'
       end
     end
 
@@ -105,13 +96,10 @@ describe 'Test AcaRadar API v1 routes' do
 
       AcaRadar::Service::EmbedResearchInterest.stub :new, ->(*) { failing_service } do
         post '/api/v1/research_interest',
-             { term: valid_term }.to_json,
+             { term: invalid_term }.to_json,
              { 'CONTENT_TYPE' => 'application/json' }
 
-        _(last_response.status).must_equal 422
-        body = parsed_response
-        _(body['status']).must_equal 'cannot_process'
-        _(body['message']).must_equal 'Failed to embed research interest'
+        _(last_response.status).must_equal 400
       end
     end
   end
@@ -132,11 +120,10 @@ describe 'Test AcaRadar API v1 routes' do
              { term: 'machine learning' }.to_json,
              { 'CONTENT_TYPE' => 'application/json' }
 
-        _(last_response.status).must_equal 201
+        _(last_response.status).must_equal 202
         body = parsed_response
 
-        _(body['status']).must_equal 'created'
-        _(body['message']).must_equal 'Research interest created'
+        _(body['status']).must_equal 'processing'
       end
     end
   end

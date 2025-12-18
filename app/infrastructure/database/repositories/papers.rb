@@ -131,7 +131,7 @@ module AcaRadar
           nil
         end.compact
       end
-      
+
       def self.update_two_dim_embedding(origin_id, two_dim)
         Database::PaperOrm.where(origin_id: origin_id).update(
           two_dim_embedding: JSON.generate(Array(two_dim))

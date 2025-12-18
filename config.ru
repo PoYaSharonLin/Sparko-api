@@ -4,6 +4,8 @@
 require 'bundler/setup'
 require 'rack/cache'
 require 'redis'
+require 'faye'
+require 'rack/cors'
 require_relative 'require_app'
 require_app
 
@@ -28,4 +30,13 @@ else
       entitystore: 'file:tmp/cache/body'
 end
 
+use Faye::RackAdapter, mount: '/faye', timeout: 25
+use Rack::Cors do
+  allow do
+    origins 'localhost:9000', '127.0.0.1:9000' # Allow frontend
+    resource '*',
+             headers: :any,
+             methods: %i[get post options]
+  end
+end
 run AcaRadar::App.freeze.app
