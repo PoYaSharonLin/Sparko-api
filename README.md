@@ -50,7 +50,7 @@ Status:
 Example:
 4. GET the papers — reusing the same session cookie
 ```bash
-curl "http://localhost:9292/api/v1/papers?journals%5B%5D=MIS+Quarterly&journals%5B%5D=Management+Science&page=1"   --cookie /tmp/acaradar_cookie.jar -w "\nHTTP Status: %{http_code}\n"
+curl "https://acaradar-api-10b2af109247.herokuapp.com/api/v1/papers?journals%5B%5D=MIS+Quarterly&journals%5B%5D=Management+Science&page=1"   --cookie /tmp/acaradar_cookie.jar -w "\nHTTP Status: %{http_code}\n"
 
 # {"research_interest_term":"machine learning","research_interest_2d":[-0.024391869083046913,0.0032444987446069717],"journals":["MIS Quarterly","Management Science"],"papers":{"data":[{"origin_id":"http://arxiv.org/abs/1702.08072v1","title":"Knowledge Reuse for Customization: Metamodels in an Open Design Community for 3d Printing","abstract" ...
 # ...

@@ -33,7 +33,7 @@ end
 use Faye::RackAdapter, mount: '/faye', timeout: 25
 use Rack::Cors do
   allow do
-    origins 'localhost:9000', '127.0.0.1:9000' # Allow frontend
+    origins 'localhost:9000', '127.0.0.1:9000', 'https://acaradar-app-3bd1e48033fd.herokuapp.com'
     resource '*',
              headers: :any,
              methods: %i[get post options]
