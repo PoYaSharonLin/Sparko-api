@@ -69,7 +69,7 @@ def ensure_embed_service_for_release!
     return nil
   end
 
-  python_bin = ENV['PYTHON_BIN'] || File.expand_path('../../.venv/bin/python', __dir__)
+  python_bin = ENV['PYTHON_BIN'] || 'python'
 
   cache_root = File.expand_path('../tmp/hf_cache', __dir__)
   FileUtils.mkdir_p(cache_root)
@@ -203,7 +203,7 @@ module AcaRadar
       mean_path = ENV['PCA_MEAN_PATH'] || 'app/domain/clustering/services/pca_mean.json'
       comp_path = ENV['PCA_COMPONENTS_PATH'] || 'app/domain/clustering/services/pca_components.json'
 
-      python = ENV.fetch('PYTHON_BIN', 'python3')
+      python = ENV.fetch('PYTHON_BIN', 'python')
       stdout, stderr, status = Open3.capture3(
         { 'PCA_MEAN_PATH' => mean_path, 'PCA_COMPONENTS_PATH' => comp_path },
         python, dim_reducer_path,
