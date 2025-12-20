@@ -1,0 +1,1 @@
+{"status":"ok","code":200,"message":"Papers retrieved successfully","data":{"journals":["MIS Quarterly","Management Science"],"papers":{"data":[]},"pagination":{"current":1,"total_pages":0,"total_count":0,"prev_page":null,"next_page":null}}}

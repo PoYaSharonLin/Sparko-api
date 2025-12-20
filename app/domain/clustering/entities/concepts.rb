@@ -21,7 +21,7 @@ module AcaRadar
         input = summary.to_s
         extractor_path = ENV['EXTRACTOR_PATH'] || 'app/domain/clustering/services/extractor.py'
 
-        python = ENV.fetch('PYTHON_BIN', 'python3')
+        python = 'python'
         stdout, stderr, status = Open3.capture3(python, extractor_path, stdin_data: input)
 
         raise "Python script failed: #{stderr}" unless status.success?
