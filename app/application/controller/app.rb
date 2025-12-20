@@ -52,6 +52,7 @@ module AcaRadar
             result = Service::QueueResearchInterestEmbedding.new.call(term: request_obj.term)
             standard_response(:internal_error, 'Failed to queue embedding job') if result.failure?
           
+<<<<<<< HEAD
             job_id = result.value!
             job    = Repository::ResearchInterestJob.find(job_id)
             
@@ -60,6 +61,16 @@ module AcaRadar
               session[:research_interest_request_id] = job_id
               session[:research_interest_term]       = job.term
               session[:research_interest_2d]         = [job.vector_x.to_f, job.vector_y.to_f]
+=======
+            # job_id = result.value!
+            job    = Repository::ResearchInterestJob.find(job_id)
+            
+            # If the service returned a cached completed job, respond immediately as "completed"
+            # if job && job.status == 'completed'
+            #   session[:research_interest_request_id] = job_id
+            #   session[:research_interest_term]       = job.term
+            #   session[:research_interest_2d]         = [job.vector_x.to_f, job.vector_y.to_f]
+>>>>>>> 19d5913 (uncomment job)
           
               if job.respond_to?(:embedding_b64) && job.embedding_b64 && !job.embedding_b64.to_s.empty?
                 session[:research_interest_embedding_b64] = job.embedding_b64
@@ -93,7 +104,7 @@ module AcaRadar
           
             # Not completed -> treat as queued/processing
             job_id = SecureRandom.uuid
-            
+
             Thread.new do
               Service::EmbedResearchInterest.new.call(
                 term: request_obj.term, 
