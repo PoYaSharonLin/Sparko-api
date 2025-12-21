@@ -337,67 +337,54 @@ module AcaRadar
             standard_response(:ok, 'Papers retrieved successfully', data)
           end
         end
-        routing.on 'journals' do
-          routing.get do
-            yaml_path = File.expand_path('../../../bin/journals.yml', __dir__)
-            unless File.file?(yaml_path)
-              standard_response(:internal_error, "journals.yml not found at #{yaml_path}")
-            end
-        
-            raw = File.read(yaml_path)
-        
-            data =
-              begin
-                YAML.safe_load(raw, permitted_classes: [], permitted_symbols: [], aliases: true) || {}
-              rescue ArgumentError
-                YAML.safe_load(raw, [], [], true) || {}
-              end
-        
-            domains = (data['domains'] || data[:domains] || {})
-            unless domains.is_a?(Hash)
-              standard_response(:internal_error, 'journals.yml has unexpected structure (expected domains: {...})')
-            end
-        
-            # Return grouped options: [{key,label,journals:[...]}]
-            payload = domains.map do |key, node|
-              label = (node['label'] || node[:label] || key.to_s).to_s
-              journals = []
-        
-              # collect canonical names from journals arrays + subdomains
-              collect_names = lambda do |n|
-                next unless n.is_a?(Hash)
-        
-                jnode = n['journals'] || n[:journals]
-                case jnode
-                when Array
-                  jnode.each do |j|
-                    if j.is_a?(Hash)
-                      name = j['name'] || j[:name]
-                      journals << name.to_s if name
-                    else
-                      journals << j.to_s
-                    end
-                  end
-                when Hash
-                  jnode.each_key { |name| journals << name.to_s }
-                end
-        
-                sub = n['subdomains'] || n[:subdomains]
-                sub&.each_value { |sd| collect_names.call(sd) } if sub.is_a?(Hash)
-              end
-        
-              collect_names.call(node)
-        
-              {
-                key: key.to_s,
-                label: label,
-                journals: journals.map(&:strip).reject(&:empty?).uniq
-              }
-            end
-        
-            standard_response(:ok, 'Journals retrieved successfully', { domains: payload })
+        # GET /api/v1/journals
+        routing.get 'journals' do
+          yaml_path = File.expand_path('../../../bin/journals.yml', __dir__)
+          unless File.file?(yaml_path)
+            standard_response(:ok, 'Journals retrieved successfully', { domains: [] })
           end
-        end        
+
+          raw = File.read(yaml_path)
+          data = YAML.safe_load(raw, permitted_classes: [], permitted_symbols: [], aliases: true) || {}
+
+          domains_hash = data.is_a?(Hash) ? (data['domains'] || {}) : {}
+          domains_out = []
+
+          build_node = lambda do |key, node|
+            node ||= {}
+            label = node['label'] || node[:label] || key.to_s
+
+            # journals: can be ["Name", ...] OR [{name:, aliases:}, ...]
+            jlist = Array(node['journals'] || node[:journals]).map do |j|
+              j.is_a?(Hash) ? (j['name'] || j[:name]) : j
+            end.compact.map { |x| x.to_s.strip }.reject(&:empty?).uniq.sort
+
+            sub_hash = node['subdomains'] || node[:subdomains] || {}
+            subs = []
+            if sub_hash.is_a?(Hash)
+              sub_hash.each do |sub_key, sub_node|
+                subs << build_node.call(sub_key, sub_node)
+              end
+            end
+
+            {
+              key: key.to_s,
+              label: label.to_s,
+              journals: jlist,
+              subdomains: subs.sort_by { |h| h[:label].to_s.downcase }
+            }
+          end
+
+          if domains_hash.is_a?(Hash)
+            domains_hash.each do |key, node|
+              domains_out << build_node.call(key, node)
+            end
+          end
+
+          domains_out.sort_by! { |h| h[:label].to_s.downcase }
+
+          standard_response(:ok, 'Journals retrieved successfully', { domains: domains_out })
+        end       
       end
     end
 

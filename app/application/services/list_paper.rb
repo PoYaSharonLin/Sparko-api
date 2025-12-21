@@ -11,8 +11,8 @@ module AcaRadar
     class ListPapers
       include Dry::Monads::Result::Mixin
 
-      PER_PAGE  = 10
-      MAX_FETCH = 250
+      PER_PAGE  = 25
+      MAX_FETCH = 10000
       MAX_TOP_N = 50
 
       # If top_n is provided (>0), returns top_n closest papers (no paging).
