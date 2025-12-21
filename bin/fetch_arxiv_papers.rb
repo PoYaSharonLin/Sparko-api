@@ -69,7 +69,7 @@ def ensure_embed_service_for_release!
     return nil
   end
 
-  python_bin = ENV['PYTHON_BIN'] || File.expand_path('../.venv/bin/python', __dir__)
+  python_bin = ENV['PYTHON_BIN'] || File.expand_path('./.venv/bin/python', __dir__)
 
   cache_root = File.expand_path('../tmp/hf_cache', __dir__)
   FileUtils.mkdir_p(cache_root)
