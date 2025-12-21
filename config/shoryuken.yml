@@ -1,11 +1,5 @@
-concurrency: 5
-delay: 0
-polling_interval: 1
-
 aws:
   receive_message:
-    wait_time_seconds: 10
-    max_number_of_messages: 1
     region: <%= ENV.fetch('AWS_REGION', 'us-east-1') %>
 
 queues:
