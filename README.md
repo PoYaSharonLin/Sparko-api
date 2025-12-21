@@ -71,3 +71,4 @@ curl "https://acaradar-api-10b2af109247.herokuapp.com/api/v1/papers?journals%5B%
 - Run `python -m pip install -r requirements.txt` to install python dependencies
 - Run `ruby bin/fetch_arxiv_papers.rb` to fetch papers from arXiv API and store them in the database
 - Run `rake run` to run the application
+a

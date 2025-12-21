@@ -108,7 +108,7 @@ def ensure_embed_service_for_release!
 
   pid = spawn(embed_env, *embed_cmd, out: $stdout, err: $stderr)
 
-  unless wait_for_http_ok(health_url, timeout_seconds: 35)
+  unless wait_for_http_ok(health_url, timeout_seconds: 180)
     puts "[FETCH] ERROR: embed service did not become healthy at #{health_url}"
     begin
       Process.kill('KILL', pid)

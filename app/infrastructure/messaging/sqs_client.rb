@@ -10,7 +10,6 @@ module AcaRadar
       def self.client
         @client ||= Aws::SQS::Client.new(
           region: ENV.fetch('AWS_REGION', 'us-east-1')
-          # credentials from ENV: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
         )
       end
 
@@ -19,12 +18,13 @@ module AcaRadar
       end
 
       def self.publish(message_hash)
-        client.send_message(
+        resp = client.send_message(
           queue_url: queue_url,
           message_body: JSON.generate(message_hash)
         )
+        AcaRadar.logger.debug("SQS sent message_id=#{resp.message_id} queue=#{queue_url}")
+        resp
       end
     end
   end
 end
-

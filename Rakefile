@@ -119,7 +119,7 @@ puts "[RUN] Embed env: EMBED_DEVICE=#{embed_env['EMBED_DEVICE']} HF_HOME=#{embed
   end
 
   # Wait until embed service is healthy before starting worker/web
-  health_ok = wait_for_http("#{embed_url}/health", timeout_seconds: 120)
+  health_ok = wait_for_http("#{embed_url}/health", timeout_seconds: 300)
   unless health_ok
     puts "[RUN] ERROR: embed service health check failed at #{embed_url}/health"
     puts "[RUN] Killing embed PID #{embed_pid} and aborting."

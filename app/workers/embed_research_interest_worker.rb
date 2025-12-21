@@ -16,6 +16,10 @@ module AcaRadar
       LOGGER = Logger.new($stdout)
 
       def perform(_sqs_msg, body)
+        sent_at = Time.at(_sqs_msg.attributes['SentTimestamp'].to_i / 1000.0)
+        delay = Time.now - sent_at
+        LOGGER.debug("WORKER received message. SQS Delay: #{delay.round(2)}s")
+
         payload = parse_body(body)
         return unless payload['type'] == 'embed_research_interest'
 
@@ -44,6 +48,7 @@ module AcaRadar
         payload_hash = result.value!
         vector_2d    = payload_hash[:vector_2d] || payload_hash['vector_2d']
         embedding    = payload_hash[:embedding] || payload_hash['embedding']
+        concepts     = payload_hash[:concepts] || payload_hash['concepts']
 
         vector_2d =
           if vector_2d.is_a?(Hash)
@@ -54,6 +59,12 @@ module AcaRadar
             [vector_2d[0].to_f, vector_2d[1].to_f]
           end
 
+        unless vector_2d.is_a?(Array) && vector_2d.size == 2
+            LOGGER.error("WORKER invalid vector_2d job_id=#{job_id} vec=#{vector_2d.inspect}")
+            AcaRadar::Repository::ResearchInterestJob.mark_failed(job_id, "Invalid vector_2d")
+            return
+        end
+          
         embedding_b64 = nil
         embedding_dim = nil
 
@@ -73,7 +84,8 @@ module AcaRadar
           job_id,
           vector_2d,
           embedding_b64: embedding_b64,
-          embedding_dim: embedding_dim
+          embedding_dim: embedding_dim,
+          concepts: concepts
         )
       rescue StandardError => e
         LOGGER.error("WORKER exception job_id=#{job_id}: #{e.class} - #{e.message}")

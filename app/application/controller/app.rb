@@ -67,12 +67,23 @@ module AcaRadar
               else
                 session.delete(:research_interest_embedding_b64)
               end
-          
+
+              concepts =
+                begin
+                  c = JSON.parse(job.concepts_json.to_s)
+                  AcaRadar.logger.info("SPECIAL DEBUG: ... Concepts available: #{c.inspect}")
+                  c
+                rescue StandardError => e
+                  AcaRadar.logger.error("SPECIAL DEBUG: concepts parse error (cached): #{e.class} - #{e.message}")
+                  []
+                end
+  
               data = {
                 cached: true,
                 status: 'completed',
                 request_id: job_id,
                 term: job.term,
+                concepts: concepts,
                 vector_2d: [job.vector_x.to_f, job.vector_y.to_f],
                 status_url: "/api/v1/research_interest/#{job_id}",
                 percent: 100,
@@ -115,6 +126,9 @@ module AcaRadar
               cached_job = find_cached_completed_job_by_term(normalized)
 
               if cached_job
+                
+                AcaRadar.logger.info("SPECIAL DEBUG: Async RI cache hit for #{normalized}")
+
                 job_id = cached_job.job_id
               
                 session[:research_interest_request_id] = job_id
@@ -199,11 +213,21 @@ module AcaRadar
                 session.delete(:research_interest_embedding_b64)
               end
 
+              concepts =
+                begin
+                  JSON.parse(job.concepts_json.to_s)
+                rescue StandardError => e
+                  AcaRadar.logger.error("SPECIAL DEBUG: Concepts parse error on polling completion: #{e.message}")
+                  []
+                end
+                AcaRadar.logger.info("SPECIAL DEBUG: RI Job Completed. ID: #{job_id}, Concepts: #{concepts.inspect}")
+
               data = {
                 status: 'completed',
                 job_id: job.job_id,
                 term: job.term,
-                vector_2d: [job.vector_x.to_f, job.vector_y.to_f]
+                vector_2d: [job.vector_x.to_f, job.vector_y.to_f],
+                concepts: concepts
               }
               standard_response(:ok, 'Job completed', data)
 
@@ -238,7 +262,7 @@ module AcaRadar
               "PAPERS start journals=#{request_obj.journals.inspect} page=#{request_obj.page} " \
               "request_id=#{request_id.inspect} job_status=#{job&.status.inspect} term=#{job&.term.inspect}"
             )
-
+            AcaRadar.logger.info("SPECIAL DEBUG: Papers request received. Request ID from session: #{request_id}")
             # If the caller provided a request_id, require that job to be completed
             if request_id && (!job || job.status != 'completed')
               data = {

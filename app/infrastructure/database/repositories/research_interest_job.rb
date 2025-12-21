@@ -48,15 +48,19 @@ module AcaRadar
       end
 
       # Stores BOTH 2D vector and optional embedding_b64/dim.
-      def self.mark_completed(job_id, vector_2d, embedding_b64: nil, embedding_dim: nil)
+      def self.mark_completed(job_id, vector_2d, embedding_b64: nil, embedding_dim: nil, concepts: nil)
         orm = find(job_id)
         return unless orm
+
+        concepts_arr = Array(concepts).map(&:to_s)
 
         update_hash = {
           status: 'completed',
           vector_x: vector_2d.is_a?(Array) ? vector_2d[0].to_f : nil,
           vector_y: vector_2d.is_a?(Array) ? vector_2d[1].to_f : nil,
-          error_message: nil
+          error_message: nil,
+          updated_at: Time.now,
+          concepts_json: concepts_arr.to_json
         }
 
         # Only set embedding fields if provided
@@ -74,6 +78,7 @@ module AcaRadar
 
         orm.update(
           status: 'failed',
+          updated_at: Time.now,
           error_message: error.to_s
         )
       end

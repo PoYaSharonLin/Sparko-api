@@ -84,6 +84,7 @@ module AcaRadar
             end
 
             score = AcaRadar::Service::CalculateSimilarity.score(research, emb_f)
+
             if score.nil? || !score.finite?
               skipped_nonfinite += 1
               skipped_samples[:nonfinite] << "#{paper.title} (score=#{score.inspect})" if skipped_samples[:nonfinite].length < 3
