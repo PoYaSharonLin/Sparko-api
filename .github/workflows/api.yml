@@ -44,9 +44,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       SQS_QUEUE_URL: ${{ secrets.SQS_QUEUE_URL }}
       SQS_QUEUE_NAME: ${{ secrets.SQS_QUEUE_NAME }}
-      API_HOST: ${{ secrets.API_HOST }}
-      EMBED_SERVICE_URL: ${{ secrets.EMBED_SERVICE_URL }}
-      
+
       # Session secret for Rack
       SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
 
