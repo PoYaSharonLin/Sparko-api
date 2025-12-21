@@ -40,8 +40,9 @@ module AcaRadar
         routing.on 'research_interest' do
           # POST /api/v1/research_interest
           # fast response; heavy work happens in Shoryuken worker.
-           routing.post do
+          routing.post do
             request_obj = Request::EmbedResearchInterest.new(routing.params)
+<<<<<<< HEAD
             standard_response(:bad_request, 'Research interest must be a non-empty string') unless request_obj.valid?
 
 <<<<<<< HEAD
@@ -113,12 +114,62 @@ module AcaRadar
             rescue StandardError => e
               APP_LOGGER.error "BACKGROUND_JOB_ERROR: #{e.message}"
               APP_LOGGER.error e.backtrace.join("\n")
+=======
+          
+            unless request_obj.valid?
+              data = { error_code: request_obj.error_code, error: request_obj.error_message }
+              standard_response(:bad_request, request_obj.error_message, data)
+>>>>>>> 7f2912e (back to square 1)
             end
-
+          
+            # Single entrypoint for caching/idempotency/queueing
+            result = Service::QueueResearchInterestEmbedding.new.call(term: request_obj.term)
+            standard_response(:internal_error, 'Failed to queue embedding job') if result.failure?
+          
+            job_id = result.value!
+            job    = Repository::ResearchInterestJob.find(job_id)
+          
+            # If the service returned a cached completed job, respond immediately as "completed"
+            if job && job.status == 'completed'
+              session[:research_interest_request_id] = job_id
+              session[:research_interest_term]       = job.term
+              session[:research_interest_2d]         = [job.vector_x.to_f, job.vector_y.to_f]
+          
+              if job.respond_to?(:embedding_b64) && job.embedding_b64 && !job.embedding_b64.to_s.empty?
+                session[:research_interest_embedding_b64] = job.embedding_b64
+              else
+                session.delete(:research_interest_embedding_b64)
+              end
+          
+              data = {
+                cached: true,
+                status: 'completed',
+                request_id: job_id,
+                term: job.term,
+                vector_2d: [job.vector_x.to_f, job.vector_y.to_f],
+                status_url: "/api/v1/research_interest/#{job_id}",
+                percent: 100,
+                message: 'Cached'
+              }
+              standard_response(:ok, 'Research interest already embedded', data)
+            end
+          
+            # Not completed -> treat as queued/processing
+            session[:research_interest_request_id] = job_id
+            session[:research_interest_term]       = request_obj.term
+            session.delete(:research_interest_2d)
+            session.delete(:research_interest_embedding_b64)
+          
+            AcaRadar.logger.debug("RI queued job_id=#{job_id} term=#{request_obj.term.inspect}")
+          
             data = {
-              message: 'Processing started',
-              request_id: request_id
+              message: 'Queued',
+              percent: 1, 
+              request_id: job_id,
+              status: (job&.status || 'queued'),
+              status_url: "/api/v1/research_interest/#{job_id}"
             }
+          
             standard_response(:processing, 'Research interest processing started', data)
           end
           
