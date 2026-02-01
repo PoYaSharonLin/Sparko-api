@@ -184,7 +184,7 @@ namespace :db do
     require_relative 'config/environment'
     # require_relative 'spec/helpers/database_helper'
 
-    def app = AcaRadar::App
+    def app = Sparko::App
   end
 
   desc 'Run migration'
@@ -212,8 +212,8 @@ namespace :db do
       return
     end
 
-    FileUtils.rm(AcaRadar::App.config.DB_FILENAME)
-    puts "Deleted #{AcaRadar::App.config.DB_FILENAME}"
+    FileUtils.rm(Sparko::App.config.DB_FILENAME)
+    puts "Deleted #{Sparko::App.config.DB_FILENAME}"
   end
 end
 

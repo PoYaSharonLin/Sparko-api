@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   module Database
     # Junction: Paper ↔ Category
     class PaperCategoryOrm < Sequel::Model(:paper_categories)
       many_to_one :paper,
-                  class: :'AcaRadar::Database::PaperOrm',
+                  class: :'Sparko::Database::PaperOrm',
                   key: :paper_id
 
       many_to_one :category,
-                  class: :'AcaRadar::Database::CategoryOrm',
+                  class: :'Sparko::Database::CategoryOrm',
                   key: :category_id
 
       plugin :timestamps, update_on_create: true

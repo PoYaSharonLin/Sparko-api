@@ -3,7 +3,7 @@
 require_relative 'base'
 require 'ostruct'
 
-module AcaRadar
+module Sparko
   module Representer
     # class that represents the error response of the API with error and details
     class Error < Representer::Base

@@ -2,7 +2,7 @@
 
 require_relative 'base'
 
-module AcaRadar
+module Sparko
   module Representer
     # Represents the standardized API envelope
     class HttpResponse < Representer::Base

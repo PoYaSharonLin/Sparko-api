@@ -47,7 +47,7 @@
 #   'sortOrder' => sort_order
 # )
 
-# parser = AcaRadar::ArXivApiParser.new
+# parser = Sparko::ArXivApiParser.new
 # good_url = parser.arxiv_api_path("query?#{params}")
 # puts "GOOD URL: #{good_url}"
 

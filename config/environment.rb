@@ -6,7 +6,7 @@ require 'yaml'
 require 'sequel'
 require 'rack/session'
 
-module AcaRadar
+module Sparko
   class App < Roda
     plugin :environments
 
@@ -25,19 +25,24 @@ module AcaRadar
       use Rack::Session::Cookie, secret: ENV.fetch('SESSION_SECRET')
       CONFIG = YAML.safe_load_file('config/secrets.yml')
       ENV['DATABASE_URL'] ||= "sqlite://#{config.DB_FILENAME}"
-      # AcaRadar-api/tmp/hf_cache
+      # Sparko-api/tmp/hf_cache
     end
 
     # ---------------------------
     # TEST ENVIRONMENT  (CI)
     # ---------------------------
     configure :test do
-      # CI uses GitHub Action secrets
-      def self.config = ENV
+      Figaro.application = Figaro::Application.new(
+        environment:,
+        path: File.expand_path('config/secrets.yml')
+      )
+      Figaro.load
+
+      def self.config = Figaro.env
 
       CONFIG = {} #hotfix because the tests require it
       use Rack::Session::Cookie, secret: ENV.fetch('SESSION_SECRET')
-      ENV['DATABASE_URL'] ||= "sqlite://#{ENV['DB_FILENAME']}"
+      ENV['DATABASE_URL'] ||= "sqlite://#{config.DB_FILENAME}"
     end
 
     # ---------------------------

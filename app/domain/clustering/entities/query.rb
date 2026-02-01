@@ -3,7 +3,7 @@
 require 'yaml'
 require 'uri'
 
-module AcaRadar
+module Sparko
   # Query object to set up query parameters (reek hot fix)
   class Query
     DEFAULT_JOURNALS_YAML_PATH = File.expand_path('../../../../bin/journals.yml', __dir__)

@@ -4,7 +4,7 @@ require_relative 'papers'
 require_relative 'authors'
 require_relative 'categories'
 
-module AcaRadar
+module Sparko
   module Repository
     # Finds the right repository for an entity object or class
     module Lookup

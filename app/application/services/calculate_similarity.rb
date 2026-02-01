@@ -2,7 +2,7 @@
 
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/AbcSize
-module AcaRadar
+module Sparko
   module Service
     # class to calculate cosine similarity
     class CalculateSimilarity

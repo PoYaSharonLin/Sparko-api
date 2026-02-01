@@ -13,7 +13,7 @@ require_relative '../../../domain/clustering/entities/query'
 require_relative '../../../../app/models/entities/summary'
 require_relative '../../../../app/models/entities/links'
 
-module AcaRadar
+module Sparko
   # :reek:TooManyConstants
   module ArXivConfig
     MIN_DATE_ARXIV = '201010020000'
@@ -27,8 +27,8 @@ module AcaRadar
   # Library for arXiv Web API
   class ArXivApi
     def initialize(cooldown_time = 3)
-      @config = AcaRadar::App::CONFIG
-      @parser = AcaRadar::ArXivApiParser.new
+      @config = Sparko::App::CONFIG
+      @parser = Sparko::ArXivApiParser.new
       @next_call_time = 0
       @cooldown_time = cooldown_time
       # @logger = Logger.new($stdout)
@@ -66,7 +66,7 @@ module AcaRadar
       @status = status_code.to_i
       @pagination = build_pagination(content_hash)
       entries = content_hash['entries'] || []
-      @papers = entries.map { |entry_hash| AcaRadar::Entity::Paper.new(entry_hash) }
+      @papers = entries.map { |entry_hash| Sparko::Entity::Paper.new(entry_hash) }
     end
 
     def ok?

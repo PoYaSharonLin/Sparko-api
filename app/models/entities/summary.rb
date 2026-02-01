@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   # Holds the summary of the paper
   module Entity
     # Represents summary of the paper

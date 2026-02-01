@@ -4,7 +4,7 @@ require 'open3'
 require 'json'
 
 # rubocop:disable Metrics/MethodLength
-module AcaRadar
+module Sparko
   module Value
     # class for two dim embedding
     class TwoDimEmbedding

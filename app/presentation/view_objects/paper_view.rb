@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   module View
     # View object for presenting a paper in the frontend
     class Paper

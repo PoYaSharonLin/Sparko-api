@@ -25,17 +25,17 @@
 
 #     it 'HAPPY: should be able to save author from arxiv to database' do
 #       journals = ['MIS Quarterly', 'Nature']
-#       query = AcaRadar::Query.new(journals: journals)
-#       api = AcaRadar::ArXivApi.new
+#       query = Sparko::Query.new(journals: journals)
+#       api = Sparko::ArXivApi.new
 #       api_response = api.call(query)
 #       papers = api_response.papers
 #       papers.each do |paper|
 #         authors = paper.authors
 #         authors.map do |author|
-#           AcaRadar::Repository::Lookup.entity(author).create(author)
+#           Sparko::Repository::Lookup.entity(author).create(author)
 #         end
 #         first_author = authors.first
-#         found = AcaRadar::Repository::Author.find_name(first_author.name)
+#         found = Sparko::Repository::Author.find_name(first_author.name)
 #         _(found.name).must_include(first_author.name)
 #       end
 #     end

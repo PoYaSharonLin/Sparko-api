@@ -2,7 +2,7 @@
 
 require 'roar/decorator'
 require 'roar/json'
-module AcaRadar
+module Sparko
   module Representer
     # base class for other representers
     class Base < Roar::Decorator

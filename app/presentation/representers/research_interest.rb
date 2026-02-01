@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   module Representer
     # class that represent the research interest in the form of 2D vector
     class ResearchInterest < Representer::Base

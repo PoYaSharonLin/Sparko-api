@@ -3,7 +3,7 @@
 require_relative '../representers/http_response'
 require 'json'
 
-module AcaRadar
+module Sparko
   module Response
     # Standard response wrapper for all API endpoints
     class HttpResponse

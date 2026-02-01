@@ -34,7 +34,7 @@ ENV["EMBED_SERVICE_URL"] ||= "http://127.0.0.1:8001/embed"
 # Logging + AWS diagnostics
 # ----------------------------
 begin
-  logger = AcaRadar.logger
+  logger = Sparko.logger
   logger.info("[BOOT] RACK_ENV=#{ENV['RACK_ENV'].inspect} pid=#{Process.pid}")
 
   logger.info(
@@ -100,8 +100,8 @@ require_app
 # loads workers (and pulls in app code)
 require_relative "../app/workers/embed_research_interest_worker"
 
-AcaRadar.logger.debug("[SHORYUKEN_BOOT] TRANSFORMERS_CACHE=#{ENV['TRANSFORMERS_CACHE'].inspect}")
-AcaRadar.logger.debug(
+Sparko.logger.debug("[SHORYUKEN_BOOT] TRANSFORMERS_CACHE=#{ENV['TRANSFORMERS_CACHE'].inspect}")
+Sparko.logger.debug(
   "BOOT python=#{ENV['PYTHON_BIN']} HF_HOME=#{ENV['HF_HOME']} TRANSFORMERS_CACHE=#{ENV['TRANSFORMERS_CACHE']}"
 )
 
@@ -109,7 +109,7 @@ AcaRadar.logger.debug(
 # Shoryuken logger wiring + heartbeat
 # ----------------------------
 begin
-  logger = AcaRadar.logger
+  logger = Sparko.logger
 
   Shoryuken.logger = logger if Shoryuken.respond_to?(:logger=)
 
@@ -117,7 +117,7 @@ begin
   shoryuken_level = Logger.const_get(shoryuken_level_str) rescue Logger::INFO
   Shoryuken.logger.level = shoryuken_level if Shoryuken.logger.respond_to?(:level=)
 
-  logger.info("[BOOT] Shoryuken logger wired to AcaRadar.logger level=#{shoryuken_level}")
+  logger.info("[BOOT] Shoryuken logger wired to Sparko.logger level=#{shoryuken_level}")
 
   if ENV["WORKER_HEARTBEAT"] == "1"
     Thread.new do
@@ -140,7 +140,7 @@ end
 # ----------------------------
 if ENV["WORKER_STALL_PROBE"] == "1"
   Thread.new do
-    logger = AcaRadar.logger
+    logger = Sparko.logger
     region = ENV.fetch("AWS_REGION", "us-east-1")
     queue_url = ENV["SQS_QUEUE_URL"]
     interval = Integer(ENV["WORKER_STALL_PROBE_SECONDS"] || "10")
@@ -198,15 +198,15 @@ end
 # Patch Aws::SQS::Client#receive_message to see if Shoryuken is polling at all
 # ----------------------------
 if ENV["WORKER_DIAG"] == "1"
-  logger = AcaRadar.logger
+  logger = Sparko.logger
   logger.warn("[DIAG] enabling receive_message patch")
 
-  module ::AcaRadarAwsSqsReceivePatch
+  module ::SparkoAwsSqsReceivePatch
     def receive_message(params = {})
       t0 = Process.clock_gettime(Process::CLOCK_MONOTONIC)
       q = params[:queue_url] || params["queue_url"]
 
-      AcaRadar.logger.warn(
+      Sparko.logger.warn(
         "[DIAG] receive_message -> queue_url=#{q.inspect} " \
         "wait_time_seconds=#{params[:wait_time_seconds].inspect} " \
         "max_number_of_messages=#{params[:max_number_of_messages].inspect}"
@@ -217,25 +217,25 @@ if ENV["WORKER_DIAG"] == "1"
       dt = ((Process.clock_gettime(Process::CLOCK_MONOTONIC) - t0) * 1000).round(1)
       n = resp&.messages&.size || 0
 
-      AcaRadar.logger.warn("[DIAG] receive_message <- msgs=#{n} dur_ms=#{dt}")
+      Sparko.logger.warn("[DIAG] receive_message <- msgs=#{n} dur_ms=#{dt}")
       resp
     rescue => e
       dt = ((Process.clock_gettime(Process::CLOCK_MONOTONIC) - t0) * 1000).round(1) rescue nil
-      AcaRadar.logger.error("[DIAG] receive_message ERROR dur_ms=#{dt} #{e.class}: #{e.message}")
+      Sparko.logger.error("[DIAG] receive_message ERROR dur_ms=#{dt} #{e.class}: #{e.message}")
       raise
     end
   end
 
-  Aws::SQS::Client.prepend(::AcaRadarAwsSqsReceivePatch)
+  Aws::SQS::Client.prepend(::SparkoAwsSqsReceivePatch)
 
   # Optional thread dump on USR1 (keep this, it's gold)
   trap("USR1") do
-    AcaRadar.logger.error("[DIAG] ===== THREAD DUMP pid=#{Process.pid} =====")
+    Sparko.logger.error("[DIAG] ===== THREAD DUMP pid=#{Process.pid} =====")
     Thread.list.each do |t|
-      AcaRadar.logger.error("[DIAG] thread=#{t.object_id} status=#{t.status.inspect}")
+      Sparko.logger.error("[DIAG] thread=#{t.object_id} status=#{t.status.inspect}")
       bt = t.backtrace
-      AcaRadar.logger.error(bt ? bt.first(40).join("\n") : "(no backtrace)")
+      Sparko.logger.error(bt ? bt.first(40).join("\n") : "(no backtrace)")
     end
-    AcaRadar.logger.error("[DIAG] ===== END THREAD DUMP =====")
+    Sparko.logger.error("[DIAG] ===== END THREAD DUMP =====")
   end
 end

@@ -1,0 +1,16 @@
+# Nixpacks configuration for Ruby + Python multi-language support
+# This ensures both Ruby gems and Python packages are installed
+
+[phases.setup]
+nixPkgs = ["python310", "python310Packages.pip", "python310Packages.virtualenv"]
+
+[phases.install]
+cmds = [
+  "bundle install",
+  "python -m venv /app/.venv",
+  "/app/.venv/bin/pip install --upgrade pip",
+  "/app/.venv/bin/pip install -r requirements.txt"
+]
+
+[start]
+cmd = "bundle exec puma -C config/puma.rb"

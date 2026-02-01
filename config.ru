@@ -15,10 +15,24 @@ env = ENV.fetch('RACK_ENV', 'development')
 
 use Rack::Cors do
   allow do
-    origins 'localhost:9000', '127.0.0.1:9000', 'https://acaradar-app-3bd1e48033fd.herokuapp.com'
+    # Development origins
+    allowed_origins = [
+      'localhost:9000', '127.0.0.1:9000',
+      'localhost:9292', '127.0.0.1:9292',
+      # Heroku (legacy)
+      'https://acaradar-app-3bd1e48033fd.herokuapp.com',
+      # Railway - will be set via ALLOWED_ORIGINS env var
+      ENV['RAILWAY_PUBLIC_DOMAIN'] ? "https://#{ENV['RAILWAY_PUBLIC_DOMAIN']}" : nil,
+      # Custom allowed origins from env
+      *(ENV['ALLOWED_ORIGINS']&.split(',') || [])
+    ].compact
+
+    origins(*allowed_origins)
     resource '*',
              headers: :any,
-             methods: %i[get post options]
+             methods: %i[get post put patch delete options],
+             credentials: true,
+             max_age: 86400
   end
 end
 
@@ -42,4 +56,4 @@ else
       entitystore: 'file:tmp/cache/body'
 end
 
-run AcaRadar::App.freeze.app
+run Sparko::App.freeze.app

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   module Entity
     # Represents links, include pdf link, html link, reference link
     class Links

@@ -5,14 +5,14 @@ require_relative '../../infrastructure/utilities/logger'
 
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/MethodLength
-module AcaRadar
+module Sparko
   module Service
     # Service to embed a research interest term
     class EmbedResearchInterest
       include Dry::Monads::Result::Mixin
 
       def call(term:, request_id:)
-        publisher = Messaging::Publisher.new(AcaRadar::App.config, request_id.to_s)
+        publisher = Messaging::Publisher.new(Sparko::App.config, request_id.to_s)
         publisher.publish(status: 'processing', message: 'Extracting concepts', percent: 35)
         sleep(1)
         concepts = Entity::Concept.extract_from(term)
@@ -35,10 +35,10 @@ module AcaRadar
           percent: 100,
           payload: { vector_2d: two_dim_embedding.two_dim_embedding, concepts: concepts_array }
         )
-        AcaRadar.logger.debug("RI raw term: #{term.inspect}")
-        AcaRadar.logger.debug("RI concepts: #{concepts.map(&:to_s).inspect}")
-        AcaRadar.logger.debug("RI concept_text: #{concept_text.inspect}")
-        AcaRadar.logger.debug("RI emb dims: #{embedding.full_embedding.length}")
+        Sparko.logger.debug("RI raw term: #{term.inspect}")
+        Sparko.logger.debug("RI concepts: #{concepts.map(&:to_s).inspect}")
+        Sparko.logger.debug("RI concept_text: #{concept_text.inspect}")
+        Sparko.logger.debug("RI emb dims: #{embedding.full_embedding.length}")
 
         Success(
           term: term,

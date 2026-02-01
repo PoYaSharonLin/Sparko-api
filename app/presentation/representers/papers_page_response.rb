@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # app/presentation/representers/papers_page_response.rb
-module AcaRadar
+module Sparko
   module Representer
     # class for paper page response
     class PapersPageResponse < Representer::Base

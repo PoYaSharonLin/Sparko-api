@@ -5,7 +5,7 @@ require 'json'
 require_relative '../utilities/logger'
 
 # rubocop:disable Metrics/MethodLength
-module AcaRadar
+module Sparko
   module Messaging
     # Publishes progress updates to a Faye channel
     class Publisher
@@ -32,13 +32,13 @@ module AcaRadar
           data: data
         }.to_json
 
-        AcaRadar.logger.debug("FAYE_PUBLISH: Posting to #{faye_url} on channel #{@channel_id}")
+        Sparko.logger.debug("FAYE_PUBLISH: Posting to #{faye_url} on channel #{@channel_id}")
 
         HTTP.post(faye_url, form: { message: faye_message })
       rescue HTTP::ConnectionError => e
-        AcaRadar.logger.error("FAYE_ERROR: Server not found at #{faye_url}. Details: #{e.message}")
+        Sparko.logger.error("FAYE_ERROR: Server not found at #{faye_url}. Details: #{e.message}")
       rescue StandardError => e
-        AcaRadar.logger.error("FAYE_ERROR: Generic failure. Details: #{e.message}")
+        Sparko.logger.error("FAYE_ERROR: Generic failure. Details: #{e.message}")
       end
 
       private

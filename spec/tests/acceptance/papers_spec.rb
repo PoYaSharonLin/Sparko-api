@@ -12,7 +12,7 @@ require 'ostruct'
 
 # rubocop:disable Lint/UnusedBlockArgument
 def app
-  AcaRadar::App
+  Sparko::App
 end
 
 describe 'GET /api/v1/papers' do
@@ -24,7 +24,7 @@ describe 'GET /api/v1/papers' do
   before do
     VcrHelper.configure_vcr
     DatabaseHelper.wipe_database
-    AcaRadar::Database::ResearchInterestJobOrm.dataset.delete if defined?(AcaRadar::Database::ResearchInterestJobOrm)
+    Sparko::Database::ResearchInterestJobOrm.dataset.delete if defined?(Sparko::Database::ResearchInterestJobOrm)
   end
 
   after do
@@ -51,7 +51,7 @@ describe 'GET /api/v1/papers' do
   it 'SAD: invalid request returns 400' do
   req = stub_list_request(valid: false, error_message: 'Bad params')
 
-  AcaRadar::Request::ListPapers.stub :new, ->(*) { req } do
+  Sparko::Request::ListPapers.stub :new, ->(*) { req } do
     get '/api/v1/papers'
     _(last_response.status).must_equal 400
 
@@ -64,7 +64,7 @@ describe 'GET /api/v1/papers' do
   it 'SAD: top_n requires a completed embedded research interest' do
   req = stub_list_request(valid: true)
 
-  AcaRadar::Request::ListPapers.stub :new, ->(*) { req } do
+  Sparko::Request::ListPapers.stub :new, ->(*) { req } do
     get '/api/v1/papers?top_n=5'
     _(last_response.status).must_equal 400
 
@@ -78,8 +78,8 @@ describe 'GET /api/v1/papers' do
   req = stub_list_request(valid: true)
   job = OpenStruct.new(job_id: 'jid', status: 'processing')
 
-  AcaRadar::Request::ListPapers.stub :new, ->(*) { req } do
-    AcaRadar::Repository::ResearchInterestJob.stub :find, job do
+  Sparko::Request::ListPapers.stub :new, ->(*) { req } do
+    Sparko::Repository::ResearchInterestJob.stub :find, job do
       get '/api/v1/papers?request_id=jid'
       _(last_response.status).must_equal 202
 
@@ -178,9 +178,9 @@ describe 'GET /api/v1/papers' do
     Success(list)
   end
 
-  AcaRadar::Request::ListPapers.stub :new, ->(*) { req } do
-    AcaRadar::Repository::ResearchInterestJob.stub :find, job do
-        AcaRadar::Service::ListPapers.stub :new, ->(*) { list_service } do
+  Sparko::Request::ListPapers.stub :new, ->(*) { req } do
+    Sparko::Repository::ResearchInterestJob.stub :find, job do
+        Sparko::Service::ListPapers.stub :new, ->(*) { list_service } do
         get '/api/v1/papers?request_id=jid'
         _(last_response.status).must_equal 200
 
@@ -208,9 +208,9 @@ describe 'GET /api/v1/papers' do
     Success(list)
   end
 
-  AcaRadar::Request::ListPapers.stub :new, ->(*) { req } do
-    AcaRadar::Repository::ResearchInterestJob.stub :find, job do
-      AcaRadar::Service::ListPapers.stub :new, ->(*) { list_service } do
+  Sparko::Request::ListPapers.stub :new, ->(*) { req } do
+    Sparko::Repository::ResearchInterestJob.stub :find, job do
+      Sparko::Service::ListPapers.stub :new, ->(*) { list_service } do
         get '/api/v1/papers?request_id=jid'
         _(last_response.status).must_equal 200
 

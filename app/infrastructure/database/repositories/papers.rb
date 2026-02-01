@@ -10,7 +10,7 @@ require_relative '../orm/author_orm'
 # rubocop:disable Metrics/Metrics/MethodLength
 # rubocop:disable Metrics/PerceivedComplexity
 
-module AcaRadar
+module Sparko
   module Repository
     # Repository for Papers
     class Paper

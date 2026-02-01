@@ -3,7 +3,7 @@
 require 'roar/decorator'
 require 'roar/json'
 
-module AcaRadar
+module Sparko
   module Representer
     # class that represents a paper
     class Paper < Representer::Base

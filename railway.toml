@@ -1,0 +1,24 @@
+# Railway deployment configuration for Sparko API
+# Docs: https://docs.railway.app/deploy/config-as-code
+
+[build]
+# Use Nixpacks for automatic Ruby + Python detection
+builder = "NIXPACKS"
+
+# Install Python dependencies for the embedding service
+nixpacksConfigPath = "nixpacks.toml"
+
+[deploy]
+# Start command for the web service
+startCommand = "bundle exec puma -C config/puma.rb"
+
+# Health check endpoint
+healthcheckPath = "/"
+healthcheckTimeout = 30
+
+# Restart policy
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3
+
+# Number of instances (start with 1 for free tier)
+numReplicas = 1

@@ -1,26 +1,26 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   module Database
     # Object-Relational Mapper for Papers
     class PaperOrm < Sequel::Model(:papers)
       set_primary_key :paper_id
       one_to_many :paper_authors,
-                  class: :'AcaRadar::Database::PaperAuthorOrm',
+                  class: :'Sparko::Database::PaperAuthorOrm',
                   key: :paper_id
 
       one_to_many :paper_categories,
-                  class: :'AcaRadar::Database::PaperCategoryOrm',
+                  class: :'Sparko::Database::PaperCategoryOrm',
                   key: :paper_id
 
       many_to_many :authors,
-                   class: :'AcaRadar::Database::AuthorOrm',
+                   class: :'Sparko::Database::AuthorOrm',
                    join_table: :paper_authors,
                    left_key: :paper_id,
                    right_key: :author_id
 
       many_to_many :categories,
-                   class: :'AcaRadar::Database::CategoryOrm',
+                   class: :'Sparko::Database::CategoryOrm',
                    join_table: :paper_categories,
                    left_key: :paper_id,
                    right_key: :category_id

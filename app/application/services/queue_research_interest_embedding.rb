@@ -4,7 +4,7 @@ require 'dry/monads'
 require 'securerandom'
 require_relative '../../infrastructure/utilities/logger'
 
-module AcaRadar
+module Sparko
   module Service
     class QueueResearchInterestEmbedding
       include Dry::Monads[:result]
@@ -21,7 +21,7 @@ module AcaRadar
         )
 
         if cached
-          AcaRadar.logger.debug(
+          Sparko.logger.debug(
             "RI cache hit term=#{normalized.inspect} job_id=#{cached.job_id}"
           )
           return Success(cached.job_id)
@@ -40,7 +40,7 @@ module AcaRadar
 
         Success(job_id)
       rescue StandardError => e
-        AcaRadar.logger.error("Failed to queue embed job: #{e.class} - #{e.message}")
+        Sparko.logger.error("Failed to queue embed job: #{e.class} - #{e.message}")
         Failure('Failed to queue embedding job')
       end
 

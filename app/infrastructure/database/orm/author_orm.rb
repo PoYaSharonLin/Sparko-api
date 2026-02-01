@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   module Database
     # Object-Relational Mapper for Authors
     class AuthorOrm < Sequel::Model(:authors)
       one_to_many :paper_authors,
-                  class: :'AcaRadar::Database::PaperAuthorOrm',
+                  class: :'Sparko::Database::PaperAuthorOrm',
                   key: :author_id
 
       many_to_many :papers,
-                   class: :'AcaRadar::Database::PaperOrm',
+                   class: :'Sparko::Database::PaperOrm',
                    join_table: :paper_authors,
                    left_key: :author_id,
                    right_key: :paper_id

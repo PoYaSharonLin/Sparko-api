@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   # Links Mapper Object
   class LinksMapper
     def initialize(hash)
@@ -8,7 +8,7 @@ module AcaRadar
     end
 
     def build_entity
-      AcaRadar::Entity::Links.new(@hash['links'])
+      Sparko::Entity::Links.new(@hash['links'])
     end
   end
 end

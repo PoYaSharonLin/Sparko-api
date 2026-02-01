@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   module Database
     # Junction: Paper ↔ Author
     class PaperAuthorOrm < Sequel::Model(:paper_authors)
       many_to_one :paper,
-                  class: :'AcaRadar::Database::PaperOrm',
+                  class: :'Sparko::Database::PaperOrm',
                   key: :paper_id
 
       many_to_one :author,
-                  class: :'AcaRadar::Database::AuthorOrm',
+                  class: :'Sparko::Database::AuthorOrm',
                   key: :author_id
 
       plugin :timestamps, update_on_create: true

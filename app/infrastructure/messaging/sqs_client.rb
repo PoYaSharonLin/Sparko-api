@@ -4,7 +4,7 @@ require "aws-sdk-sqs"
 require "aws-sdk-sts"
 require "json"
 
-module AcaRadar
+module Sparko
   module Messaging
     class SqsClient
       class << self
@@ -30,11 +30,11 @@ module AcaRadar
           return unless ENV["LOG_AWS_IDENTITY_ON_PUBLISH"] == "1"
 
           ident = Aws::STS::Client.new(region: ENV.fetch("AWS_REGION", "us-east-1")).get_caller_identity
-          AcaRadar.logger.info(
+          Sparko.logger.info(
             "AWS identity account=#{ident.account} arn=#{ident.arn} region=#{ENV.fetch('AWS_REGION', 'us-east-1')}"
           )
         rescue StandardError => e
-          AcaRadar.logger.warn("AWS identity lookup failed: #{e.class} #{e.message}")
+          Sparko.logger.warn("AWS identity lookup failed: #{e.class} #{e.message}")
         end
 
         def publish(message_hash)
@@ -48,7 +48,7 @@ module AcaRadar
             message_body: JSON.generate(msg)
           )
 
-          AcaRadar.logger.debug("SQS sent message_id=#{resp.message_id} queue=#{queue_url}")
+          Sparko.logger.debug("SQS sent message_id=#{resp.message_id} queue=#{queue_url}")
           resp
         end
       end

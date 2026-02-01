@@ -3,7 +3,7 @@
 require 'open3'
 require 'json'
 
-module AcaRadar
+module Sparko
   # Domain entity module
   module Entity
     # Represents the concept extracted from summary

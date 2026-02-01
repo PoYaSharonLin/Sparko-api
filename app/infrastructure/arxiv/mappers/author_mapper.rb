@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   # Author Mapper Object
   class AuthorMapper
     def initialize(hash)
@@ -8,7 +8,7 @@ module AcaRadar
     end
 
     def build_entity
-      Array(@hash['authors']).map { |name| AcaRadar::Entity::Author.new(name) }
+      Array(@hash['authors']).map { |name| Sparko::Entity::Author.new(name) }
     end
   end
 end

@@ -11,7 +11,7 @@ require 'securerandom'
 
 # rubocop:disable Lint/UnusedBlockArgument
 def app
-  AcaRadar::App
+  Sparko::App
 end
 
 describe 'POST /api/v1/research_interest (+ /async)' do
@@ -23,7 +23,7 @@ describe 'POST /api/v1/research_interest (+ /async)' do
   before do
     VcrHelper.configure_vcr
     DatabaseHelper.wipe_database
-    AcaRadar::Database::ResearchInterestJobOrm.dataset.delete if defined?(AcaRadar::Database::ResearchInterestJobOrm)
+    Sparko::Database::ResearchInterestJobOrm.dataset.delete if defined?(Sparko::Database::ResearchInterestJobOrm)
   end
 
   after do
@@ -44,8 +44,8 @@ describe 'POST /api/v1/research_interest (+ /async)' do
 
       fake_job = OpenStruct.new(job_id: job_id, status: 'queued')
 
-      AcaRadar::Service::QueueResearchInterestEmbedding.stub :new, ->(*) { queue_service } do
-        AcaRadar::Repository::ResearchInterestJob.stub :find, fake_job do
+      Sparko::Service::QueueResearchInterestEmbedding.stub :new, ->(*) { queue_service } do
+        Sparko::Repository::ResearchInterestJob.stub :find, fake_job do
           post '/api/v1/research_interest',
                { term: 'machine learning' }.to_json,
                { 'CONTENT_TYPE' => 'application/json' }
@@ -91,8 +91,8 @@ describe 'POST /api/v1/research_interest (+ /async)' do
         embedding_b64: ''
       )
 
-      AcaRadar::Service::QueueResearchInterestEmbedding.stub :new, ->(*) { queue_service } do
-        AcaRadar::Repository::ResearchInterestJob.stub :find, completed_job do
+      Sparko::Service::QueueResearchInterestEmbedding.stub :new, ->(*) { queue_service } do
+        Sparko::Repository::ResearchInterestJob.stub :find, completed_job do
           post '/api/v1/research_interest',
                { term: 'machine learning' }.to_json,
                { 'CONTENT_TYPE' => 'application/json' }
@@ -119,7 +119,7 @@ describe 'POST /api/v1/research_interest (+ /async)' do
       queue_service.extend(Dry::Monads[:result])
       queue_service.define_singleton_method(:call) { |term:| Success(job_id) }
 
-      AcaRadar::Service::QueueResearchInterestEmbedding.stub :new, ->(*) { queue_service } do
+      Sparko::Service::QueueResearchInterestEmbedding.stub :new, ->(*) { queue_service } do
         post '/api/v1/research_interest/async',
              { term: 'machine learning' }.to_json,
              { 'CONTENT_TYPE' => 'application/json' }
@@ -150,7 +150,7 @@ describe 'POST /api/v1/research_interest (+ /async)' do
       job_id = 'job_db_cached'
       now = Time.now
 
-      AcaRadar::Database::ResearchInterestJobOrm.create(
+      Sparko::Database::ResearchInterestJobOrm.create(
         job_id: job_id,
         term: 'machine learning', # normalized stored
         status: 'completed',

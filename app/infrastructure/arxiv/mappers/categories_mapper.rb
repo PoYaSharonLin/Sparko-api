@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   # Categories Mapper Object
   class CategoriesMapper
     def initialize(hash)
@@ -8,7 +8,7 @@ module AcaRadar
     end
 
     def build_entity
-      AcaRadar::Entity::Categories.new(@hash['categories'], @hash['primary_category'])
+      Sparko::Entity::Categories.new(@hash['categories'], @hash['primary_category'])
     end
   end
 end

@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   module Database
     # Object-Relational Mapper for Categories
     class CategoryOrm < Sequel::Model(:categories)
       one_to_many :paper_categories,
-                  class: :'AcaRadar::Database::PaperCategoryOrm',
+                  class: :'Sparko::Database::PaperCategoryOrm',
                   key: :category_id
 
       many_to_many :papers,
-                   class: :'AcaRadar::Database::PaperOrm',
+                   class: :'Sparko::Database::PaperOrm',
                    join_table: :paper_categories,
                    left_key: :category_id,
                    right_key: :paper_id

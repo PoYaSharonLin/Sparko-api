@@ -5,7 +5,7 @@ require 'rack/test'
 require 'json'
 
 def app
-  AcaRadar::App
+  Sparko::App
 end
 
 describe 'GET /api/v1/journals' do

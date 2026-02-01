@@ -10,7 +10,7 @@ require 'time'
 
 # rubocop:disable Lint/UnusedBlockArgument
 def app
-  AcaRadar::App
+  Sparko::App
 end
 
 describe 'GET /api/v1/research_interest/:job_id' do
@@ -22,7 +22,7 @@ describe 'GET /api/v1/research_interest/:job_id' do
   before do
     VcrHelper.configure_vcr
     DatabaseHelper.wipe_database
-    AcaRadar::Database::ResearchInterestJobOrm.dataset.delete if defined?(AcaRadar::Database::ResearchInterestJobOrm)
+    Sparko::Database::ResearchInterestJobOrm.dataset.delete if defined?(Sparko::Database::ResearchInterestJobOrm)
   end
 
   after do
@@ -34,7 +34,7 @@ describe 'GET /api/v1/research_interest/:job_id' do
   end
 
   it 'SAD: returns 404 when job is missing' do
-    AcaRadar::Repository::ResearchInterestJob.stub :find, nil do
+    Sparko::Repository::ResearchInterestJob.stub :find, nil do
       get '/api/v1/research_interest/nope'
       _(last_response.status).must_equal 404
 
@@ -47,7 +47,7 @@ describe 'GET /api/v1/research_interest/:job_id' do
   it 'HAPPY: returns 202 when job is processing' do
     job = OpenStruct.new(job_id: 'jid', status: 'processing', updated_at: Time.now)
 
-    AcaRadar::Repository::ResearchInterestJob.stub :find, job do
+    Sparko::Repository::ResearchInterestJob.stub :find, job do
       get '/api/v1/research_interest/jid'
       _(last_response.status).must_equal 202
 
@@ -70,7 +70,7 @@ describe 'GET /api/v1/research_interest/:job_id' do
       updated_at: Time.now
     )
 
-    AcaRadar::Repository::ResearchInterestJob.stub :find, job do
+    Sparko::Repository::ResearchInterestJob.stub :find, job do
       get '/api/v1/research_interest/jid'
       _(last_response.status).must_equal 200
 
@@ -95,7 +95,7 @@ describe 'GET /api/v1/research_interest/:job_id' do
       updated_at: Time.now
     )
 
-    AcaRadar::Repository::ResearchInterestJob.stub :find, job do
+    Sparko::Repository::ResearchInterestJob.stub :find, job do
       get '/api/v1/research_interest/jid'
       _(last_response.status).must_equal 200
 
@@ -114,7 +114,7 @@ describe 'GET /api/v1/research_interest/:job_id' do
       embedding_dim: 0
     )
 
-    AcaRadar::Repository::ResearchInterestJob.stub :find, job do
+    Sparko::Repository::ResearchInterestJob.stub :find, job do
       get '/api/v1/research_interest/jid'
       _(last_response.status).must_equal 202
 

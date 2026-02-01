@@ -27,7 +27,7 @@ describe 'Test arXiv API library' do
 
   describe 'Query class' do
     it 'HAPPY: should correctly include the journal parameter in the query' do
-      query = AcaRadar::Query.new(journals: ['Nature', 'MIS Quarterly'])
+      query = Sparko::Query.new(journals: ['Nature', 'MIS Quarterly'])
       url = query.url
 
       encoded = url.match(/search_query=([^&]+)/)[1]
@@ -41,7 +41,7 @@ describe 'Test arXiv API library' do
   describe 'Categories class' do
     it 'HAPPY: should return correct categories and primary' do
       entry = CORRECT['entries'][0]
-      categories = AcaRadar::Entity::Categories.new(entry['categories'], entry['primary_category'])
+      categories = Sparko::Entity::Categories.new(entry['categories'], entry['primary_category'])
 
       _(categories.all).must_equal Array(entry['categories'])
       _(categories.primary).must_equal entry['primary_category']
@@ -53,7 +53,7 @@ describe 'Test arXiv API library' do
 
     it 'HAPPY: handles nils and duplicates correctly' do
       input = [nil, 'cs.AI', 'cs.AI', 'stat.ML']
-      categories = AcaRadar::Entity::Categories.new(input, nil)
+      categories = Sparko::Entity::Categories.new(input, nil)
 
       _(categories.all).must_equal ['cs.AI', 'stat.ML']
       _(categories.primary).must_be_nil
@@ -63,7 +63,7 @@ describe 'Test arXiv API library' do
 
   describe 'Author class' do
     it 'HAPPY: parses and formats multi-part names' do
-      author = AcaRadar::Entity::Author.new('John Q. Public')
+      author = Sparko::Entity::Author.new('John Q. Public')
 
       _(author.name).must_equal 'John Q. Public'
       _(author.first_name).must_equal 'John Q.'
@@ -74,7 +74,7 @@ describe 'Test arXiv API library' do
       _(author.citation).must_equal 'Public, John Q.'
       _(author.initials).must_equal 'J.Q.P.'
 
-      _(author.format(AcaRadar::NameFormat::SHORT)).must_equal 'J. Public'
+      _(author.format(Sparko::NameFormat::SHORT)).must_equal 'J. Public'
       _(author.to_s).must_equal 'John Q. Public'
       _(author.to_h).must_equal({ name: 'John Q. Public', first_name: 'John Q.', last_name: 'Public' })
     end
@@ -83,7 +83,7 @@ describe 'Test arXiv API library' do
   describe 'Paper class' do
     it 'HAPPY: should initialize with correct attributes' do
       entry = CORRECT['entries'][0]
-      paper = AcaRadar::Entity::Paper.new(entry)
+      paper = Sparko::Entity::Paper.new(entry)
 
       _(paper.title).must_equal entry['title']
       _(paper.published).must_equal entry['published']

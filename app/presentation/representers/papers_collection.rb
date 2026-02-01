@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   module Representer
     # class for the paper collections
     class PapersCollection < Representer::Base

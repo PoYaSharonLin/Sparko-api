@@ -1,0 +1,36 @@
+# Render.com deployment configuration for Sparko API
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  # Main web service
+  - type: web
+    name: sparko-api
+    runtime: ruby
+    buildCommand: bundle install && pip install -r requirements.txt
+    startCommand: bundle exec puma -C config/puma.rb
+    healthCheckPath: /
+    envVars:
+      - key: RACK_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sparko-db
+          property: connectionString
+
+  # Background worker for embeddings
+  - type: worker
+    name: sparko-worker
+    runtime: ruby
+    buildCommand: bundle install
+    startCommand: bundle exec shoryuken -R -C config/shoryuken.yml
+    envVars:
+      - key: RACK_ENV
+        value: production
+      - fromGroup: sparko-env
+
+databases:
+  - name: sparko-db
+    databaseName: sparko
+    plan: free

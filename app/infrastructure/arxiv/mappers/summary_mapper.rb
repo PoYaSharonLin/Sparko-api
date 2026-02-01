@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   # Summary Mapper Object
   class SummaryMapper
     def initialize(hash)
@@ -8,7 +8,7 @@ module AcaRadar
     end
 
     def build_entity
-      AcaRadar::Entity::Summary.new(@hash['summary'])
+      Sparko::Entity::Summary.new(@hash['summary'])
     end
   end
 end

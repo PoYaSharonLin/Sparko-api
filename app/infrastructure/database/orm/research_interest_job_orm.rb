@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   module Database
     # ORM for research interest embedding jobs
     class ResearchInterestJobOrm < Sequel::Model(:research_interest_jobs)

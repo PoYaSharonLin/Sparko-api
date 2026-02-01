@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   # Formats for author name presentation
   module NameFormat
     FULL = ->(first, last) { [first, last].join(' ') }

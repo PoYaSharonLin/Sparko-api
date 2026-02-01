@@ -4,10 +4,10 @@
 module DatabaseHelper
   def self.wipe_database
     # Ignore foreign key constraints when wiping tables
-    AcaRadar::App.db.run('PRAGMA foreign_keys = OFF')
-    AcaRadar::Database::PaperOrm.map(&:destroy)
-    AcaRadar::Database::AuthorOrm.map(&:destroy)
-    AcaRadar::Database::CategoryOrm.map(&:destroy)
-    AcaRadar::App.db.run('PRAGMA foreign_keys = ON')
+    Sparko::App.db.run('PRAGMA foreign_keys = OFF')
+    Sparko::Database::PaperOrm.map(&:destroy)
+    Sparko::Database::AuthorOrm.map(&:destroy)
+    Sparko::Database::CategoryOrm.map(&:destroy)
+    Sparko::App.db.run('PRAGMA foreign_keys = ON')
   end
 end

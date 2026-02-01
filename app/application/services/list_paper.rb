@@ -6,7 +6,7 @@ require_relative '../../infrastructure/utilities/logger'
 
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/MethodLength
-module AcaRadar
+module Sparko
   module Service
     class ListPapers
       include Dry::Monads::Result::Mixin
@@ -23,14 +23,14 @@ module AcaRadar
 
         top_n_i = parse_top_n(top_n)
 
-        AcaRadar.logger.debug(
+        Sparko.logger.debug(
           "ListPapers: journals=#{journals.inspect} page=#{page} top_n=#{top_n_i.inspect} " \
           "min_date=#{min_date.inspect} max_date=#{max_date.inspect} " \
           "research_embedding_class=#{research_embedding.class} len=#{research_embedding&.length}"
         )
 
         # Fetch candidate papers from DB (filtered by journals and date range)
-        all_papers = AcaRadar::Repository::Paper.find_by_categories(
+        all_papers = Sparko::Repository::Paper.find_by_categories(
           journals,
           limit: MAX_FETCH,
           offset: 0,
@@ -83,7 +83,7 @@ module AcaRadar
               next
             end
 
-            score = AcaRadar::Service::CalculateSimilarity.score(research, emb_f)
+            score = Sparko::Service::CalculateSimilarity.score(research, emb_f)
 
             if score.nil? || !score.finite?
               skipped_nonfinite += 1
@@ -98,17 +98,17 @@ module AcaRadar
           all_papers.sort_by! { |p| -(p.similarity_score || -1.0) }
 
           top5 = all_papers.first(5).map { |p| [p.title, p.similarity_score] }
-          AcaRadar.logger.debug(
+          Sparko.logger.debug(
             "ListPapers: similarity computed=#{computed}/#{total} " \
             "skipped_empty=#{skipped_empty} skipped_dim=#{skipped_dim} " \
             "skipped_nonfinite=#{skipped_nonfinite} skipped_zero=#{skipped_zero}"
           )
-          AcaRadar.logger.debug("ListPapers: Top 5 scores: #{top5.inspect}")
+          Sparko.logger.debug("ListPapers: Top 5 scores: #{top5.inspect}")
           if skipped_empty.positive? || skipped_dim.positive? || skipped_nonfinite.positive? || skipped_zero.positive?
-            AcaRadar.logger.debug("ListPapers: skipped samples #{skipped_samples.inspect}")
+            Sparko.logger.debug("ListPapers: skipped samples #{skipped_samples.inspect}")
           end
         else
-          AcaRadar.logger.debug("ListPapers: no usable research embedding; similarity_score will be nil")
+          Sparko.logger.debug("ListPapers: no usable research embedding; similarity_score will be nil")
           all_papers.each { |p| p.similarity_score = nil if p.respond_to?(:similarity_score=) }
         end
 
@@ -143,7 +143,7 @@ module AcaRadar
 
         Success(OpenStruct.new(papers: papers, pagination: pagination))
       rescue StandardError => e
-        AcaRadar.logger.error(
+        Sparko.logger.error(
           "Service::ListPapers failed: #{e.class} - #{e.message}\n#{e.backtrace&.first(12)&.join("\n")}"
         )
         Failure(e)

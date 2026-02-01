@@ -4,12 +4,12 @@ require_relative '../../helpers/spec_helper'
 require 'dry/monads'
 require 'ostruct'
 
-describe AcaRadar::Service::ListPapers do
+describe Sparko::Service::ListPapers do
   include Dry::Monads[:result]
 
   PaperDouble = Struct.new(:title, :embedding, :similarity_score, keyword_init: true)
 
-  let(:service) { AcaRadar::Service::ListPapers.new }
+  let(:service) { Sparko::Service::ListPapers.new }
 
   it 'HAPPY: computes similarity and returns top_n results sorted' do
     # Research vector = [1,0]
@@ -19,7 +19,7 @@ describe AcaRadar::Service::ListPapers do
     b = PaperDouble.new(title: 'B', embedding: [0.0, 1.0])  # score 0
     c = PaperDouble.new(title: 'C', embedding: [-1.0, 0.0]) # score -1
 
-    AcaRadar::Repository::Paper.stub(:find_by_categories, [b, c, a]) do
+    Sparko::Repository::Paper.stub(:find_by_categories, [b, c, a]) do
       res = service.call(journals: [], page: 1, research_embedding: ri, top_n: '2')
       _(res).must_be :success?
 
@@ -33,7 +33,7 @@ describe AcaRadar::Service::ListPapers do
   it 'HAPPY: paged mode when top_n is missing' do
     papers = (1..30).map { |i| PaperDouble.new(title: "P#{i}", embedding: [1.0, 0.0]) }
 
-    AcaRadar::Repository::Paper.stub(:find_by_categories, papers) do
+    Sparko::Repository::Paper.stub(:find_by_categories, papers) do
       res = service.call(journals: [], page: 2, research_embedding: nil, top_n: nil)
       _(res).must_be :success?
       list = res.value!
@@ -48,7 +48,7 @@ describe AcaRadar::Service::ListPapers do
   it 'SAD: invalid top_n falls back to paged mode' do
     papers = (1..5).map { |i| PaperDouble.new(title: "P#{i}", embedding: [1.0, 0.0]) }
 
-    AcaRadar::Repository::Paper.stub(:find_by_categories, papers) do
+    Sparko::Repository::Paper.stub(:find_by_categories, papers) do
       res = service.call(journals: [], page: 1, research_embedding: [1.0, 0.0], top_n: '0')
       _(res).must_be :success?
       list = res.value!
@@ -60,7 +60,7 @@ describe AcaRadar::Service::ListPapers do
     good = PaperDouble.new(title: 'GOOD', embedding: [1.0, 0.0])
     bad  = PaperDouble.new(title: 'BAD',  embedding: [])
 
-    AcaRadar::Repository::Paper.stub(:find_by_categories, [bad, good]) do
+    Sparko::Repository::Paper.stub(:find_by_categories, [bad, good]) do
       res = service.call(journals: [], page: 1, research_embedding: [1.0, 0.0], top_n: '2')
       _(res).must_be :success?
       list = res.value!

@@ -10,10 +10,10 @@ require 'base64'
 
 # rubocop:disable Lint/UnusedBlockArgument
 def app
-  AcaRadar::App
+  Sparko::App
 end
 
-describe 'Test AcaRadar API v1 routes' do
+describe 'Test Sparko API v1 routes' do
   include Rack::Test::Methods
   include Dry::Monads[:result]
 
@@ -45,7 +45,7 @@ describe 'Test AcaRadar API v1 routes' do
 
       body = parsed_response
       _(body['status']).must_equal 'ok'
-      _(body['message']).must_include 'AcaRadar API v1'
+      _(body['message']).must_include 'Sparko API v1'
       _(body['data']).must_be_nil
     end
   end
@@ -63,7 +63,7 @@ describe 'Test AcaRadar API v1 routes' do
   #       Success(vector_2d)
   #     end
 
-  #     AcaRadar::Service::EmbedResearchInterest.stub :new, ->(*) { stub_service } do
+  #     Sparko::Service::EmbedResearchInterest.stub :new, ->(*) { stub_service } do
   #       post '/api/v1/research_interest',
   #            { term: valid_term }.to_json,
   #            { 'CONTENT_TYPE' => 'application/json' }
@@ -95,7 +95,7 @@ describe 'Test AcaRadar API v1 routes' do
   #       Failure('Embedding model unavailable')
   #     end
 
-  #     AcaRadar::Service::EmbedResearchInterest.stub :new, ->(*) { failing_service } do
+  #     Sparko::Service::EmbedResearchInterest.stub :new, ->(*) { failing_service } do
   #       post '/api/v1/research_interest',
   #            { term: invalid_term }.to_json,
   #            { 'CONTENT_TYPE' => 'application/json' }
@@ -116,7 +116,7 @@ describe 'Test AcaRadar API v1 routes' do
         Success(job_id)
       end
 
-      AcaRadar::Service::QueueResearchInterestEmbedding.stub :new, ->(*) { queue_service } do
+      Sparko::Service::QueueResearchInterestEmbedding.stub :new, ->(*) { queue_service } do
         post '/api/v1/research_interest/async',
              { term: 'machine learning' }.to_json,
              { 'CONTENT_TYPE' => 'application/json' }

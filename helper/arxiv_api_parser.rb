@@ -4,7 +4,7 @@ require 'yaml'
 require 'http'
 require 'rexml/document'
 
-module AcaRadar
+module Sparko
   # Library for API parser
   class ArXivApiParser
     module Errors

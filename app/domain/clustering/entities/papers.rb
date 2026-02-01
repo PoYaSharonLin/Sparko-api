@@ -10,7 +10,7 @@ require_relative '../../../infrastructure/arxiv/mappers/summary_mapper'
 # rubocop:disable Metrics/PerceivedComplexity
 # rubocop:disable Metrics/MethodLength
 
-module AcaRadar
+module Sparko
   # Domain entity module
   module Entity
     # Represents a single paper entry from the arXiv API, including title, authors, categories, and links

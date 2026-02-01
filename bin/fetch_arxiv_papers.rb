@@ -122,7 +122,7 @@ def ensure_embed_service_for_release!
 end
 
 
-module AcaRadar
+module Sparko
   # class for arxiv fetcher to fetch paper
   class ArxivFetcher
     def initialize
@@ -236,7 +236,7 @@ module AcaRadar
   end
 end
 
-AcaRadar::ArxivFetcher.new.run
+Sparko::ArxivFetcher.new.run
 # rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/MethodLength
 # rubocop:enable Metrics/CyclomaticComplexity

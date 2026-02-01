@@ -2,7 +2,7 @@
 
 require 'logger'
 
-module AcaRadar
+module Sparko
   LOGGER = Logger.new($stdout)
   LOGGER.level = Logger.const_get((ENV['LOG_LEVEL'] || 'DEBUG').upcase) rescue Logger::DEBUG
 

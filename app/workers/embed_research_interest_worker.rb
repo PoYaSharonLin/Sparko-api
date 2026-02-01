@@ -4,7 +4,7 @@ require "shoryuken"
 require "json"
 require "base64"
 
-module AcaRadar
+module Sparko
   module Workers
     class EmbedResearchInterestWorker
       include Shoryuken::Worker
@@ -32,7 +32,7 @@ module AcaRadar
         sqs_delay_s = sent_ms > 0 ? ((now_ms - sent_ms) / 1000.0) : nil
         first_recv_age_s = first_recv_ms > 0 ? ((now_ms - first_recv_ms) / 1000.0) : nil
 
-        AcaRadar.logger.debug(
+        Sparko.logger.debug(
           "WORKER received message_id=#{msg_id} recv_count=#{recv_count} " \
           "sqs_delay_s=#{sqs_delay_s&.round(2)} first_recv_age_s=#{first_recv_age_s&.round(2)}"
         )
@@ -43,21 +43,21 @@ module AcaRadar
         job_id = payload["job_id"]
         term   = payload["term"]
 
-        AcaRadar.logger.debug("WORKER start job_id=#{job_id} term=#{term.inspect}")
-        AcaRadar.logger.debug(
+        Sparko.logger.debug("WORKER start job_id=#{job_id} term=#{term.inspect}")
+        Sparko.logger.debug(
           "WORKER env TRANSFORMERS_CACHE=#{ENV['TRANSFORMERS_CACHE'].inspect} HF_HOME=#{ENV['HF_HOME'].inspect}"
         )
 
         # safeguard so two workers don't do the same job
         t0 = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-        claimed = AcaRadar::Repository::ResearchInterestJob.try_mark_processing(job_id)
+        claimed = Sparko::Repository::ResearchInterestJob.try_mark_processing(job_id)
         t1 = Process.clock_gettime(Process::CLOCK_MONOTONIC)
-        AcaRadar.logger.debug(
+        Sparko.logger.debug(
           "DB try_mark_processing took #{((t1 - t0) * 1000).round(1)}ms job_id=#{job_id} claimed=#{claimed}"
         )
 
         unless claimed
-          AcaRadar.logger.info("WORKER skip job_id=#{job_id} (already processing/completed/failed)")
+          Sparko.logger.info("WORKER skip job_id=#{job_id} (already processing/completed/failed)")
           return
         end
 
@@ -68,8 +68,8 @@ module AcaRadar
         result = Service::EmbedResearchInterest.new.call(term: term, request_id: job_id)
 
         if result.failure?
-          AcaRadar.logger.error("WORKER failed job_id=#{job_id} error=#{result.failure}")
-          AcaRadar::Repository::ResearchInterestJob.mark_failed(job_id, result.failure)
+          Sparko.logger.error("WORKER failed job_id=#{job_id} error=#{result.failure}")
+          Sparko::Repository::ResearchInterestJob.mark_failed(job_id, result.failure)
           return
         end
 
@@ -88,8 +88,8 @@ module AcaRadar
           end
 
         unless vector_2d.is_a?(Array) && vector_2d.size == 2
-          AcaRadar.logger.error("WORKER invalid vector_2d job_id=#{job_id} vec=#{vector_2d.inspect}")
-          AcaRadar::Repository::ResearchInterestJob.mark_failed(job_id, "Invalid vector_2d")
+          Sparko.logger.error("WORKER invalid vector_2d job_id=#{job_id} vec=#{vector_2d.inspect}")
+          Sparko::Repository::ResearchInterestJob.mark_failed(job_id, "Invalid vector_2d")
           return
         end
 
@@ -103,12 +103,12 @@ module AcaRadar
           embedding_dim = floats.length
         end
 
-        AcaRadar.logger.debug(
+        Sparko.logger.debug(
           "WORKER completed job_id=#{job_id} vec2d=#{vector_2d.inspect} " \
           "emb_dim=#{embedding_dim.inspect} b64_bytes=#{embedding_b64&.bytesize}"
         )
 
-        AcaRadar::Repository::ResearchInterestJob.mark_completed(
+        Sparko::Repository::ResearchInterestJob.mark_completed(
           job_id,
           vector_2d,
           embedding_b64: embedding_b64,
@@ -116,9 +116,9 @@ module AcaRadar
           concepts: concepts
         )
       rescue StandardError => e
-        AcaRadar.logger.error("WORKER exception job_id=#{job_id}: #{e.class} - #{e.message}")
-        AcaRadar.logger.error(e.backtrace&.first(10)&.join("\n"))
-        AcaRadar::Repository::ResearchInterestJob.mark_failed(job_id, e) if defined?(job_id) && job_id
+        Sparko.logger.error("WORKER exception job_id=#{job_id}: #{e.class} - #{e.message}")
+        Sparko.logger.error(e.backtrace&.first(10)&.join("\n"))
+        Sparko::Repository::ResearchInterestJob.mark_failed(job_id, e) if defined?(job_id) && job_id
       end
 
       private

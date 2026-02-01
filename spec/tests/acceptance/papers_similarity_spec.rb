@@ -9,7 +9,7 @@ require 'base64'
 require 'digest'
 
 def app
-  AcaRadar::App
+  Sparko::App
 end
 
 describe 'GET /api/v1/papers (similarity mode)' do
@@ -19,8 +19,8 @@ describe 'GET /api/v1/papers (similarity mode)' do
   before do
     DatabaseHelper.wipe_database
     # DatabaseHelper doesn't wipe research_interest_jobs; do it here to avoid cross-test pollution
-    if defined?(AcaRadar::Database::ResearchInterestJobOrm)
-      AcaRadar::Database::ResearchInterestJobOrm.dataset.delete
+    if defined?(Sparko::Database::ResearchInterestJobOrm)
+      Sparko::Database::ResearchInterestJobOrm.dataset.delete
     elsif app.respond_to?(:db)
       app.db[:research_interest_jobs].delete rescue nil
     end
@@ -38,15 +38,15 @@ describe 'GET /api/v1/papers (similarity mode)' do
   end
 
   def safe_create_paper(attrs)
-    cols = AcaRadar::Database::PaperOrm.columns
+    cols = Sparko::Database::PaperOrm.columns
     filtered = attrs.select { |k, _| cols.include?(k) }
-    AcaRadar::Database::PaperOrm.create(filtered)
+    Sparko::Database::PaperOrm.create(filtered)
   end
 
   def safe_create_job(attrs)
-    cols = AcaRadar::Database::ResearchInterestJobOrm.columns
+    cols = Sparko::Database::ResearchInterestJobOrm.columns
     filtered = attrs.select { |k, _| cols.include?(k) }
-    AcaRadar::Database::ResearchInterestJobOrm.create(filtered)
+    Sparko::Database::ResearchInterestJobOrm.create(filtered)
   end
 
   def pack_embedding_to_b64(vec)

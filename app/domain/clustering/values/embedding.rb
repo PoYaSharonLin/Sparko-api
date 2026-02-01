@@ -4,7 +4,7 @@ require 'json'
 require 'http'
 require_relative '../../../infrastructure/utilities/logger'
 
-module AcaRadar
+module Sparko
   module Value
     class Embedding
       attr_reader :full_embedding, :short_embedding
@@ -21,7 +21,7 @@ module AcaRadar
         # Use request id if you have one; otherwise generate cheap trace id
         trace_id = ENV['ACARADAR_TRACE_ID'] || "ri-#{Time.now.to_i}-#{rand(1000)}"
 
-        AcaRadar.logger.debug("EMBED HTTP start url=#{url} text_len=#{input.length} trace_id=#{trace_id}")
+        Sparko.logger.debug("EMBED HTTP start url=#{url} text_len=#{input.length} trace_id=#{trace_id}")
 
         t0 = Process.clock_gettime(Process::CLOCK_MONOTONIC)
         response = HTTP
@@ -34,11 +34,11 @@ module AcaRadar
                    .post(url, json: { text: input })
 
         ms = (Process.clock_gettime(Process::CLOCK_MONOTONIC) - t0) * 1000.0
-        AcaRadar.logger.debug("EMBED HTTP resp code=#{response.code} ms=#{ms.round(1)} trace_id=#{trace_id}")
+        Sparko.logger.debug("EMBED HTTP resp code=#{response.code} ms=#{ms.round(1)} trace_id=#{trace_id}")
 
         unless response.code.between?(200, 299)
           body = response.body.to_s
-          AcaRadar.logger.error("EMBED HTTP error code=#{response.code} body=#{body[0, 300]}")
+          Sparko.logger.error("EMBED HTTP error code=#{response.code} body=#{body[0, 300]}")
           raise "Embed service failed: #{response.code}"
         end
 
@@ -46,13 +46,13 @@ module AcaRadar
         embedding = parsed['embedding'] || []
         service_ms = parsed['ms']
 
-        AcaRadar.logger.debug("EMBED parsed emb_dim=#{embedding.length} service_ms=#{service_ms.inspect} trace_id=#{trace_id}")
+        Sparko.logger.debug("EMBED parsed emb_dim=#{embedding.length} service_ms=#{service_ms.inspect} trace_id=#{trace_id}")
 
         new(embedding)
       rescue JSON::ParserError => e
         raise "Failed to parse JSON from embed service: #{e.message}"
       rescue HTTP::TimeoutError
-        AcaRadar.logger.error('EMBED HTTP timeout')
+        Sparko.logger.error('EMBED HTTP timeout')
         raise 'Embed service timed out'
       end
 

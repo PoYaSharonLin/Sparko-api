@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AcaRadar
+module Sparko
   # Holds the primary and weird secondary categories of the paper
   module Entity
     # Represents categories, should have names defined by arxiv and commonly understandable names

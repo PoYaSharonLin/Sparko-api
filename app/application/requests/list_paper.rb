@@ -7,7 +7,7 @@ require_relative 'base'
 # rubocop:disable Metrics/AbcSize
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
-module AcaRadar
+module Sparko
   module Request
     # class for listing papers from 1+ journals (canonical names from journals.yml)
     class ListPapers < Base

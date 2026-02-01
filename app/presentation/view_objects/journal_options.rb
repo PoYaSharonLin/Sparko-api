@@ -2,7 +2,7 @@
 
 require 'yaml'
 
-module AcaRadar
+module Sparko
   module View
     # class for presenting the journal options in frontend
     class JournalOption
