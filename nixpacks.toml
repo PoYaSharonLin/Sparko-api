@@ -1,16 +1,35 @@
-# Nixpacks configuration for Ruby + Python multi-language support
-# This ensures both Ruby gems and Python packages are installed
+# nixpacks.toml
+# Ruby + Python hybrid (Ruby is main, Python is for embedding service)
 
 [phases.setup]
-nixPkgs = ["python310", "python310Packages.pip", "python310Packages.virtualenv"]
+  # Include auto-detected packages + explicit Python 3.12
+  nixPkgs = [
+    "...",                           # keeps ruby, nodejs if detected, etc.
+    "python312",
+    "python312Packages.pip",
+    "python312Packages.virtualenv",
+    "python312Packages.gunicorn"     # so gunicorn is available in PATH if needed
+  ]
 
 [phases.install]
-cmds = [
-  "bundle install",
-  "python -m venv /app/.venv",
-  "/app/.venv/bin/pip install --upgrade pip",
-  "/app/.venv/bin/pip install -r requirements.txt"
-]
+  # Order matters: Ruby first (most dependencies), then Python
+  cmds = [
+    # Ruby install - use --deployment if you want locked versions
+    "bundle install --jobs 4 --retry 3",
 
-[start]
-cmd = "bundle exec puma -C config/puma.rb"
+    # Python venv + install
+    "python3 -m venv /app/.venv",
+    "/app/.venv/bin/pip install --upgrade pip setuptools wheel",
+    "/app/.venv/bin/pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu"
+  ]
+
+# Tell Nixpacks we want both providers to run their detection logic
+[providers]
+  ruby = true
+  python = true
+
+# Nixpacks start phase is ignored when Procfile exists → no need to define [start]
+
+# Optional: more debug output during build (uncomment when troubleshooting)
+# [variables]
+#   NIXPACKS_DEBUG = "1"
