@@ -1,35 +1,27 @@
 # nixpacks.toml
-# Ruby + Python hybrid (Ruby is main, Python is for embedding service)
+# Ruby main app + separate Python embedding service
 
 [phases.setup]
-  # Include auto-detected packages + explicit Python 3.12
   nixPkgs = [
-    "...",                           # keeps ruby, nodejs if detected, etc.
+    "...",                                 # keeps auto-detected (ruby, etc.)
     "python312",
     "python312Packages.pip",
     "python312Packages.virtualenv",
-    "python312Packages.gunicorn"     # so gunicorn is available in PATH if needed
+    "python312Packages.gunicorn"           # helps the embed process find gunicorn
   ]
 
 [phases.install]
-  # Order matters: Ruby first (most dependencies), then Python
   cmds = [
-    # Ruby install - use --deployment if you want locked versions
+    # Ruby gems first (most of your deps)
     "bundle install --jobs 4 --retry 3",
 
-    # Python venv + install
+    # Then Python venv + your heavy deps (torch, sentence-transformers)
     "python3 -m venv /app/.venv",
     "/app/.venv/bin/pip install --upgrade pip setuptools wheel",
     "/app/.venv/bin/pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu"
   ]
 
-# Tell Nixpacks we want both providers to run their detection logic
-[providers]
-  ruby = true
-  python = true
+# This is the correct syntax — array of provider names
+providers = ["...", "ruby", "python"]
 
-# Nixpacks start phase is ignored when Procfile exists → no need to define [start]
-
-# Optional: more debug output during build (uncomment when troubleshooting)
-# [variables]
-#   NIXPACKS_DEBUG = "1"
+# No need for [start] — Railway will use your Procfile automatically
