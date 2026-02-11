@@ -5,15 +5,15 @@ module Sparko
     # Repository for Authors
     class Author
       def self.find_id(id)
-        rebuild_entity Database::AuthorOrm.first(id:)
+        rebuild_entity Database::AuthorOrm.first(id: id)
       end
 
       def self.find_name(name)
-        rebuild_entity Database::AuthorOrm.first(name:)
+        rebuild_entity Database::AuthorOrm.first(name: name)
       end
 
       def self.find_last_name(last_name)
-        rebuild_entity Database::AuthorOrm.first(last_name:)
+        rebuild_entity Database::AuthorOrm.first(last_name: last_name)
       end
 
       def self.create(entity)

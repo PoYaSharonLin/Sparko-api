@@ -19,7 +19,7 @@ module Sparko
       end
 
       def self.find_by_origin_id(origin_id)
-        db_record = Database::PaperOrm.first(origin_id:)
+        db_record = Database::PaperOrm.first(origin_id: origin_id)
         rebuild_entity(db_record)
       end
 
@@ -28,7 +28,7 @@ module Sparko
       end
 
       def self.find_title(title)
-        rebuild_entity Database::PaperOrm.first(title:)
+        rebuild_entity Database::PaperOrm.first(title: title)
       end
 
       # Filter by stored journal + optional published date range.

@@ -10,7 +10,7 @@ module Sparko
       include Shoryuken::Worker
 
       shoryuken_options(
-        queue: ENV.fetch("SQS_QUEUE_NAME", "acaradar-research-interest-dev"),
+        queue: ENV.fetch("SQS_QUEUE_NAME", "sparko-research-interest-dev"),
         auto_delete: true
       )
 

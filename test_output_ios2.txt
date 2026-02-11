@@ -1,0 +1,97 @@
+Error retrieving instance profile credentials: execution expired
+I, [2026-02-11T16:34:38.263944 #16174]  INFO -- : [BOOT] RACK_ENV="test" pid=16174
+I, [2026-02-11T16:34:38.264034 #16174]  INFO -- : [BOOT] SQS config region="us-east-1" queue_name="sparko-research-interest-dev" queue_url="https://sqs.us-east-1.amazonaws.com/994128590956/sparko-research-interest-dev"
+I, [2026-02-11T16:34:38.264089 #16174]  INFO -- : [BOOT] Aws.config set: retry_mode=adaptive max_attempts=10 open_timeout=2.0 read_timeout=20.0 idle_timeout=5.0 aws_log_level=off
+W, [2026-02-11T16:34:39.707765 #16174]  WARN -- : [BOOT] AWS identity lookup failed: Aws::Errors::MissingCredentialsError unable to sign request without credentials set
+D, [2026-02-11T16:34:40.018905 #16174] DEBUG -- : [SHORYUKEN_BOOT] TRANSFORMERS_CACHE="/home/poyasharonlin/SPARKO/Sparko-api/tmp/hf_cache"
+D, [2026-02-11T16:34:40.018973 #16174] DEBUG -- : BOOT python=/home/poyasharonlin/SPARKO/.venv/bin/python HF_HOME=/home/poyasharonlin/SPARKO/Sparko-api/tmp/hf_cache TRANSFORMERS_CACHE=/home/poyasharonlin/SPARKO/Sparko-api/tmp/hf_cache
+I, [2026-02-11T16:34:40.019056 #16174]  INFO -- : [BOOT] Shoryuken logger wired to Sparko.logger level=1
+Coverage report generated for RSpec to /home/poyasharonlin/SPARKO/Sparko-api/coverage.
+Line Coverage: 27.62% (232 / 840)
+Run options: --seed 12389
+
+# Running:
+
+.....D, [2026-02-11T16:34:40.231838 #16174] DEBUG -- : ListPapers: journals=[] page=1 top_n=2 min_date=nil max_date=nil research_embedding_class=Array len=2
+D, [2026-02-11T16:34:40.231990 #16174] DEBUG -- : ListPapers: similarity computed=3/3 skipped_empty=0 skipped_dim=0 skipped_nonfinite=0 skipped_zero=0
+D, [2026-02-11T16:34:40.232017 #16174] DEBUG -- : ListPapers: Top 5 scores: [["A", 1.0], ["B", 0.0], ["C", -1.0]]
+.D, [2026-02-11T16:34:40.232327 #16174] DEBUG -- : ListPapers: journals=[] page=2 top_n=nil min_date=nil max_date=nil research_embedding_class=NilClass len=
+D, [2026-02-11T16:34:40.232345 #16174] DEBUG -- : ListPapers: no usable research embedding; similarity_score will be nil
+.D, [2026-02-11T16:34:40.232882 #16174] DEBUG -- : ListPapers: journals=[] page=1 top_n=nil min_date=nil max_date=nil research_embedding_class=Array len=2
+D, [2026-02-11T16:34:40.232941 #16174] DEBUG -- : ListPapers: similarity computed=5/5 skipped_empty=0 skipped_dim=0 skipped_nonfinite=0 skipped_zero=0
+D, [2026-02-11T16:34:40.232962 #16174] DEBUG -- : ListPapers: Top 5 scores: [["P1", 1.0], ["P2", 1.0], ["P3", 1.0], ["P4", 1.0], ["P5", 1.0]]
+.D, [2026-02-11T16:34:40.233103 #16174] DEBUG -- : ListPapers: journals=[] page=1 top_n=2 min_date=nil max_date=nil research_embedding_class=Array len=2
+D, [2026-02-11T16:34:40.233133 #16174] DEBUG -- : ListPapers: similarity computed=1/2 skipped_empty=1 skipped_dim=0 skipped_nonfinite=0 skipped_zero=0
+D, [2026-02-11T16:34:40.233146 #16174] DEBUG -- : ListPapers: Top 5 scores: [["GOOD", 1.0], ["BAD", nil]]
+D, [2026-02-11T16:34:40.233166 #16174] DEBUG -- : ListPapers: skipped samples {:empty=>["BAD"], :dim=>[], :nonfinite=>[], :zero=>[]}
+..........D, [2026-02-11T16:34:40.364668 #16174] DEBUG -- : PAPERS start journals=["MIS Quarterly"] page=1 request_id="jid" job_status="completed" term="t"
+D, [2026-02-11T16:34:40.364897 #16174] DEBUG -- : PAPERS returned top5 (title, similarity_score): []
+/var/lib/gems/3.0.0/gems/representable-3.2.0/lib/representable/json.rb:42: warning: JSON::State#[] is deprecated and will be removed in json 3.0.0
+/var/lib/gems/3.0.0/gems/representable-3.2.0/lib/representable/json.rb:42: warning: JSON::State#[] is deprecated and will be removed in json 3.0.0
+D, [2026-02-11T16:34:40.365751 #16174] DEBUG -- : PAPERS start journals=["MIS Quarterly"] page=1 request_id="jid" job_status="completed" term="t"
+D, [2026-02-11T16:34:40.365836 #16174] DEBUG -- : PAPERS returned top5 (title, similarity_score): []
+.D, [2026-02-11T16:34:40.366955 #16174] DEBUG -- : PAPERS start journals=["MIS Quarterly"] page=1 request_id=nil job_status=nil term=nil
+.D, [2026-02-11T16:34:40.368221 #16174] DEBUG -- : PAPERS start journals=["MIS Quarterly"] page=1 request_id="jid" job_status="processing" term=nil
+.D, [2026-02-11T16:34:40.370643 #16174] DEBUG -- : PAPERS start journals=["MIS Quarterly"] page=1 request_id="jid" job_status="completed" term="machine learning"
+D, [2026-02-11T16:34:40.370792 #16174] DEBUG -- : PAPERS returned top5 (title, similarity_score): [["Paper A", 0.99], ["Paper B", 0.12]]
+/var/lib/gems/3.0.0/gems/representable-3.2.0/lib/representable/json.rb:42: warning: JSON::State#[] is deprecated and will be removed in json 3.0.0
+/var/lib/gems/3.0.0/gems/representable-3.2.0/lib/representable/json.rb:42: warning: JSON::State#[] is deprecated and will be removed in json 3.0.0
+......D, [2026-02-11T16:34:40.373135 #16174] DEBUG -- : RI status check job_id=jid status="completed"
+I, [2026-02-11T16:34:40.373307 #16174]  INFO -- : RI Job Completed. ID: jid, Concepts: ["ai"]
+..D, [2026-02-11T16:34:40.400657 #16174] DEBUG -- : RI queued job_id=job_async_123 term="machine learning"
+..D, [2026-02-11T16:34:40.417876 #16174] DEBUG -- : RI cache hit term="machine learning" job_id=job_db_cached
+..D, [2026-02-11T16:34:40.421120 #16174] DEBUG -- : RI cache hit term="machine learning" job_id=cached_1
+..E, [2026-02-11T16:34:40.421978 #16174] ERROR -- : Failed to queue embed job: RuntimeError - boom
+.D, [2026-02-11T16:34:40.431765 #16174] DEBUG -- : RI queued job_id=job_12345 term="machine learning"
+........[Query] search_query="submittedDate:[201010020000 TO 202602110000] AND (jr:\"Nature\" OR (jr:\"MIS Quarterly\" OR jr:\"MIS Q\" OR jr:\"MISQ\" OR jr:\"MIS Quart.\"))" url=https://export.arxiv.org/api/query?search_query=submittedDate%3A%5B201010020000+TO+202602110000%5D+AND+%28jr%3A%22Nature%22+OR+%28jr%3A%22MIS+Quarterly%22+OR+jr%3A%22MIS+Q%22+OR+jr%3A%22MISQ%22+OR+jr%3A%22MIS+Quart.%22%29%29&start=0&max_results=250&sortBy=submittedDate&sortOrder=ascending
+.............D, [2026-02-11T16:34:40.449937 #16174] DEBUG -- : RI status check job_id=jid status="processing"
+.D, [2026-02-11T16:34:40.451624 #16174] DEBUG -- : RI status check job_id=jid status="processing"
+.D, [2026-02-11T16:34:40.452726 #16174] DEBUG -- : RI status check job_id=jid status="completed"
+I, [2026-02-11T16:34:40.452861 #16174]  INFO -- : RI Job Completed. ID: jid, Concepts: ["a", "b"]
+.D, [2026-02-11T16:34:40.454410 #16174] DEBUG -- : RI status check job_id=jid status="completed"
+E, [2026-02-11T16:34:40.454518 #16174] ERROR -- : Concepts parse error: JSON::ParserError - expected object key, got 'not' at line 1 column 2
+I, [2026-02-11T16:34:40.454530 #16174]  INFO -- : RI Job Completed. ID: jid, Concepts: []
+......D, [2026-02-11T16:34:40.466089 #16174] DEBUG -- : PAPERS start journals=["MIS Quarterly"] page=1 request_id="jid_processing" job_status="processing" term="machine learning"
+.D, [2026-02-11T16:34:40.487471 #16174] DEBUG -- : PAPERS start journals=["MIS Quarterly"] page=1 request_id="jid_completed4" job_status="completed" term="ml"
+D, [2026-02-11T16:34:40.487603 #16174] DEBUG -- : ListPapers: journals=["MIS Quarterly"] page=1 top_n=1 min_date=nil max_date=nil research_embedding_class=Array len=2
+D, [2026-02-11T16:34:40.489391 #16174] DEBUG -- : ListPapers: similarity computed=1/1 skipped_empty=0 skipped_dim=0 skipped_nonfinite=0 skipped_zero=0
+D, [2026-02-11T16:34:40.489438 #16174] DEBUG -- : ListPapers: Top 5 scores: [["A", 1.0]]
+D, [2026-02-11T16:34:40.489553 #16174] DEBUG -- : PAPERS returned top5 (title, similarity_score): [["A", 1.0]]
+/var/lib/gems/3.0.0/gems/representable-3.2.0/lib/representable/json.rb:42: warning: JSON::State#[] is deprecated and will be removed in json 3.0.0
+/var/lib/gems/3.0.0/gems/representable-3.2.0/lib/representable/json.rb:42: warning: JSON::State#[] is deprecated and will be removed in json 3.0.0
+D, [2026-02-11T16:34:40.491611 #16174] DEBUG -- : PAPERS start journals=["MIS Quarterly"] page=1 request_id="jid_completed4" job_status="completed" term="ml"
+D, [2026-02-11T16:34:40.491676 #16174] DEBUG -- : ListPapers: journals=["MIS Quarterly"] page=1 top_n=1 min_date=nil max_date=nil research_embedding_class=Array len=2
+D, [2026-02-11T16:34:40.492460 #16174] DEBUG -- : ListPapers: similarity computed=1/1 skipped_empty=0 skipped_dim=0 skipped_nonfinite=0 skipped_zero=0
+D, [2026-02-11T16:34:40.492518 #16174] DEBUG -- : ListPapers: Top 5 scores: [["A", 1.0]]
+D, [2026-02-11T16:34:40.492587 #16174] DEBUG -- : PAPERS returned top5 (title, similarity_score): [["A", 1.0]]
+.D, [2026-02-11T16:34:40.561201 #16174] DEBUG -- : PAPERS start journals=["MIS Quarterly"] page=1 request_id="jid_completed" job_status="completed" term="machine learning"
+D, [2026-02-11T16:34:40.561287 #16174] DEBUG -- : ListPapers: journals=["MIS Quarterly"] page=1 top_n=2 min_date=nil max_date=nil research_embedding_class=Array len=2
+D, [2026-02-11T16:34:40.562307 #16174] DEBUG -- : ListPapers: similarity computed=3/3 skipped_empty=0 skipped_dim=0 skipped_nonfinite=0 skipped_zero=0
+D, [2026-02-11T16:34:40.562343 #16174] DEBUG -- : ListPapers: Top 5 scores: [["A", 1.0], ["B", 0.0], ["C", -1.0]]
+D, [2026-02-11T16:34:40.562431 #16174] DEBUG -- : PAPERS returned top5 (title, similarity_score): [["A", 1.0], ["B", 0.0]]
+/var/lib/gems/3.0.0/gems/representable-3.2.0/lib/representable/json.rb:42: warning: JSON::State#[] is deprecated and will be removed in json 3.0.0
+/var/lib/gems/3.0.0/gems/representable-3.2.0/lib/representable/json.rb:42: warning: JSON::State#[] is deprecated and will be removed in json 3.0.0
+.D, [2026-02-11T16:34:40.649389 #16174] DEBUG -- : PAPERS start journals=["MIS Quarterly"] page=1 request_id="jid_completed2" job_status="completed" term="ml"
+D, [2026-02-11T16:34:40.649952 #16174] DEBUG -- : ListPapers: journals=["MIS Quarterly"] page=1 top_n=10 min_date=nil max_date=nil research_embedding_class=Array len=2
+D, [2026-02-11T16:34:40.650867 #16174] DEBUG -- : ListPapers: similarity computed=1/1 skipped_empty=0 skipped_dim=0 skipped_nonfinite=0 skipped_zero=0
+D, [2026-02-11T16:34:40.650897 #16174] DEBUG -- : ListPapers: Top 5 scores: [["A", 1.0]]
+D, [2026-02-11T16:34:40.650989 #16174] DEBUG -- : PAPERS returned top5 (title, similarity_score): [["A", 1.0]]
+/var/lib/gems/3.0.0/gems/representable-3.2.0/lib/representable/json.rb:42: warning: JSON::State#[] is deprecated and will be removed in json 3.0.0
+/var/lib/gems/3.0.0/gems/representable-3.2.0/lib/representable/json.rb:42: warning: JSON::State#[] is deprecated and will be removed in json 3.0.0
+.D, [2026-02-11T16:34:40.695912 #16174] DEBUG -- : PAPERS start journals=["MIS Quarterly"] page=1 request_id="jid_completed3" job_status="completed" term="ml"
+D, [2026-02-11T16:34:40.696004 #16174] DEBUG -- : ListPapers: journals=["MIS Quarterly"] page=1 top_n=10 min_date=#<Date: 2020-01-01 ((2458850j,0s,0n),+0s,2299161j)> max_date=nil research_embedding_class=Array len=2
+D, [2026-02-11T16:34:40.696892 #16174] DEBUG -- : ListPapers: similarity computed=1/1 skipped_empty=0 skipped_dim=0 skipped_nonfinite=0 skipped_zero=0
+D, [2026-02-11T16:34:40.696929 #16174] DEBUG -- : ListPapers: Top 5 scores: [["NEW", 1.0]]
+D, [2026-02-11T16:34:40.697010 #16174] DEBUG -- : PAPERS returned top5 (title, similarity_score): [["NEW", 1.0]]
+/var/lib/gems/3.0.0/gems/representable-3.2.0/lib/representable/json.rb:42: warning: JSON::State#[] is deprecated and will be removed in json 3.0.0
+/var/lib/gems/3.0.0/gems/representable-3.2.0/lib/representable/json.rb:42: warning: JSON::State#[] is deprecated and will be removed in json 3.0.0
+...D, [2026-02-11T16:34:40.715150 #16174] DEBUG -- : PAPERS start journals=["MIS Quarterly"] page=1 request_id="jid" job_status="completed" term="test"
+D, [2026-02-11T16:34:40.715364 #16174] DEBUG -- : PAPERS returned top5 (title, similarity_score): []
+/var/lib/gems/3.0.0/gems/representable-3.2.0/lib/representable/json.rb:42: warning: JSON::State#[] is deprecated and will be removed in json 3.0.0
+/var/lib/gems/3.0.0/gems/representable-3.2.0/lib/representable/json.rb:42: warning: JSON::State#[] is deprecated and will be removed in json 3.0.0
+.D, [2026-02-11T16:34:40.717998 #16174] DEBUG -- : RI queued job_id=job_12345 term="machine learning"
+.....
+
+Finished in 0.517360s, 152.6983 runs/s, 577.9343 assertions/s.
+
+79 runs, 299 assertions, 0 failures, 0 errors, 0 skips

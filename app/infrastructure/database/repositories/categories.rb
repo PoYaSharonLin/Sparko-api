@@ -5,11 +5,11 @@ module Sparko
     # Repository for Categories
     class Category
       def self.find_id(id)
-        rebuild_entity Database::CategoryOrm.first(id:)
+        rebuild_entity Database::CategoryOrm.first(id: id)
       end
 
       def self.find_name(display_name)
-        rebuild_entity Database::CategoryOrm.first(display_name:)
+        rebuild_entity Database::CategoryOrm.first(display_name: display_name)
       end
 
       def self.rebuild_entity(db_record)

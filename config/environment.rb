@@ -15,7 +15,7 @@ module Sparko
     # ---------------------------
     configure :development do
       Figaro.application = Figaro::Application.new(
-        environment:,
+        environment: environment,
         path: File.expand_path('config/secrets.yml')  # dev uses secrets.yml
       )
       Figaro.load
@@ -33,7 +33,7 @@ module Sparko
     # ---------------------------
     configure :test do
       Figaro.application = Figaro::Application.new(
-        environment:,
+        environment: environment,
         path: File.expand_path('config/secrets.yml')
       )
       Figaro.load

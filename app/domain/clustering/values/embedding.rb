@@ -19,7 +19,7 @@ module Sparko
         url   = ENV.fetch('EMBED_SERVICE_URL', 'http://localhost:8001/embed')
 
         # Use request id if you have one; otherwise generate cheap trace id
-        trace_id = ENV['ACARADAR_TRACE_ID'] || "ri-#{Time.now.to_i}-#{rand(1000)}"
+        trace_id = ENV['SPARKO_TRACE_ID'] || "ri-#{Time.now.to_i}-#{rand(1000)}"
 
         Sparko.logger.debug("EMBED HTTP start url=#{url} text_len=#{input.length} trace_id=#{trace_id}")
 

@@ -1,0 +1,36 @@
+Error retrieving instance profile credentials: execution expired
+I, [2026-02-11T16:18:56.799398 #13790]  INFO -- : [BOOT] RACK_ENV="test" pid=13790
+I, [2026-02-11T16:18:56.799469 #13790]  INFO -- : [BOOT] SQS config region="us-east-1" queue_name="sparko-research-interest-dev" queue_url="https://sqs.us-east-1.amazonaws.com/994128590956/sparko-research-interest-dev"
+I, [2026-02-11T16:18:56.799504 #13790]  INFO -- : [BOOT] Aws.config set: retry_mode=adaptive max_attempts=10 open_timeout=2.0 read_timeout=20.0 idle_timeout=5.0 aws_log_level=off
+W, [2026-02-11T16:18:58.017888 #13790]  WARN -- : [BOOT] AWS identity lookup failed: Aws::Errors::MissingCredentialsError unable to sign request without credentials set
+/var/lib/gems/3.0.0/gems/zeitwerk-2.6.18/lib/zeitwerk/kernel.rb:34:in `require': /home/poyasharonlin/SPARKO/Sparko-api/app/infrastructure/database/repositories/authors.rb:8: syntax error, unexpected ')' (SyntaxError)
+... Database::AuthorOrm.first(id:)
+...                              ^
+/home/poyasharonlin/SPARKO/Sparko-api/app/infrastructure/database/repositories/authors.rb:12: syntax error, unexpected ')'
+...atabase::AuthorOrm.first(name:)
+...                              ^
+/home/poyasharonlin/SPARKO/Sparko-api/app/infrastructure/database/repositories/authors.rb:16: syntax error, unexpected ')'
+...se::AuthorOrm.first(last_name:)
+...                              ^
+/home/poyasharonlin/SPARKO/Sparko-api/app/infrastructure/database/repositories/authors.rb:43: syntax error, unexpected end-of-input, expecting `end'
+	from /var/lib/gems/3.0.0/gems/zeitwerk-2.6.18/lib/zeitwerk/kernel.rb:34:in `require'
+	from /home/poyasharonlin/SPARKO/Sparko-api/require_app.rb:6:in `block in require_app'
+	from /home/poyasharonlin/SPARKO/Sparko-api/require_app.rb:5:in `each'
+	from /home/poyasharonlin/SPARKO/Sparko-api/require_app.rb:5:in `require_app'
+	from /home/poyasharonlin/SPARKO/Sparko-api/config/shoryuken_boot.rb:98:in `<top (required)>'
+	from /home/poyasharonlin/SPARKO/Sparko-api/require_app.rb:6:in `require'
+	from /home/poyasharonlin/SPARKO/Sparko-api/require_app.rb:6:in `block in require_app'
+	from /home/poyasharonlin/SPARKO/Sparko-api/require_app.rb:5:in `each'
+	from /home/poyasharonlin/SPARKO/Sparko-api/require_app.rb:5:in `require_app'
+	from /home/poyasharonlin/SPARKO/Sparko-api/spec/helpers/spec_helper.rb:12:in `<top (required)>'
+	from /home/poyasharonlin/SPARKO/Sparko-api/spec/tests/acceptance/api_v1_spec.rb:3:in `require_relative'
+	from /home/poyasharonlin/SPARKO/Sparko-api/spec/tests/acceptance/api_v1_spec.rb:3:in `<top (required)>'
+	from /var/lib/gems/3.0.0/gems/rake-13.3.1/lib/rake/rake_test_loader.rb:21:in `require'
+	from /var/lib/gems/3.0.0/gems/rake-13.3.1/lib/rake/rake_test_loader.rb:21:in `block in <main>'
+	from /var/lib/gems/3.0.0/gems/rake-13.3.1/lib/rake/rake_test_loader.rb:6:in `select'
+	from /var/lib/gems/3.0.0/gems/rake-13.3.1/lib/rake/rake_test_loader.rb:6:in `<main>'
+rake aborted!
+Command failed with status (1)
+/var/lib/gems/3.0.0/gems/rake-13.3.1/exe/rake:27:in `<top (required)>'
+Tasks: TOP => spec
+(See full trace by running task with --trace)
